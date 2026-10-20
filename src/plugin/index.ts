@@ -7,6 +7,7 @@ import type { SessionPrompt, SessionRetry } from "@opencode/plugin/promise/sessi
 import {
   DIR,
   isVirtual,
+  isNixVirtual,
   readJSON,
   writeJSONAtomic,
   loadConfig,
@@ -83,14 +84,17 @@ interface TurnBook {
 }
 
 interface Chooser {
-  choose(sid: string, exclude?: string[]): Promise<string | undefined>
+  choose(sid: string, exclude?: string[], mode?: "general" | "nixbench"): Promise<string | undefined>
   setSticky(sid: string, id: string): void
 }
 
 const STATE = path.join(DIR, "state.json")
 const RANKING = path.join(DIR, "ranking.json")
+const NIXBENCH_RANKING = path.join(DIR, "nixbench-ranking.json")
+const NIXBENCH_URL = process.env.FREE_ROUTER_NIXBENCH_URL || "https://raw.githubusercontent.com/dweee/opencode-free-router/master/data/nixbench-ranking.json"
 const LOG = path.join(DIR, "router.log")
 const LIVE_TTL = 5 * 60e3
+const NIXBENCH_TTL = 6 * 3600e3
 
 // The log is created 0600, but one from an older install or a rotation keeps the mode it had.
 function secureLog() {
@@ -189,14 +193,39 @@ function createCandidates(ctx: RouterContext, cfg: Config) {
     return live.models
   }
 
-  return async () => orderCandidates(getRanking(), await getLive(), cfg, loadPins())
+  async function getNixbenchRanking() {
+    const st = fs.statSync(NIXBENCH_RANKING, { throwIfNoEntry: false })
+    const cached = asObject(readJSON(NIXBENCH_RANKING))
+    const hasCatalog = typeof asObject(cached.catalog).retrievedAt === "string"
+    if (!st || !hasCatalog || Date.now() - st.mtimeMs >= NIXBENCH_TTL) {
+      try {
+        const response = await fetch(NIXBENCH_URL, { signal: AbortSignal.timeout(15_000) })
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
+        const data: unknown = await response.json()
+        const document = asObject(data)
+        if (document.schemaVersion !== 1 || typeof asObject(document.catalog).retrievedAt !== "string") {
+          throw new Error("invalid NixBench ranking document")
+        }
+        writeJSONAtomic(NIXBENCH_RANKING, data)
+      } catch (e) {
+        log(`WARN NixBench ranking refresh failed: ${errorText(e).slice(0, 180)}`)
+      }
+    }
+    return rankedIds(readJSON(NIXBENCH_RANKING))
+  }
+
+  return async (mode: "general" | "nixbench" = "general") => {
+    const ranked = mode === "nixbench" ? await getNixbenchRanking() : getRanking()
+    const ordered = orderCandidates(ranked, await getLive(), cfg, loadPins())
+    return mode === "nixbench" ? ordered.filter((id) => ranked.includes(id)) : ordered
+  }
 }
 
 // The model a session sticks to, and the one to move it to.
-function createChooser(candidates: () => Promise<string[]>): Chooser {
-  async function choose(sid: string, exclude: string[] = []) {
+function createChooser(candidates: (mode?: "general" | "nixbench") => Promise<string[]>): Chooser {
+  async function choose(sid: string, exclude: string[] = [], mode: "general" | "nixbench" = "general") {
     const state = readState()
-    const ordered = await candidates()
+    const ordered = await candidates(mode)
     const sticky = state.sessions[sid]?.model
     if (!exclude.length && sticky && ordered.includes(sticky) && !coolingUntil(state, sticky)) return sticky
     const p = pick(ordered, state, exclude)
@@ -249,6 +278,7 @@ const metaPick = (info: SessionLike) => optString(asObject(asObject(info.metadat
 function createSessions(ctx: RouterContext, chooser: Chooser) {
   const stickyOf = (sid: string) => readState().sessions[sid]?.model
   const info = (sid: string) => ctx.session.get({ sessionID: sid })
+  const routeMode = (value: SessionLike): "general" | "nixbench" => asObject(asObject(value.metadata).freeRouter).mode === "nixbench" ? "nixbench" : "general"
 
   // The model a session runs on: its own, else opencode's default.
   async function effectiveModel(info: SessionLike) {
@@ -283,14 +313,15 @@ function createSessions(ctx: RouterContext, chooser: Chooser) {
 
   // Move the session to `id` and remember it in both places the pick is kept. A session already on
   // `id` is not switched again: every switch is a line in its history.
-  async function switchTo(sid: string, id: string, known?: SessionLike) {
+  async function switchTo(sid: string, id: string, known?: SessionLike, mode: "general" | "nixbench" = "general") {
     const current = known ?? (await info(sid))
     if (!current.model || idOf(current.model) !== id) await ctx.session.switchModel({ sessionID: sid, model: toRef(id) })
     chooser.setSticky(sid, id)
-    if (metaPick(current) !== id) await ctx.session.update({ sessionID: sid, metadata: { ...current.metadata, freeRouter: { pick: id } } })
+    const freeRouter = mode === "nixbench" ? { pick: id, mode } : { pick: id }
+    if (metaPick(current) !== id || routeMode(current) !== mode) await ctx.session.update({ sessionID: sid, metadata: { ...current.metadata, freeRouter } })
   }
 
-  return { stickyOf, info, effectiveModel, onPick, switchTo }
+  return { stickyOf, info, effectiveModel, onPick, switchTo, routeMode }
 }
 
 type Sessions = ReturnType<typeof createSessions>
@@ -310,7 +341,9 @@ function createFailover(cfg: Config, chooser: Chooser, sessions: Sessions) {
       log(`give up ${sid}: already switched ${t.switches} times this turn; leaving ${from} (${c.klass})`)
       return
     }
-    const to = await chooser.choose(sid, [from])
+    const info = await sessions.info(sid)
+    const mode = sessions.routeMode(info)
+    const to = await chooser.choose(sid, [from], mode)
     if (!to) {
       log(`no alternative for ${sid}; staying on ${from} (${c.klass})`)
       return
@@ -322,7 +355,7 @@ function createFailover(cfg: Config, chooser: Chooser, sessions: Sessions) {
     t.left.set(from, cfg.autoContinue ? 0 : 1)
     // A model the session comes back to is a pick again, not one it has left.
     t.left.delete(to)
-    await sessions.switchTo(sid, to)
+    await sessions.switchTo(sid, to, info, mode)
     log(`failover ${sid}: ${from} -> ${to} (${c.klass}: ${message.slice(0, 160)})`)
     if (cfg.autoContinue) e.decision = { retry: true, delay: 0 }
     else log(`switched ${sid} to ${to}; autoContinue off, next message will use it`)
@@ -340,18 +373,19 @@ function createRouter(cfg: Config, turns: TurnBook, chooser: Chooser, sessions: 
     const info = await sessions.info(sid)
     const model = await sessions.effectiveModel(info)
     if (!model || !(isFreeAuto(model) || (await sessions.onPick(sid, model, info)))) return
+    const mode = isNixVirtual(split(model)) ? "nixbench" : isFreeAuto(model) ? "general" : sessions.routeMode(info)
     // A fresh turn; also the backstop when the event stream that resets this has died.
     t.switches = 0
     t.attemptAtSwitch = 1
     t.left.clear()
     const sticky = sessions.stickyOf(sid)
-    const id = await chooser.choose(sid)
+    const id = await chooser.choose(sid, [], mode)
     if (!id) {
       log(`ERROR no free model available for ${sid}; free/auto left in place, the request will fail`)
       return
     }
     // The whole model goes, not just its id: a variant picked for free/auto means nothing to a real one.
-    await sessions.switchTo(sid, id, info)
+    await sessions.switchTo(sid, id, info, mode)
     if (sticky !== id) log(`pick ${sid} -> ${id}${sticky ? ` (was ${sticky})` : ""}`)
   }
 
@@ -371,13 +405,14 @@ function createRouter(cfg: Config, turns: TurnBook, chooser: Chooser, sessions: 
     }
     // A request the prompt hook never routed (a command, say): pick now, or fail fast with no model.
     if (isFreeAuto(from)) {
-      const id = await chooser.choose(sid)
+      const mode = isNixVirtual(split(from)) ? "nixbench" : "general"
+      const id = await chooser.choose(sid, [], mode)
       if (!id) {
         log(`ERROR no free model available for ${sid}; free/auto left in place, the request will fail`)
         e.decision = { retry: false }
         return
       }
-      await sessions.switchTo(sid, id)
+      await sessions.switchTo(sid, id, undefined, mode)
       t.left.set(from, 1)
       log(`pick ${sid} -> ${id}`)
       e.decision = { retry: true, delay: 0 }

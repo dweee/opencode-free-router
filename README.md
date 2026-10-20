@@ -1,7 +1,6 @@
 # opencode-free-router
 
-[![ci](https://github.com/lettland/opencode-free-router/actions/workflows/ci.yml/badge.svg)](https://github.com/lettland/opencode-free-router/actions/workflows/ci.yml)
-[![Coverage Status](https://coveralls.io/repos/github/lettland/opencode-free-router/badge.svg?branch=master)](https://coveralls.io/github/lettland/opencode-free-router?branch=master)
+[![ci](https://github.com/dweee/opencode-free-router/actions/workflows/ci.yml/badge.svg)](https://github.com/dweee/opencode-free-router/actions/workflows/ci.yml)
 
 An [opencode](https://opencode.ai) plugin that always runs on the **best free model available right
 now**, so you never have to track which free models exist this week.
@@ -35,13 +34,13 @@ on 2, and the script moves the `plugin` entry of your `free.jsonc` to the `plugi
 reads.
 
 ```sh
-git clone https://github.com/lettland/opencode-free-router
+git clone https://github.com/dweee/opencode-free-router
 cd opencode-free-router
 ./scripts/install.sh          # add --bb to also register a bb agent
 ```
 
 To pin a release instead of tracking `master`, `git checkout vX.Y.Z` (see
-[releases](https://github.com/lettland/opencode-free-router/releases)) before running it.
+[releases](https://github.com/dweee/opencode-free-router/releases)) before running it.
 
 This installs into `~/.config/opencode/free-router` (or `$XDG_CONFIG_HOME/…`, or `--dir PATH`), runs
 the first ranking, and links `opencode-free` into `~/.local/bin` if that is on your `PATH`. Re-run it
@@ -54,6 +53,27 @@ opencode-free                 # TUI on free/auto
 opencode-free run "..."       # one-shot
 opencode-free acp             # ACP agent (Zed, JetBrains, bb, ...)
 ```
+
+### NixBench-screened models
+
+The fork also provides `free/nix`, which routes only to models with a recorded NixBench run. The
+current machine-readable catalog and screening results live at
+[`data/nixbench-ranking.json`](data/nixbench-ranking.json). The plugin refreshes its local copy from
+the fork's default branch every six hours and checks the selected model against the live OpenCode
+model list before using it. If there are no eligible scored models, `free/nix` fails closed.
+
+GitHub Actions refreshes the OpenRouter model catalog from [models.dev](https://models.dev), then
+screens at most one newly eligible model per daily run with the public NixBench corpus. To run the
+benchmarks, add an `OPENROUTER_API_KEY` Actions secret to your fork and enable Actions for the fork.
+Without that secret, the workflow still refreshes the catalog but skips the model run. Catalog price
+is an eligibility signal, not proof that your OpenRouter account can access a model for free; provider
+availability is checked again at runtime.
+
+Scores are **one-run screening results**, not a stable or official leaderboard. NixBench 3.2.0
+identifies its public corpus as calibrating, so the JSON explicitly labels results `screening-only`.
+Each scheduled benchmark runs a restricted OpenCode v2 agent with shell, network, subagent, and
+external-directory access denied. The workflow checks out NixBench at a pinned commit and writes
+only the catalog and aggregate scores back to this fork.
 
 `opencode-free` is plain `opencode` with the free-router config layered on top via `OPENCODE_CONFIG`.
 Your normal `opencode` is unaffected. opencode 2 commands normally talk to a shared background

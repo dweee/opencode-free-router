@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": null,
+  "catalog": {
+    "url": "https://models.dev/api.json",
+    "retrievedAt": null
+  },
+  "benchmark": {
+    "name": "NixBench",
+    "repository": "https://github.com/maximilianpw/nixbench",
+    "revision": null,
+    "corpusId": "nixbench-public",
+    "corpusVersion": "3.2.0",
+    "corpusDigest": null,
+    "corpusStatus": "calibrating",
+    "interpretation": "screening-only",
+    "agent": "OpenCode v2 with read/edit/glob/grep tools; shell, network tools, and external file access denied"
+  },
+  "availableModels": [],
+  "models": [],
+  "currentModel": null,
+  "nextCandidate": null,
+  "recommendationStatus": "no-benchmarked-free-model",
+  "rankingNote": "No currently free, eligible OpenRouter model has a recorded NixBench run. Catalog availability is not proof of account access.",
+  "attempted": []
+}

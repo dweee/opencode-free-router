@@ -1,0 +1,25 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permissions": [
+    { "action": "external_directory", "resource": "*", "effect": "deny" },
+    { "action": "shell", "resource": "*", "effect": "deny" },
+    { "action": "subagent", "resource": "*", "effect": "deny" },
+    { "action": "webfetch", "resource": "*", "effect": "deny" },
+    { "action": "websearch", "resource": "*", "effect": "deny" }
+  ],
+  "agents": {
+    "nixbench": {
+      "description": "Edits only the NixBench worktree; shell, network tools and external paths are blocked.",
+      "mode": "primary",
+      "steps": 32,
+      "system": "You are solving one NixBench task. Read NIXBENCH_PROMPT.md and the files in the current worktree. Make the smallest correct edits to the current worktree. You cannot run shell commands; reason from the repository and task prompt. Do not request or attempt access to paths outside the current worktree.",
+      "permissions": [
+        { "action": "*", "resource": "*", "effect": "deny" },
+        { "action": "read", "resource": "*", "effect": "allow" },
+        { "action": "edit", "resource": "*", "effect": "allow" },
+        { "action": "glob", "resource": "*", "effect": "allow" },
+        { "action": "grep", "resource": "*", "effect": "allow" }
+      ]
+    }
+  }
+}

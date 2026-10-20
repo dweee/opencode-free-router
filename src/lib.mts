@@ -13,7 +13,8 @@ export interface ModelRef {
 }
 
 export const VIRTUAL: ModelRef = { providerID: "free", modelID: "auto" }
-export const isVirtual = (m: ModelRef) => m.providerID === VIRTUAL.providerID && m.modelID === VIRTUAL.modelID
+export const isNixVirtual = (m: ModelRef) => m.providerID === "free" && m.modelID === "nix"
+export const isVirtual = (m: ModelRef) => (m.providerID === VIRTUAL.providerID && m.modelID === VIRTUAL.modelID) || isNixVirtual(m)
 
 // A model as decodeModel reads it from opencode's model list; only what the router needs.
 export interface ModelInfo {

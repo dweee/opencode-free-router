@@ -1,0 +1,121 @@
+name: NixBench free-model screens
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: nixbench-free-models
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-and-screen:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - uses: cachix/install-nix-action@3c6342b75005b9cc7c7d4069c3e9179247c89012
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v7
+        with:
+          repository: maximilianpw/nixbench
+          ref: 290eb8c18d4a0833fcc3746662ff08766102232c
+          path: .nixbench-upstream
+          persist-credentials: false
+      - name: Install OpenCode v2
+        run: npm install --global @opencode/cli@2.0.18
+      - name: Refresh models.dev and choose one new candidate
+        id: candidates
+        env:
+          NIXBENCH_REVISION: 290eb8c18d4a0833fcc3746662ff08766102232c
+        run: |
+          cd .nixbench-upstream
+          python3 bench.py corpus-id --json > "$RUNNER_TEMP/nixbench-corpus.json"
+          cd "$GITHUB_WORKSPACE"
+          python3 scripts/nixbench-ranking.py refresh \
+            --file data/nixbench-ranking.json \
+            --nixbench-revision "$NIXBENCH_REVISION" \
+            --corpus-version "$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("version", "3.2.0"))' "$RUNNER_TEMP/nixbench-corpus.json")" \
+            --corpus-digest "$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("digest", ""))' "$RUNNER_TEMP/nixbench-corpus.json")"
+          model=$(python3 -c 'import json; print(json.load(open("data/nixbench-ranking.json")).get("nextCandidate") or "")')
+          if [ -n "$model" ]; then
+            printf 'model=%s\n' "$model" >> "$GITHUB_OUTPUT"
+          fi
+          task_count=$(python3 -c 'import json; print(json.load(open("'"$RUNNER_TEMP"'/nixbench-corpus.json")).get("task_count", 0))')
+          printf 'task_count=%s\n' "$task_count" >> "$GITHUB_OUTPUT"
+      - name: Benchmark the next model
+        id: benchmark
+        if: steps.candidates.outputs.model != ''
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          NIXBENCH_MODEL_ID: ${{ steps.candidates.outputs.model }}
+          NIXBENCH_EXPECTED_TASKS: ${{ steps.candidates.outputs.task_count }}
+          OPENCODE_CONFIG: ${{ github.workspace }}/templates/nixbench-opencode.json
+          OPENCODE_CONFIG_DIR: ${{ runner.temp }}/opencode-config
+          OPENCODE_HOME: ${{ runner.temp }}/opencode-home
+          NIXBENCH_WORKSPACE: ${{ github.workspace }}
+        run: |
+          if [ -z "$OPENROUTER_API_KEY" ]; then
+            echo "No OPENROUTER_API_KEY Actions secret; catalog refreshed, benchmark deferred." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          mkdir -p "$OPENCODE_CONFIG_DIR" "$OPENCODE_HOME"
+          export HOME="$OPENCODE_HOME"
+          export NIXBENCH_MODEL_ID
+          # Require the exact current OpenCode model selector, in addition to models.dev's $0 record.
+          if ! opencode models | grep -Fqx -- "$NIXBENCH_MODEL_ID"; then
+            echo "Model is not present in this OpenCode runtime; benchmark deferred." >> "$GITHUB_STEP_SUMMARY"
+            python3 "$GITHUB_WORKSPACE/scripts/nixbench-ranking.py" failed \
+              --file "$GITHUB_WORKSPACE/data/nixbench-ranking.json" \
+              --model "$NIXBENCH_MODEL_ID" \
+              --status unavailable
+            exit 0
+          fi
+          cd .nixbench-upstream
+          set +e
+          python3 bench.py run-all \
+            --agent-cmd "$NIXBENCH_WORKSPACE/scripts/nixbench-agent.sh" \
+            --agent-timeout-seconds 300 \
+            --model "$NIXBENCH_MODEL_ID" \
+            --kind opencode \
+            --agent-version "$(opencode --version)" \
+            --network enabled \
+            --label "OpenCode v2 restricted-tools screening: $NIXBENCH_MODEL_ID"
+          bench_status=$?
+          set -e
+          summary=$(find results -mindepth 2 -maxdepth 2 -type f -name summary.json -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
+          cd "$GITHUB_WORKSPACE"
+          if [ -n "$summary" ] && python3 scripts/nixbench-ranking.py record \
+              --file data/nixbench-ranking.json \
+              --model "$NIXBENCH_MODEL_ID" \
+              --summary "$GITHUB_WORKSPACE/.nixbench-upstream/$summary" \
+              --expected-tasks "$NIXBENCH_EXPECTED_TASKS" \
+              --agent-version "$(opencode --version)"; then
+            echo "Completed a full one-trial screening run for $NIXBENCH_MODEL_ID (bench exit $bench_status)." >> "$GITHUB_STEP_SUMMARY"
+          else
+            python3 scripts/nixbench-ranking.py failed --file data/nixbench-ranking.json --model "$NIXBENCH_MODEL_ID"
+            echo "NixBench did not produce a full, valid task summary for $NIXBENCH_MODEL_ID; the model was not ranked." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Commit refreshed model data
+        if: always() && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/nixbench-ranking.json
+          if git diff --cached --quiet; then
+            echo "No model catalog or ranking changes."
+          else
+            git commit -m "Refresh free model catalog and NixBench screening data"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi

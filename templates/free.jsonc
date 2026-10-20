@@ -2,8 +2,8 @@
   "$schema": "https://opencode.ai/config.json",
   // opencode-free-router: loaded via OPENCODE_CONFIG by the `opencode-free` wrapper (and the bb agent),
   // merged over your normal opencode config, so plain `opencode` is unaffected. Needs opencode 2.
-  // free/auto is a placeholder: ./plugin swaps it for the best-ranked free model on every turn
-  // (sticky per session) and fails over when that model runs out. See ranking.json / rank.mts.
+  // free/auto uses the best generally ranked free model. free/nix uses only a model with a NixBench
+  // screening result. Both stay sticky per session and fail over within their own ranking.
   "plugins": ["./plugin"],
   "model": "free/auto",
   "providers": {
@@ -19,6 +19,16 @@
       "models": {
         "auto": {
           "name": "Best available free model",
+          "capabilities": {
+            "tools": true
+          },
+          "limit": {
+            "context": 200000,
+            "output": 32000
+          }
+        },
+        "nix": {
+          "name": "Best NixBench-screened free model",
           "capabilities": {
             "tools": true
           },

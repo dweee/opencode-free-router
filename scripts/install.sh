@@ -77,6 +77,7 @@ copy_once() {
   fi
 }
 copy_once "$repo/templates/free.jsonc" "$dir/free.jsonc"
+copy_once "$repo/data/nixbench-ranking.json" "$dir/nixbench-ranking.json"
 # The one edit ever made to an existing free.jsonc: its plugin entry follows the move to opencode 2's
 # "plugins" directory entry. Written back in place, so a free.jsonc symlinked from elsewhere stays a
 # symlink. Comment lines are neither rewritten nor counted.

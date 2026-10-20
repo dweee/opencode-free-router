@@ -5,13 +5,13 @@
   "private": true,
   "type": "module",
   "license": "BSD-2-Clause",
-  "homepage": "https://github.com/lettland/opencode-free-router#readme",
+  "homepage": "https://github.com/dweee/opencode-free-router#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lettland/opencode-free-router.git"
+    "url": "git+https://github.com/dweee/opencode-free-router.git"
   },
   "bugs": {
-    "url": "https://github.com/lettland/opencode-free-router/issues"
+    "url": "https://github.com/dweee/opencode-free-router/issues"
   },
   "keywords": [
     "opencode",
