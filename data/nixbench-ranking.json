@@ -1,26 +1,231 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": null,
-  "catalog": {
-    "url": "https://models.dev/api.json",
-    "retrievedAt": null
-  },
+  "attempted": [],
+  "availableModels": [
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-19",
+      "contextTokens": 1000000,
+      "id": "openrouter/minimax/minimax-m3.1-flash:free",
+      "name": "MiniMax M3.1 Flash (free)",
+      "releaseDate": "2026-10-19"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-16",
+      "contextTokens": 262144,
+      "id": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+      "name": "Xing4.0 29B A4B (free)",
+      "releaseDate": "2026-10-16"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-15",
+      "contextTokens": 1000000,
+      "id": "openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "name": "Nemotron 3.5 Super VL (free)",
+      "releaseDate": "2026-10-15"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-08-14",
+      "contextTokens": 512000,
+      "id": "openrouter/dots-studio/dots-3-note-preview:free",
+      "name": "Dots3-Note Preview (free)",
+      "releaseDate": "2026-08-14"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-08-11",
+      "contextTokens": 1000000,
+      "id": "openrouter/nvidia/nemotron-3.5-lightning:free",
+      "name": "Nemotron 3.5 Lightning (free)",
+      "releaseDate": "2026-08-11"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-08-11",
+      "contextTokens": 65536,
+      "id": "openrouter/liquid/lfm-2.5-2.6b:free",
+      "name": "LFM2.5-2.6B (free)",
+      "releaseDate": "2026-08-11"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-30",
+      "contextTokens": 1048576,
+      "id": "openrouter/thinkingmachines/inkling-small:free",
+      "name": "Inkling Small (free)",
+      "releaseDate": "2026-07-30"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-21",
+      "contextTokens": 262144,
+      "id": "openrouter/poolside/laguna-s-2.1:free",
+      "name": "Laguna S 2.1 (free)",
+      "releaseDate": "2026-07-21"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-15",
+      "contextTokens": 1048576,
+      "id": "openrouter/thinkingmachines/inkling:free",
+      "name": "Inkling (free)",
+      "releaseDate": "2026-07-15"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-02",
+      "contextTokens": 262144,
+      "id": "openrouter/poolside/laguna-xs-2.1:free",
+      "name": "Laguna XS 2.1 (free)",
+      "releaseDate": "2026-07-02"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-06-09",
+      "contextTokens": 256000,
+      "id": "openrouter/cohere/north-mini-code:free",
+      "name": "North Mini Code (free)",
+      "releaseDate": "2026-06-09"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-06-04",
+      "contextTokens": 1000000,
+      "id": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "name": "Nemotron 3 Ultra (free)",
+      "releaseDate": "2026-06-04"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-04-28",
+      "contextTokens": 256000,
+      "id": "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "name": "Nemotron 3 Nano Omni (free)",
+      "releaseDate": "2026-04-28"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-04-02",
+      "contextTokens": 262144,
+      "id": "openrouter/google/gemma-4-31b-it:free",
+      "name": "Gemma 4 31B (free)",
+      "releaseDate": "2026-04-02"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-04-02",
+      "contextTokens": 262144,
+      "id": "openrouter/google/gemma-4-26b-a4b-it:free",
+      "name": "Gemma 4 26B A4B  (free)",
+      "releaseDate": "2026-04-02"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-03-11",
+      "contextTokens": 262144,
+      "id": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "name": "Nemotron 3 Super (free)",
+      "releaseDate": "2026-03-11"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-02-01",
+      "contextTokens": 200000,
+      "id": "openrouter/openrouter/free",
+      "name": "Free Models Router",
+      "releaseDate": "2026-02-01"
+    }
+  ],
   "benchmark": {
+    "agent": "OpenCode v2 with read/edit/glob/grep tools; shell, network tools, and external file access denied",
+    "corpusDigest": "f783a51cb0ab545778cf74f03dbe97c4e2a6025b0b7ed293eed6e35c224ba380",
+    "corpusId": "nixbench-public",
+    "corpusStatus": "calibrating",
+    "corpusVersion": "3.2.0",
+    "interpretation": "screening-only",
     "name": "NixBench",
     "repository": "https://github.com/maximilianpw/nixbench",
-    "revision": null,
-    "corpusId": "nixbench-public",
-    "corpusVersion": "3.2.0",
-    "corpusDigest": null,
-    "corpusStatus": "calibrating",
-    "interpretation": "screening-only",
-    "agent": "OpenCode v2 with read/edit/glob/grep tools; shell, network tools, and external file access denied"
+    "revision": "290eb8c18d4a0833fcc3746662ff08766102232c"
   },
-  "availableModels": [],
-  "models": [],
+  "catalog": {
+    "retrievedAt": "Tue, 20 Oct 2026 23:35:27 GMT",
+    "url": "https://models.dev/api.json"
+  },
   "currentModel": null,
-  "nextCandidate": null,
-  "recommendationStatus": "no-benchmarked-free-model",
+  "generatedAt": "2026-10-20T23:35:27Z",
+  "models": [],
+  "nextCandidate": "openrouter/minimax/minimax-m3.1-flash:free",
   "rankingNote": "No currently free, eligible OpenRouter model has a recorded NixBench run. Catalog availability is not proof of account access.",
-  "attempted": []
+  "recommendationStatus": "no-benchmarked-free-model",
+  "schemaVersion": 1
 }
