@@ -180,7 +180,8 @@ class Store:
 
 
 def slug(model_id: str) -> str:
-    return model_id.replace("/", "__")
+    # Colons would split PATH if a job directory is prepended to it.
+    return model_id.replace("/", "__").replace(":", "_")
 
 
 def run_job(
@@ -217,6 +218,7 @@ def run_job(
             "OPENCODE_CONFIG_DIR": str(job_dir / "config"),
             "OPENROUTER_API_KEY": secret,
             "NIXBENCH_MODEL_ID": model_id,
+            "OPENCODE_BIN": str(opencode),
             "NIXBENCH_BWRAP": str(bwrap),
             "NIXBENCH_NIX_DAEMON": "1",
             "NIXBENCH_NIX_BIN_DIR": str(nix_bin),

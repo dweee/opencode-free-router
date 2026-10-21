@@ -18,4 +18,5 @@ rules.append({"action": "external_directory", "resource": f"{workdir}/*", "effec
 config_path.write_text(json.dumps(config, indent=2) + "\n")
 PY
 cd "$NIXBENCH_WORKDIR"
-exec opencode run --standalone --agent nixbench --model "$NIXBENCH_MODEL_ID" "$prompt"
+opencode_bin=${OPENCODE_BIN:-opencode}
+exec "$opencode_bin" run --standalone --agent nixbench --model "$NIXBENCH_MODEL_ID" "$prompt"
