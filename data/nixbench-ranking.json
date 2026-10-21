@@ -9,6 +9,11 @@
       "at": "2026-10-21T04:04:55Z",
       "id": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
       "status": "runner-failed"
+    },
+    {
+      "at": "2026-10-21T04:14:41Z",
+      "id": "openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "status": "runner-failed"
     }
   ],
   "availableModels": [
@@ -236,11 +241,11 @@
     "taskCount": 18
   },
   "catalog": {
-    "retrievedAt": "Wed, 21 Oct 2026 04:04:53 GMT",
+    "retrievedAt": "Wed, 21 Oct 2026 04:05:57 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": null,
-  "generatedAt": "2026-10-21T04:04:53Z",
+  "generatedAt": "2026-10-21T04:05:57Z",
   "models": [],
   "nextCandidate": null,
   "rankingNote": "No currently free, eligible OpenRouter model has a recorded NixBench run. Catalog availability is not proof of account access.",
