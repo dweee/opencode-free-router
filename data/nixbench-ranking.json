@@ -1,11 +1,5 @@
 {
-  "attempted": [
-    {
-      "at": "2026-10-21T03:48:29Z",
-      "id": "openrouter/minimax/minimax-m3.1-flash:free",
-      "status": "runner-failed"
-    }
-  ],
+  "attempted": [],
   "availableModels": [
     {
       "availability": "models.dev-zero-price; provider access must be checked at run time",
