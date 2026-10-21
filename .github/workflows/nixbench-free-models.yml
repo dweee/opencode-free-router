@@ -102,6 +102,7 @@ jobs:
           fi
           nix_bin=$(readlink -f "$(command -v nix-instantiate)")
           export NIXBENCH_NIX_BIN_DIR="$(dirname "$nix_bin")"
+          export NIX_PATH="nixpkgs=$(nix-instantiate --find-file nixpkgs)"
           sudo install -o root -g root -m 755 \
             "$GITHUB_WORKSPACE/scripts/nixbench-safe-shell.sh" \
             /usr/local/bin/nixbench-safe-shell
