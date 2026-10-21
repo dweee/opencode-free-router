@@ -134,6 +134,7 @@ def refresh(args: argparse.Namespace) -> int:
             "revision": args.nixbench_revision or None,
             "corpusId": "nixbench-public",
             "corpusVersion": args.corpus_version or "3.2.0",
+            "taskCount": args.corpus_task_count or None,
             "corpusDigest": args.corpus_digest or None,
             "corpusStatus": "calibrating",
             "interpretation": "screening-only",
@@ -216,6 +217,7 @@ def main() -> int:
     refresh_parser.add_argument("--file", type=Path, required=True)
     refresh_parser.add_argument("--nixbench-revision", default="")
     refresh_parser.add_argument("--corpus-version", default="3.2.0")
+    refresh_parser.add_argument("--corpus-task-count", type=int, default=0)
     refresh_parser.add_argument("--corpus-digest", default="")
     refresh_parser.set_defaults(func=refresh)
     record_parser = sub.add_parser("record")

@@ -16,8 +16,8 @@
     "nixbench": {
       "description": "Edits only the NixBench worktree; shell, network tools and external paths are blocked.",
       "mode": "primary",
-      "steps": 32,
-      "system": "You are solving one NixBench task. Read NIXBENCH_PROMPT.md and the files in the current worktree. Make the smallest correct edits to the current worktree. You cannot run shell commands; reason from the repository and task prompt. Do not request or attempt access to paths outside the current worktree.",
+      "steps": 48,
+      "system": "You are solving one NixBench coding task. The task prompt is in the user message. First use glob or grep to discover the actual files in this worktree; use only exact paths those tools return, and do not guess directory names. Read the relevant source files and make the smallest complete edits that satisfy the task. If a path is missing, search for the right path instead of retrying it. You cannot run shell commands. After editing, give a short completion response and stop. Never access paths outside the current task worktree.",
       "permissions": [
         { "action": "*", "resource": "*", "effect": "deny" },
         { "action": "read", "resource": "*", "effect": "allow" },

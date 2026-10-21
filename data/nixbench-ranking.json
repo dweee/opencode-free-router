@@ -1,11 +1,5 @@
 {
-  "attempted": [
-    {
-      "at": "2026-10-21T04:00:33Z",
-      "id": "openrouter/minimax/minimax-m3.1-flash:free",
-      "status": "runner-failed"
-    }
-  ],
+  "attempted": [],
   "availableModels": [
     {
       "availability": "models.dev-zero-price; provider access must be checked at run time",
@@ -227,7 +221,8 @@
     "name": "NixBench",
     "repository": "https://github.com/maximilianpw/nixbench",
     "revision": "290eb8c18d4a0833fcc3746662ff08766102232c",
-    "scope": "NixBench public corpus tasks supported by GitHub-hosted runners; KVM-dependent tasks omitted"
+    "scope": "NixBench public corpus tasks supported by GitHub-hosted runners; KVM-dependent tasks omitted",
+    "taskCount": 18
   },
   "catalog": {
     "retrievedAt": "Wed, 21 Oct 2026 03:50:31 GMT",

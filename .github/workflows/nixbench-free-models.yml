@@ -66,17 +66,18 @@ jobs:
                       shutil.copytree(contract, target / "contracts" / task.name)
           PY
           python3 bench.py --tasks-dir nixbench-github-hosted/tasks corpus-id --json > "$RUNNER_TEMP/nixbench-corpus.json"
+          task_count=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("task_count", 0))' "$RUNNER_TEMP/nixbench-corpus.json")
           cd "$GITHUB_WORKSPACE"
           python3 scripts/nixbench-ranking.py refresh \
             --file data/nixbench-ranking.json \
             --nixbench-revision "$NIXBENCH_REVISION" \
             --corpus-version "$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("version", "3.2.0"))' "$RUNNER_TEMP/nixbench-corpus.json")" \
+            --corpus-task-count "$task_count" \
             --corpus-digest "$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("digest", ""))' "$RUNNER_TEMP/nixbench-corpus.json")"
           model=$(python3 -c 'import json; print(json.load(open("data/nixbench-ranking.json")).get("nextCandidate") or "")')
           if [ -n "$model" ]; then
             printf 'model=%s\n' "$model" >> "$GITHUB_OUTPUT"
           fi
-          task_count=$(python3 -c 'import json; print(json.load(open("'"$RUNNER_TEMP"'/nixbench-corpus.json")).get("task_count", 0))')
           printf 'task_count=%s\n' "$task_count" >> "$GITHUB_OUTPUT"
       - name: Benchmark the next model
         id: benchmark
@@ -121,7 +122,7 @@ jobs:
           set +e
           python3 bench.py --tasks-dir nixbench-github-hosted/tasks run-all \
             --agent-cmd "$NIXBENCH_WORKSPACE/scripts/nixbench-agent.sh" \
-            --agent-timeout-seconds 300 \
+            --agent-timeout-seconds 900 \
             --model "$NIXBENCH_MODEL_ID" \
             --kind opencode \
             --agent-version "$(opencode --version)" \
@@ -156,6 +157,7 @@ jobs:
           PY
             python3 scripts/nixbench-ranking.py failed --file data/nixbench-ranking.json --model "$NIXBENCH_MODEL_ID"
             echo "NixBench did not produce a full, valid task summary for $NIXBENCH_MODEL_ID; the model was not ranked." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           fi
       - name: Commit refreshed model data
         if: always() && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
