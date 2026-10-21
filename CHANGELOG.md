@@ -6,6 +6,14 @@ release. A `[minor]` or `[major]` marker in a commit subject picks the bump; oth
 
 ## Unreleased
 
+## 0.1.4 — 2026-10-21
+
+- Sandbox NixBench shell while enabling local checks
+- Allow NixBench generated prompt reads
+- Use explicit OpenRouter-compatible provider for NixBench
+- Allow slower free-model NixBench runs
+- Register newly free models for OpenCode screening
+
 ## 0.1.3 — 2026-10-19
 
 - **Breaking: opencode 2 only.** The plugin is ported to opencode 2's plugin API; opencode 1.x is no
