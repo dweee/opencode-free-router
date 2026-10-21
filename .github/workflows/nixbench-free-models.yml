@@ -61,7 +61,7 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           NIXBENCH_MODEL_ID: ${{ steps.candidates.outputs.model }}
           NIXBENCH_EXPECTED_TASKS: ${{ steps.candidates.outputs.task_count }}
-          OPENCODE_CONFIG: ${{ github.workspace }}/templates/nixbench-opencode.json
+          OPENCODE_CONFIG: ${{ runner.temp }}/nixbench-opencode.json
           OPENCODE_CONFIG_DIR: ${{ runner.temp }}/opencode-config
           OPENCODE_HOME: ${{ runner.temp }}/opencode-home
           NIXBENCH_WORKSPACE: ${{ github.workspace }}
@@ -73,17 +73,26 @@ jobs:
           mkdir -p "$OPENCODE_CONFIG_DIR" "$OPENCODE_HOME"
           export HOME="$OPENCODE_HOME"
           export NIXBENCH_MODEL_ID
-          # Refresh OpenCode's model cache first; models.dev and OpenCode may sync on different schedules.
-          opencode models --refresh >/dev/null
-          # Require the exact model selector in OpenCode, in addition to models.dev's $0 record.
-          if ! opencode models openrouter | grep -Fqx -- "$NIXBENCH_MODEL_ID"; then
-            echo "Model is not present in this OpenCode runtime; benchmark deferred." >> "$GITHUB_STEP_SUMMARY"
-            python3 "$GITHUB_WORKSPACE/scripts/nixbench-ranking.py" failed \
-              --file "$GITHUB_WORKSPACE/data/nixbench-ranking.json" \
-              --model "$NIXBENCH_MODEL_ID" \
-              --status unavailable
-            exit 0
-          fi
+          # Register the exact models.dev candidate in a temporary OpenCode config so a new model
+          # does not have to wait for OpenCode's bundled provider catalog to catch up.
+          python3 - "$GITHUB_WORKSPACE/templates/nixbench-opencode.json" "$OPENCODE_CONFIG" "$GITHUB_WORKSPACE/data/nixbench-ranking.json" "$NIXBENCH_MODEL_ID" <<'PY'
+          import json, sys
+          from pathlib import Path
+          template, output, ranking = map(Path, sys.argv[1:4])
+          selector = sys.argv[4]
+          config = json.loads(template.read_text())
+          data = json.loads(ranking.read_text())
+          row = next((m for m in data.get("availableModels", []) if m.get("id") == selector), None)
+          if row is None:
+              raise SystemExit(f"candidate disappeared from catalog: {selector}")
+          model_id = selector.removeprefix("openrouter/")
+          config["providers"]["openrouter"]["models"][model_id] = {
+              "name": row.get("name", model_id),
+              "limit": {"context": row.get("contextTokens", 64000), "output": 8192},
+              "capabilities": {"tools": True},
+          }
+          Path(output).write_text(json.dumps(config, indent=2) + "\n")
+          PY
           cd .nixbench-upstream
           set +e
           python3 bench.py run-all \

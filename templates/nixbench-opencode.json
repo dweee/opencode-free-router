@@ -7,6 +7,11 @@
     { "action": "webfetch", "resource": "*", "effect": "deny" },
     { "action": "websearch", "resource": "*", "effect": "deny" }
   ],
+  "providers": {
+    "openrouter": {
+      "models": {}
+    }
+  },
   "agents": {
     "nixbench": {
       "description": "Edits only the NixBench worktree; shell, network tools and external paths are blocked.",
