@@ -100,9 +100,13 @@ jobs:
             sudo apt-get update
             sudo apt-get install --yes bubblewrap
           fi
+          nixpkgs_rev=$(python3 -c 'import json; print(json.load(open(".nixbench-upstream/vendor/nixpkgs/pin.json"))["rev"])')
+          nix flake prefetch "github:NixOS/nixpkgs/$nixpkgs_rev"
+          nixpkgs_path=$(python3 -c 'import json; print(json.load(open(".nixbench-upstream/vendor/nixpkgs/pin.json"))["store_path"])')
+          test -f "$nixpkgs_path/default.nix"
           nix_bin=$(readlink -f "$(command -v nix-instantiate)")
           export NIXBENCH_NIX_BIN_DIR="$(dirname "$nix_bin")"
-          export NIX_PATH="nixpkgs=$(nix-instantiate --find-file nixpkgs)"
+          export NIX_PATH="nixpkgs=$nixpkgs_path"
           sudo install -o root -g root -m 755 \
             "$GITHUB_WORKSPACE/scripts/nixbench-safe-shell.sh" \
             /usr/local/bin/nixbench-safe-shell
