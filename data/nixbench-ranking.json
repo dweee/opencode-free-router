@@ -4,6 +4,11 @@
       "at": "2026-10-21T03:40:25Z",
       "id": "openrouter/minimax/minimax-m3.1-flash:free",
       "status": "unavailable"
+    },
+    {
+      "at": "2026-10-21T03:41:28Z",
+      "id": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+      "status": "unavailable"
     }
   ],
   "availableModels": [
@@ -224,11 +229,11 @@
     "revision": "290eb8c18d4a0833fcc3746662ff08766102232c"
   },
   "catalog": {
-    "retrievedAt": "Wed, 21 Oct 2026 03:40:24 GMT",
+    "retrievedAt": "Wed, 21 Oct 2026 03:41:28 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": null,
-  "generatedAt": "2026-10-21T03:40:24Z",
+  "generatedAt": "2026-10-21T03:41:28Z",
   "models": [],
   "nextCandidate": null,
   "rankingNote": "No currently free, eligible OpenRouter model has a recorded NixBench run. Catalog availability is not proof of account access.",
