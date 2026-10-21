@@ -233,7 +233,7 @@
     }
   ],
   "benchmark": {
-    "agent": "OpenCode v2 with read/edit/glob/grep tools; shell, network tools, and external file access denied",
+    "agent": "OpenCode v2 with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
     "corpusDigest": "e08d50418427c4e73ea8f45b0ae7fbbf6e4db7d81f48fb0581f1774adf083531",
     "corpusId": "nixbench-public",
     "corpusStatus": "calibrating",

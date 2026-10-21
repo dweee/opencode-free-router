@@ -95,6 +95,16 @@ jobs:
             exit 0
           fi
           mkdir -p "$OPENCODE_CONFIG_DIR" "$OPENCODE_HOME"
+          chmod 700 "$OPENCODE_CONFIG_DIR" "$OPENCODE_HOME"
+          if ! command -v bwrap >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install --yes bubblewrap
+          fi
+          nix_bin=$(readlink -f "$(command -v nix-instantiate)")
+          export NIXBENCH_NIX_BIN_DIR="$(dirname "$nix_bin")"
+          sudo install -o root -g root -m 755 \
+            "$GITHUB_WORKSPACE/scripts/nixbench-safe-shell.sh" \
+            /usr/local/bin/nixbench-safe-shell
           export HOME="$OPENCODE_HOME"
           export NIXBENCH_MODEL_ID
           # Register the exact models.dev candidate in a temporary OpenCode config so a new model
@@ -126,7 +136,7 @@ jobs:
             --kind opencode \
             --agent-version "$(opencode --version)" \
             --network enabled \
-            --label "OpenCode v2 restricted-tools screening: $NIXBENCH_MODEL_ID"
+            --label "OpenCode v2 network-isolated shell screening: $NIXBENCH_MODEL_ID"
           bench_status=$?
           set -e
           summary=$(find results -mindepth 2 -maxdepth 2 -type f -name summary.json -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)

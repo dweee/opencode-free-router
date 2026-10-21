@@ -144,7 +144,7 @@ def refresh(args: argparse.Namespace) -> int:
                 "firewall-nftables-forwarding-silently-dropped",
                 "state-directory-ownership-after-hardening",
             ],
-            "agent": "OpenCode v2 with read/edit/glob/grep tools; shell, network tools, and external file access denied",
+            "agent": "OpenCode v2 with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
         },
         "availableModels": available,
         "nextCandidate": candidate["id"] if candidate else None,
@@ -188,7 +188,7 @@ def record(args: argparse.Namespace) -> int:
         "completedAt": summary.get("created_at") or now(),
         "runId": summary.get("run_id"),
         "status": "screening-only",
-        "configuration": {"agent": "opencode", "version": args.agent_version, "tools": ["read", "edit", "glob", "grep"], "shell": "denied"},
+        "configuration": {"agent": "opencode", "version": args.agent_version, "tools": ["read", "edit", "glob", "grep", "shell"], "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only"},
     }
     models = [m for m in doc.get("models", []) if not isinstance(m, dict) or m.get("id") != args.model]
     models.append(entry)
