@@ -1,5 +1,11 @@
 {
-  "attempted": [],
+  "attempted": [
+    {
+      "at": "2026-10-21T03:47:10Z",
+      "id": "openrouter/minimax/minimax-m3.1-flash:free",
+      "status": "runner-failed"
+    }
+  ],
   "availableModels": [
     {
       "availability": "models.dev-zero-price; provider access must be checked at run time",
@@ -208,21 +214,27 @@
   ],
   "benchmark": {
     "agent": "OpenCode v2 with read/edit/glob/grep tools; shell, network tools, and external file access denied",
-    "corpusDigest": "f783a51cb0ab545778cf74f03dbe97c4e2a6025b0b7ed293eed6e35c224ba380",
+    "corpusDigest": "e08d50418427c4e73ea8f45b0ae7fbbf6e4db7d81f48fb0581f1774adf083531",
     "corpusId": "nixbench-public",
     "corpusStatus": "calibrating",
     "corpusVersion": "3.2.0",
+    "excludedTasks": [
+      "boot-hook-marker-survives-reboot",
+      "firewall-nftables-forwarding-silently-dropped",
+      "state-directory-ownership-after-hardening"
+    ],
     "interpretation": "screening-only",
     "name": "NixBench",
     "repository": "https://github.com/maximilianpw/nixbench",
-    "revision": "290eb8c18d4a0833fcc3746662ff08766102232c"
+    "revision": "290eb8c18d4a0833fcc3746662ff08766102232c",
+    "scope": "NixBench public corpus tasks supported by GitHub-hosted runners; KVM-dependent tasks omitted"
   },
   "catalog": {
-    "retrievedAt": "Wed, 21 Oct 2026 03:44:25 GMT",
+    "retrievedAt": "Wed, 21 Oct 2026 03:47:09 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": null,
-  "generatedAt": "2026-10-21T03:44:25Z",
+  "generatedAt": "2026-10-21T03:47:09Z",
   "models": [],
   "nextCandidate": null,
   "rankingNote": "No currently free, eligible OpenRouter model has a recorded NixBench run. Catalog availability is not proof of account access.",
