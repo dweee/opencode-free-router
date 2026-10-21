@@ -34,6 +34,11 @@
       "at": "2026-10-21T05:19:37Z",
       "id": "openrouter/thinkingmachines/inkling-small:free",
       "status": "runner-failed"
+    },
+    {
+      "at": "2026-10-21T05:22:31Z",
+      "id": "openrouter/poolside/laguna-s-2.1:free",
+      "status": "runner-failed"
     }
   ],
   "availableModels": [
@@ -261,11 +266,11 @@
     "taskCount": 18
   },
   "catalog": {
-    "retrievedAt": "Wed, 21 Oct 2026 05:17:27 GMT",
+    "retrievedAt": "Wed, 21 Oct 2026 05:22:28 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": null,
-  "generatedAt": "2026-10-21T05:17:28Z",
+  "generatedAt": "2026-10-21T05:22:28Z",
   "models": [],
   "nextCandidate": null,
   "rankingNote": "No currently free, eligible OpenRouter model has a recorded NixBench run. Catalog availability is not proof of account access.",
