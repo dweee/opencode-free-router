@@ -218,13 +218,13 @@
     "revision": "290eb8c18d4a0833fcc3746662ff08766102232c"
   },
   "catalog": {
-    "retrievedAt": "Wed, 21 Oct 2026 03:41:28 GMT",
+    "retrievedAt": "Wed, 21 Oct 2026 03:43:03 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": null,
-  "generatedAt": "2026-10-21T03:41:28Z",
+  "generatedAt": "2026-10-21T03:43:03Z",
   "models": [],
-  "nextCandidate": null,
+  "nextCandidate": "openrouter/minimax/minimax-m3.1-flash:free",
   "rankingNote": "No currently free, eligible OpenRouter model has a recorded NixBench run. Catalog availability is not proof of account access.",
   "recommendationStatus": "no-benchmarked-free-model",
   "schemaVersion": 1
