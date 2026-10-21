@@ -41,7 +41,25 @@ jobs:
           NIXBENCH_REVISION: 290eb8c18d4a0833fcc3746662ff08766102232c
         run: |
           cd .nixbench-upstream
-          python3 bench.py corpus-id --json > "$RUNNER_TEMP/nixbench-corpus.json"
+          # Three public tasks require /dev/kvm, unavailable on GitHub-hosted runners.
+          # Build a transparent task subset with the same pinned corpus manifest.
+          python3 - <<'PY'
+          from pathlib import Path
+          import shutil
+
+          source = Path("tasks")
+          target = Path("tasks-github-hosted")
+          excluded = {
+              "boot-hook-marker-survives-reboot",
+              "firewall-nftables-forwarding-silently-dropped",
+              "state-directory-ownership-after-hardening",
+          }
+          target.mkdir()
+          for task in source.iterdir():
+              if task.is_dir() and task.name not in excluded:
+                  shutil.copytree(task, target / task.name)
+          PY
+          python3 bench.py --tasks-dir tasks-github-hosted corpus-id --json > "$RUNNER_TEMP/nixbench-corpus.json"
           cd "$GITHUB_WORKSPACE"
           python3 scripts/nixbench-ranking.py refresh \
             --file data/nixbench-ranking.json \
@@ -95,7 +113,7 @@ jobs:
           PY
           cd .nixbench-upstream
           set +e
-          python3 bench.py run-all \
+          python3 bench.py --tasks-dir tasks-github-hosted run-all \
             --agent-cmd "$NIXBENCH_WORKSPACE/scripts/nixbench-agent.sh" \
             --agent-timeout-seconds 300 \
             --model "$NIXBENCH_MODEL_ID" \

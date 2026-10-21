@@ -71,9 +71,10 @@ availability is checked again at runtime.
 
 Scores are **one-run screening results**, not a stable or official leaderboard. NixBench 3.2.0
 identifies its public corpus as calibrating, so the JSON explicitly labels results `screening-only`.
-Each scheduled benchmark runs a restricted OpenCode v2 agent with shell, network, subagent, and
-external-directory access denied. The workflow checks out NixBench at a pinned commit and writes
-only the catalog and aggregate scores back to this fork.
+GitHub-hosted runners lack KVM, so the workflow omits NixBench's three VM tasks and records that
+18-task scope with each result. Each run uses a restricted OpenCode v2 agent with shell, network,
+subagent, and external-directory access denied. The workflow checks out NixBench at a pinned commit
+and writes only the catalog and aggregate scores back to this fork.
 
 `opencode-free` is plain `opencode` with the free-router config layered on top via `OPENCODE_CONFIG`.
 Your normal `opencode` is unaffected. opencode 2 commands normally talk to a shared background

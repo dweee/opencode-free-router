@@ -137,6 +137,12 @@ def refresh(args: argparse.Namespace) -> int:
             "corpusDigest": args.corpus_digest or None,
             "corpusStatus": "calibrating",
             "interpretation": "screening-only",
+            "scope": "NixBench public corpus tasks supported by GitHub-hosted runners; KVM-dependent tasks omitted",
+            "excludedTasks": [
+                "boot-hook-marker-survives-reboot",
+                "firewall-nftables-forwarding-silently-dropped",
+                "state-directory-ownership-after-hardening",
+            ],
             "agent": "OpenCode v2 with read/edit/glob/grep tools; shell, network tools, and external file access denied",
         },
         "availableModels": available,
