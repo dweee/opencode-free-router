@@ -86,7 +86,6 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           NIXBENCH_MODEL_ID: ${{ steps.candidates.outputs.model }}
           NIXBENCH_EXPECTED_TASKS: ${{ steps.candidates.outputs.task_count }}
-          OPENCODE_CONFIG: ${{ runner.temp }}/nixbench-opencode.json
           OPENCODE_CONFIG_DIR: ${{ runner.temp }}/opencode-config
           OPENCODE_HOME: ${{ runner.temp }}/opencode-home
           NIXBENCH_WORKSPACE: ${{ github.workspace }}
@@ -100,7 +99,7 @@ jobs:
           export NIXBENCH_MODEL_ID
           # Register the exact models.dev candidate in a temporary OpenCode config so a new model
           # does not have to wait for OpenCode's bundled provider catalog to catch up.
-          python3 - "$GITHUB_WORKSPACE/templates/nixbench-opencode.json" "$OPENCODE_CONFIG" "$GITHUB_WORKSPACE/data/nixbench-ranking.json" "$NIXBENCH_MODEL_ID" <<'PY'
+          python3 - "$GITHUB_WORKSPACE/templates/nixbench-opencode.json" "$OPENCODE_CONFIG_DIR/opencode.json" "$GITHUB_WORKSPACE/data/nixbench-ranking.json" "$NIXBENCH_MODEL_ID" <<'PY'
           import json, sys
           from pathlib import Path
           template, output, ranking = map(Path, sys.argv[1:4])
