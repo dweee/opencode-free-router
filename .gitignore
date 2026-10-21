@@ -9,6 +9,8 @@ rank.lock
 cache/
 coverage/
 node_modules/
+__pycache__/
+.compare-runs/
 .DS_Store
 
 .claude/

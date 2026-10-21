@@ -1,0 +1,23 @@
+The nixos MCP is enabled. It returns current upstream index data, or files from this machine's Nix store. It does not describe this project's pinned revision. Confirm any name you use against the project's flake lock and sources before editing.
+
+- nixos_nix: Look up live Nix data. Set action, and source when the action needs one.
+  - source nixos, type packages: find a current NixOS package; type package with action info for one exact attribute.
+  - source nixos, type options: find a current NixOS module option; type option with action info for one exact option.
+  - source nixos, type programs: find which package provides a program name.
+  - source home-manager: search or inspect Home Manager options.
+  - source darwin: search or inspect nix-darwin options.
+  - source nixvim: search or inspect Nixvim options.
+  - source nvf: search or inspect NVF options; canonical paths are vim.*.
+  - source flakes: search community flakes on search.nixos.org.
+  - source flakehub: search or inspect flakes published on FlakeHub.
+  - source noogle: search Nix language functions and their type signatures.
+  - source wiki: search NixOS Wiki articles; action info reads one page.
+  - source nix-dev: search official nix.dev docs; action info reads one page.
+  - source nixhub: look up NixHub package metadata and store paths.
+  - action channels: list NixOS channel names and the indexed commit when the server knows it.
+  - action stats: return counts for the selected source.
+  - action browse: walk a tree by prefix for home-manager, darwin, nixvim, nvf, or noogle.
+  - action cache: check whether a package is on cache.nixos.org; version and system are optional.
+  - action flake-inputs: list this project's locked inputs, or list or read a file inside one.
+  - action store: list or read an explicit /nix/store path that already exists.
+- nixos_nix_versions: Find which nixpkgs commit shipped a given package version, including the attribute path, date, and platforms. Use it for version history, not to choose this project's pin.
