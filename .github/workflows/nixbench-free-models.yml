@@ -139,6 +139,21 @@ jobs:
               --agent-version "$(opencode --version)"; then
             echo "Completed a full one-trial screening run for $NIXBENCH_MODEL_ID (bench exit $bench_status)." >> "$GITHUB_STEP_SUMMARY"
           else
+            python3 - "$GITHUB_WORKSPACE/.nixbench-upstream/$summary" <<'PY'
+          import json, re, sys
+          from pathlib import Path
+          summary = Path(sys.argv[1])
+          if summary.is_file():
+              data = json.loads(summary.read_text())
+              for task in data.get("tasks", []):
+                  agent = task.get("agent") or {}
+                  print(f"NixBench diagnostic {task.get('task_id')}: agent_exit={agent.get('returncode')} timed_out={agent.get('timed_out')} measurement={task.get('measurement_status')} reason={task.get('invalid_reason')}")
+                  log = summary.parent / task.get("task_id", "") / "agent.log"
+                  if log.is_file():
+                      for line in log.read_text(errors="replace").splitlines():
+                          if re.search(r"error|denied|failed|401|403|unavailable|invalid|timeout|model", line, re.I):
+                              print("Agent diagnostic:", line[-400:])
+          PY
             python3 scripts/nixbench-ranking.py failed --file data/nixbench-ranking.json --model "$NIXBENCH_MODEL_ID"
             echo "NixBench did not produce a full, valid task summary for $NIXBENCH_MODEL_ID; the model was not ranked." >> "$GITHUB_STEP_SUMMARY"
           fi
