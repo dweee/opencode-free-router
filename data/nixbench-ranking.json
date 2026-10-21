@@ -1,5 +1,11 @@
 {
-  "attempted": [],
+  "attempted": [
+    {
+      "at": "2026-10-21T04:03:08Z",
+      "id": "openrouter/minimax/minimax-m3.1-flash:free",
+      "status": "runner-failed"
+    }
+  ],
   "availableModels": [
     {
       "availability": "models.dev-zero-price; provider access must be checked at run time",
@@ -225,11 +231,11 @@
     "taskCount": 18
   },
   "catalog": {
-    "retrievedAt": "Wed, 21 Oct 2026 03:50:31 GMT",
+    "retrievedAt": "Wed, 21 Oct 2026 04:03:05 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": null,
-  "generatedAt": "2026-10-21T03:50:32Z",
+  "generatedAt": "2026-10-21T04:03:05Z",
   "models": [],
   "nextCandidate": null,
   "rankingNote": "No currently free, eligible OpenRouter model has a recorded NixBench run. Catalog availability is not proof of account access.",
