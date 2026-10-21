@@ -266,14 +266,39 @@
     "taskCount": 18
   },
   "catalog": {
-    "retrievedAt": "Wed, 21 Oct 2026 05:22:28 GMT",
+    "retrievedAt": "Wed, 21 Oct 2026 05:23:54 GMT",
     "url": "https://models.dev/api.json"
   },
-  "currentModel": null,
-  "generatedAt": "2026-10-21T05:22:28Z",
-  "models": [],
+  "currentModel": "openrouter/thinkingmachines/inkling:free",
+  "generatedAt": "2026-10-21T05:23:54Z",
+  "models": [
+    {
+      "completedAt": "2026-10-21T06:35:57.639882+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "openrouter/thinkingmachines/inkling:free",
+      "maxScore": 1800.0,
+      "passedTasks": 7,
+      "runId": "20261021T052414Z-5da758d0",
+      "score": 1180.0,
+      "scoreRate": 0.655556,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    }
+  ],
   "nextCandidate": null,
-  "rankingNote": "No currently free, eligible OpenRouter model has a recorded NixBench run. Catalog availability is not proof of account access.",
-  "recommendationStatus": "no-benchmarked-free-model",
+  "rankingNote": "Provisional one-run screens only. NixBench 3.2.0 is in calibration; this is not an official leaderboard or a statistically stable recommendation.",
+  "recommendationStatus": "provisional-screening",
   "schemaVersion": 1
 }
