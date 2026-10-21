@@ -1,16 +1,5 @@
 {
-  "attempted": [
-    {
-      "at": "2026-10-21T03:40:25Z",
-      "id": "openrouter/minimax/minimax-m3.1-flash:free",
-      "status": "unavailable"
-    },
-    {
-      "at": "2026-10-21T03:41:28Z",
-      "id": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
-      "status": "unavailable"
-    }
-  ],
+  "attempted": [],
   "availableModels": [
     {
       "availability": "models.dev-zero-price; provider access must be checked at run time",

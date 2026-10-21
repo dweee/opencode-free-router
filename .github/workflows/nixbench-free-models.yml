@@ -73,8 +73,10 @@ jobs:
           mkdir -p "$OPENCODE_CONFIG_DIR" "$OPENCODE_HOME"
           export HOME="$OPENCODE_HOME"
           export NIXBENCH_MODEL_ID
-          # Require the exact current OpenCode model selector, in addition to models.dev's $0 record.
-          if ! opencode models | grep -Fqx -- "$NIXBENCH_MODEL_ID"; then
+          # Refresh OpenCode's model cache first; models.dev and OpenCode may sync on different schedules.
+          opencode models --refresh >/dev/null
+          # Require the exact model selector in OpenCode, in addition to models.dev's $0 record.
+          if ! opencode models openrouter | grep -Fqx -- "$NIXBENCH_MODEL_ID"; then
             echo "Model is not present in this OpenCode runtime; benchmark deferred." >> "$GITHUB_STEP_SUMMARY"
             python3 "$GITHUB_WORKSPACE/scripts/nixbench-ranking.py" failed \
               --file "$GITHUB_WORKSPACE/data/nixbench-ranking.json" \
