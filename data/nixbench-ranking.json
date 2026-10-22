@@ -44,9 +44,26 @@
       "at": "2026-10-21T10:13:38Z",
       "id": "openrouter/poolside/laguna-xs-2.1:free",
       "status": "runner-failed"
+    },
+    {
+      "at": "2026-10-22T10:16:57Z",
+      "id": "openrouter/recursive/flint-v1.0:free",
+      "status": "runner-failed"
     }
   ],
   "availableModels": [
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-21",
+      "contextTokens": 262144,
+      "id": "openrouter/recursive/flint-v1.0:free",
+      "name": "Flint (free)",
+      "releaseDate": "2026-10-21"
+    },
     {
       "availability": "models.dev-zero-price; provider access must be checked at run time",
       "catalogCost": {
@@ -271,11 +288,11 @@
     "taskCount": 18
   },
   "catalog": {
-    "retrievedAt": "Wed, 21 Oct 2026 10:13:15 GMT",
+    "retrievedAt": "Thu, 22 Oct 2026 10:15:04 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "openrouter/thinkingmachines/inkling:free",
-  "generatedAt": "2026-10-21T10:13:15Z",
+  "generatedAt": "2026-10-22T10:15:04Z",
   "models": [
     {
       "completedAt": "2026-10-21T06:35:57.639882+00:00",
