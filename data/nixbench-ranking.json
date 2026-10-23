@@ -49,6 +49,11 @@
       "at": "2026-10-22T10:16:57Z",
       "id": "openrouter/recursive/flint-v1.0:free",
       "status": "runner-failed"
+    },
+    {
+      "at": "2026-10-23T10:16:21Z",
+      "id": "openrouter/cohere/north-mini-code:free",
+      "status": "runner-failed"
     }
   ],
   "availableModels": [
@@ -63,18 +68,6 @@
       "id": "openrouter/recursive/flint-v1.0:free",
       "name": "Flint (free)",
       "releaseDate": "2026-10-21"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-10-19",
-      "contextTokens": 1000000,
-      "id": "openrouter/minimax/minimax-m3.1-flash:free",
-      "name": "MiniMax M3.1 Flash (free)",
-      "releaseDate": "2026-10-19"
     },
     {
       "availability": "models.dev-zero-price; provider access must be checked at run time",
@@ -288,11 +281,11 @@
     "taskCount": 18
   },
   "catalog": {
-    "retrievedAt": "Thu, 22 Oct 2026 10:15:04 GMT",
+    "retrievedAt": "Fri, 23 Oct 2026 10:07:34 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "openrouter/thinkingmachines/inkling:free",
-  "generatedAt": "2026-10-22T10:15:04Z",
+  "generatedAt": "2026-10-23T10:07:34Z",
   "models": [
     {
       "completedAt": "2026-10-21T06:35:57.639882+00:00",
