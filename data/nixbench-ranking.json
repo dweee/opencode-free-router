@@ -54,6 +54,11 @@
       "at": "2026-10-23T10:16:21Z",
       "id": "openrouter/cohere/north-mini-code:free",
       "status": "runner-failed"
+    },
+    {
+      "at": "2026-10-24T10:01:43Z",
+      "id": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "status": "runner-failed"
     }
   ],
   "availableModels": [
@@ -281,11 +286,11 @@
     "taskCount": 18
   },
   "catalog": {
-    "retrievedAt": "Fri, 23 Oct 2026 10:07:34 GMT",
+    "retrievedAt": "Sat, 24 Oct 2026 09:34:44 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "openrouter/thinkingmachines/inkling:free",
-  "generatedAt": "2026-10-23T10:07:34Z",
+  "generatedAt": "2026-10-24T09:34:44Z",
   "models": [
     {
       "completedAt": "2026-10-21T06:35:57.639882+00:00",
