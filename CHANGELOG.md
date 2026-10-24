@@ -6,6 +6,10 @@ release. A `[minor]` or `[major]` marker in a commit subject picks the bump; oth
 
 ## Unreleased
 
+## 0.1.5 — 2026-10-24
+
+- Keep NixBench screens from aborting on the sandbox path and provider idle timeouts.
+
 ## 0.1.4 — 2026-10-21
 
 - Sandbox NixBench shell while enabling local checks
