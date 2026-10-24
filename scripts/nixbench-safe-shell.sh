@@ -7,7 +7,11 @@ case "$NIXBENCH_WORKDIR" in
   *) echo "Refusing shell outside a NixBench isolated worktree" >&2; exit 126 ;;
 esac
 [ -d "$NIXBENCH_WORKDIR" ] || { echo "NixBench worktree does not exist" >&2; exit 126; }
-[ -d /nix/store ] || { echo "Nix store is unavailable" >&2; exit 126; }
+nix_store=${NIXBENCH_NIX_STORE:-/nix/store}
+[ -d "$nix_store" ] || { echo "Nix store is unavailable" >&2; exit 126; }
+# OpenCode edits this host path. Remounting it at /workspace makes shell
+# commands address a directory OpenCode denies as an external directory.
+work_parent=$(dirname "$NIXBENCH_WORKDIR")
 bwrap_bin="${NIXBENCH_BWRAP:-/usr/bin/bwrap}"
 [ -x "$bwrap_bin" ] || { echo "bubblewrap is unavailable" >&2; exit 126; }
 
@@ -27,8 +31,9 @@ args=(
   --tmpfs /tmp
   --tmpfs /home
   --dir /home/agent
-  --bind "$NIXBENCH_WORKDIR" /workspace
-  --ro-bind /nix/store /nix/store
+  --dir "$work_parent"
+  --bind "$NIXBENCH_WORKDIR" "$NIXBENCH_WORKDIR"
+  --ro-bind "$nix_store" "$nix_store"
   --ro-bind /usr /usr
   --ro-bind /bin /bin
 )
@@ -57,9 +62,9 @@ args+=(
   --setenv TMPDIR /tmp
   --setenv PATH "$safe_path"
   --setenv NIXBENCH_TASK_ID "${NIXBENCH_TASK_ID:-}"
-  --setenv NIXBENCH_WORKDIR /workspace
-  --setenv NIXBENCH_PROMPT /workspace/NIXBENCH_PROMPT.md
+  --setenv NIXBENCH_WORKDIR "$NIXBENCH_WORKDIR"
+  --setenv NIXBENCH_PROMPT "$NIXBENCH_WORKDIR/NIXBENCH_PROMPT.md"
 )
 if [ -n "${NIX_PATH:-}" ]; then args+=(--setenv NIX_PATH "$NIX_PATH"); fi
-args+=(--chdir /workspace -- "$inner_shell" "$@")
+args+=(--chdir "$NIXBENCH_WORKDIR" -- "$inner_shell" "$@")
 exec "$bwrap_bin" "${args[@]}"

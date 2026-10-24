@@ -19,4 +19,24 @@ config_path.write_text(json.dumps(config, indent=2) + "\n")
 PY
 cd "$NIXBENCH_WORKDIR"
 opencode_bin=${OPENCODE_BIN:-opencode}
-exec "$opencode_bin" run --standalone --agent nixbench --model "$NIXBENCH_MODEL_ID" "$prompt"
+# A silent provider gap is an infrastructure failure. NixBench treats any
+# non-zero agent exit as an invalid measurement and stops the corpus, so retry
+# that one error once before giving up. The 900s task limit still applies.
+log=$(mktemp)
+trap 'rm -f "$log"' EXIT
+attempt=1
+max_attempts=2
+while true; do
+  set +e
+  "$opencode_bin" run --standalone --agent nixbench --model "$NIXBENCH_MODEL_ID" "$prompt" 2>&1 | tee -a "$log"
+  status=${PIPESTATUS[0]}
+  set -e
+  if [ "$status" -eq 0 ]; then
+    exit 0
+  fi
+  if [ "$attempt" -ge "$max_attempts" ] || ! grep -q "Upstream idle timeout exceeded" "$log"; then
+    exit "$status"
+  fi
+  attempt=$((attempt + 1))
+  printf 'NixBench agent retrying after upstream idle timeout (attempt %s/%s)\n' "$attempt" "$max_attempts" >&2
+done
