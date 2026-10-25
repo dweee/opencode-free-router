@@ -180,8 +180,8 @@ def refresh(args: argparse.Namespace) -> int:
     available = order_available(available, screen_priority(available))
     attempted = {row.get("id") for row in doc.get("attempted", []) if isinstance(row, dict)}
     screened = {row.get("id") for row in doc.get("models", []) if isinstance(row, dict)}
-    # One model per scheduled run keeps provider quotas bounded. The queue follows
-    # the same LMArena and Artificial Analysis weights as the free-model ranker.
+    # One model per scheduled run keeps provider quotas bounded. Models with no
+    # leaderboard match go first; scored models follow the free-model ranker weights.
     new = [row for row in available if row["id"] not in attempted and row["id"] not in screened]
     candidate = next(iter(new), None)
     doc.update({
@@ -205,7 +205,7 @@ def refresh(args: argparse.Namespace) -> int:
                 "state-directory-ownership-after-hardening",
             ],
             "agent": "OpenCode v2 with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
-            "candidateOrder": "LMArena agent, webdev, and text indexes, plus Artificial Analysis coding, agentic, and intelligence indexes when a key is configured",
+            "candidateOrder": "Unmatched models first, then LMArena agent, webdev, and text indexes, plus Artificial Analysis coding, agentic, and intelligence indexes when a key is configured",
         },
         "availableModels": available,
         "nextCandidate": candidate["id"] if candidate else None,

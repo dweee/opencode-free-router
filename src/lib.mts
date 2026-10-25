@@ -456,7 +456,14 @@ export const SCREENING_WEIGHTS: Record<string, number> = {
 }
 
 export function screeningScore(cands: ModelInfo[], boards: Record<string, RankedRow[]>, now = Date.now()) {
-  return score(cands, boards, [], { ...DEFAULT_CONFIG, weights: { ...SCREENING_WEIGHTS } }, { pin: [], ban: [], alias: {} }, now)
+  // Models with no leaderboard match are screened first. The scored ones follow
+  // in weight order, so a known board placement does not jump an unknown model.
+  return score(cands, boards, [], { ...DEFAULT_CONFIG, weights: { ...SCREENING_WEIGHTS } }, { pin: [], ban: [], alias: {} }, now).sort((a, b) => {
+    const aUnscored = Object.keys(a.sources).length === 0
+    const bUnscored = Object.keys(b.sources).length === 0
+    if (aUnscored !== bUnscored) return aUnscored ? -1 : 1
+    return b.score - a.score
+  })
 }
 
 // The model ids of a ranking.json, best first.

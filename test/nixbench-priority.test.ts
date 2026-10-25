@@ -27,7 +27,7 @@ const web: ModelInfo = {
   release_date: "2026-10-22T00:00:00.000Z",
 }
 
-test("screening order uses the agent, webdev, and text boards ahead of release date", () => {
+test("models with no leaderboard match are screened before scored ones", () => {
   const ranked = screeningScore(
     [flint, ultra, web],
     {
@@ -52,20 +52,20 @@ test("screening order uses the agent, webdev, and text boards ahead of release d
   assert.deepEqual(
     ranked.map((row) => row.id),
     [
+      "openrouter/recursive/flint-v1.0:free",
       "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
       "openrouter/example/web-only:free",
-      "openrouter/recursive/flint-v1.0:free",
     ],
   )
-  const best = ranked[0]
-  const webOnly = ranked[1]
-  const missed = ranked[2]
+  const missed = ranked[0]
+  const best = ranked[1]
+  const webOnly = ranked[2]
+  assert.ok(missed)
   assert.ok(best)
   assert.ok(webOnly)
-  assert.ok(missed)
+  assert.equal(missed.reason.startsWith("unscored"), true)
   assert.equal(best.reason, "benchmarks (arena_agent, arena_webdev, arena_text)")
   assert.equal(webOnly.reason, "benchmarks (arena_webdev)")
-  assert.equal(missed.reason.startsWith("unscored"), true)
 })
 
 test("the queue keeps a higher screening score ahead of a newer release", () => {
