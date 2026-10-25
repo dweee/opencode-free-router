@@ -68,7 +68,11 @@ def discover(data: dict[str, Any]) -> list[dict[str, Any]]:
         context = (model.get("limit") or {}).get("context")
         if not isinstance(context, int) or context < 64000:
             continue
-        model_id = model.get("id", key)
+        model_id = str(model.get("id", key))
+        # openrouter/free, auto, and fusion are routers. They report a zero price
+        # and then pick another model, sometimes a paid one.
+        if model_id.startswith("openrouter/"):
+            continue
         selector = f"openrouter/{model_id}"
         if not MODEL_RE.fullmatch(selector):
             continue
@@ -85,7 +89,7 @@ def discover(data: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def order_available(available: list[dict[str, Any]], priority: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Put benchmarked models first. An empty priority keeps the release-date order."""
+    """Keep the priority script's order. An empty priority keeps release-date order."""
     if not priority:
         return list(available)
     rank = {row.get("id"): index for index, row in enumerate(priority) if isinstance(row, dict)}

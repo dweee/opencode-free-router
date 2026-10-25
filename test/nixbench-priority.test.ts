@@ -68,6 +68,41 @@ test("models with no leaderboard match are screened before scored ones", () => {
   assert.equal(webOnly.reason, "benchmarks (arena_webdev)")
 })
 
+test("OpenRouter's free router is not a screening candidate", () => {
+  const run = spawnSync(
+    "python3",
+    [
+      "-c",
+      `
+import importlib.util, json, sys
+spec = importlib.util.spec_from_file_location("ranking", sys.argv[1])
+mod = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+def row(model_id, name):
+    return {
+        "id": model_id,
+        "name": name,
+        "cost": {"input": 0, "output": 0},
+        "modalities": {"input": ["text"]},
+        "tool_call": True,
+        "limit": {"context": 128000},
+        "release_date": "2026-01-01",
+    }
+catalog = {"openrouter": {"models": {
+    "free": row("openrouter/free", "Free Models Router"),
+    "auto": row("openrouter/auto", "Auto Router"),
+    "flint": row("recursive/flint-v1.0:free", "Flint"),
+}}}
+print(json.dumps([item["id"] for item in mod.discover(catalog)]))
+`,
+      RANKING,
+    ],
+    { encoding: "utf8" },
+  )
+  assert.equal(run.status, 0, run.stderr)
+  assert.deepEqual(JSON.parse(run.stdout), ["openrouter/recursive/flint-v1.0:free"])
+})
+
 test("the queue keeps a higher screening score ahead of a newer release", () => {
   const run = spawnSync(
     "python3",

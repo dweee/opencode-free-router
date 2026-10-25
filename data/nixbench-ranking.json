@@ -58,23 +58,6 @@
         "input": 0,
         "output": 0
       },
-      "catalogUpdated": "2026-02-01",
-      "contextTokens": 200000,
-      "id": "openrouter/openrouter/free",
-      "name": "Free Models Router",
-      "priority": {
-        "reason": "unscored",
-        "score": 0.25,
-        "sources": {}
-      },
-      "releaseDate": "2026-02-01"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
       "catalogUpdated": "2026-10-16",
       "contextTokens": 262144,
       "id": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
@@ -404,11 +387,11 @@
     "taskCount": 18
   },
   "catalog": {
-    "retrievedAt": "Sun, 25 Oct 2026 00:02:34 GMT",
+    "retrievedAt": "Sun, 25 Oct 2026 00:04:46 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "openrouter/thinkingmachines/inkling:free",
-  "generatedAt": "2026-10-25T00:02:37Z",
+  "generatedAt": "2026-10-25T00:04:49Z",
   "models": [
     {
       "completedAt": "2026-10-21T06:35:57.639882+00:00",
