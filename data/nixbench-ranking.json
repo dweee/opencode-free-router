@@ -1,5 +1,11 @@
 {
-  "attempted": [],
+  "attempted": [
+    {
+      "at": "2026-10-25T09:28:28Z",
+      "id": "openrouter/recursive/flint-v1.0:free",
+      "status": "runner-failed"
+    }
+  ],
   "availableModels": [
     {
       "availability": "models.dev-zero-price; provider access must be checked at run time",
@@ -13,7 +19,7 @@
       "name": "Flint (free)",
       "priority": {
         "reason": "unscored",
-        "score": 0.3456,
+        "score": 0.3451,
         "sources": {}
       },
       "releaseDate": "2026-10-21"
@@ -30,7 +36,7 @@
       "name": "Dots3-Note Preview (free)",
       "priority": {
         "reason": "unscored",
-        "score": 0.27,
+        "score": 0.2696,
         "sources": {}
       },
       "releaseDate": "2026-08-14"
@@ -64,7 +70,7 @@
       "name": "Xing4.0 29B A4B (free)",
       "priority": {
         "reason": "unscored, small-model penalty",
-        "score": 0.19,
+        "score": 0.1896,
         "sources": {}
       },
       "releaseDate": "2026-10-16"
@@ -81,7 +87,7 @@
       "name": "LFM2.5-2.6B (free)",
       "priority": {
         "reason": "unscored, small-model penalty",
-        "score": 0.1167,
+        "score": 0.1162,
         "sources": {}
       },
       "releaseDate": "2026-08-11"
@@ -387,11 +393,11 @@
     "taskCount": 18
   },
   "catalog": {
-    "retrievedAt": "Sun, 25 Oct 2026 00:04:46 GMT",
+    "retrievedAt": "Sun, 25 Oct 2026 09:26:42 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "openrouter/thinkingmachines/inkling:free",
-  "generatedAt": "2026-10-25T00:04:49Z",
+  "generatedAt": "2026-10-25T09:26:45Z",
   "models": [
     {
       "completedAt": "2026-10-21T06:35:57.639882+00:00",
@@ -418,7 +424,7 @@
       "trials": 1
     }
   ],
-  "nextCandidate": "openrouter/recursive/flint-v1.0:free",
+  "nextCandidate": null,
   "rankingNote": "Provisional one-run screens only. NixBench 3.2.0 is in calibration; this is not an official leaderboard or a statistically stable recommendation.",
   "recommendationStatus": "provisional-screening",
   "schemaVersion": 1
