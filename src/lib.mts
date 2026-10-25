@@ -444,6 +444,21 @@ export function score(cands: ModelInfo[], boards: Record<string, RankedRow[]>, s
   return out.sort((a, b) => b.score - a.score)
 }
 
+// Same boards the free-model ranker trusts. Agent and webdev carry the most weight;
+// Artificial Analysis counts only when its key is configured for the run.
+export const SCREENING_WEIGHTS: Record<string, number> = {
+  arena_agent: 0.35,
+  arena_webdev: 0.35,
+  arena_text: 0.15,
+  aa_coding: 0.25,
+  aa_agentic: 0.25,
+  aa_intelligence: 0.15,
+}
+
+export function screeningScore(cands: ModelInfo[], boards: Record<string, RankedRow[]>, now = Date.now()) {
+  return score(cands, boards, [], { ...DEFAULT_CONFIG, weights: { ...SCREENING_WEIGHTS } }, { pin: [], ban: [], alias: {} }, now)
+}
+
 // The model ids of a ranking.json, best first.
 export const rankedIds = (ranking: unknown) => list(asObject(ranking).models, (m) => optString(asObject(m).id))
 

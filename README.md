@@ -63,7 +63,10 @@ the fork's default branch every six hours and checks the selected model against 
 model list before using it. If there are no eligible scored models, `free/nix` fails closed.
 
 GitHub Actions refreshes the OpenRouter model catalog from [models.dev](https://models.dev), then
-screens at most one newly eligible model per daily run with the public NixBench corpus. To run the
+screens at most one newly eligible model per daily run with the public NixBench corpus. The queue
+uses the same leaderboard weights as the free-model ranker: LMArena agent and webdev, then text, plus
+Artificial Analysis coding, agentic, and intelligence when `ARTIFICIAL_ANALYSIS_API_KEY` is set for
+the workflow. Models those boards do not match stay in release-date order behind the scored ones. To run the
 benchmarks, add an `OPENROUTER_API_KEY` Actions secret to your fork and enable Actions for the fork.
 Without that secret, the workflow still refreshes the catalog but skips the model run. Catalog price
 is an eligibility signal, not proof that your OpenRouter account can access a model for free; provider

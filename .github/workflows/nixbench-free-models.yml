@@ -39,6 +39,7 @@ jobs:
         id: candidates
         env:
           NIXBENCH_REVISION: 290eb8c18d4a0833fcc3746662ff08766102232c
+          ARTIFICIAL_ANALYSIS_API_KEY: ${{ secrets.ARTIFICIAL_ANALYSIS_API_KEY }}
         run: |
           cd .nixbench-upstream
           # Three public tasks require /dev/kvm, unavailable on GitHub-hosted runners.

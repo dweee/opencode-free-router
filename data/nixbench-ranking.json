@@ -7,47 +7,22 @@
         "input": 0,
         "output": 0
       },
-      "catalogUpdated": "2026-10-21",
+      "catalogUpdated": "2026-03-11",
       "contextTokens": 262144,
-      "id": "openrouter/recursive/flint-v1.0:free",
-      "name": "Flint (free)",
-      "releaseDate": "2026-10-21"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
+      "id": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "name": "Nemotron 3 Super (free)",
+      "priority": {
+        "reason": "benchmarks (arena_text)",
+        "score": 0.5779,
+        "sources": {
+          "arena_text": {
+            "as": "NVIDIA-Nemotron-3-Super-120B-A12B",
+            "pct": 0.578,
+            "value": 1377.5793249756439
+          }
+        }
       },
-      "catalogUpdated": "2026-10-16",
-      "contextTokens": 262144,
-      "id": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
-      "name": "Xing4.0 29B A4B (free)",
-      "releaseDate": "2026-10-16"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-10-15",
-      "contextTokens": 1000000,
-      "id": "openrouter/nvidia/nemotron-3.5-super-vl:free",
-      "name": "Nemotron 3.5 Super VL (free)",
-      "releaseDate": "2026-10-15"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-08-14",
-      "contextTokens": 512000,
-      "id": "openrouter/dots-studio/dots-3-note-preview:free",
-      "name": "Dots3-Note Preview (free)",
-      "releaseDate": "2026-08-14"
+      "releaseDate": "2026-03-11"
     },
     {
       "availability": "models.dev-zero-price; provider access must be checked at run time",
@@ -59,103 +34,18 @@
       "contextTokens": 1000000,
       "id": "openrouter/nvidia/nemotron-3.5-lightning:free",
       "name": "Nemotron 3.5 Lightning (free)",
+      "priority": {
+        "reason": "benchmarks (arena_text)",
+        "score": 0.4532,
+        "sources": {
+          "arena_text": {
+            "as": "NVIDIA-Nemotron-3.5-Lightning-30B-A3B (NVFP4)",
+            "pct": 0.453,
+            "value": 1330.5343944897813
+          }
+        }
+      },
       "releaseDate": "2026-08-11"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-08-11",
-      "contextTokens": 65536,
-      "id": "openrouter/liquid/lfm-2.5-2.6b:free",
-      "name": "LFM2.5-2.6B (free)",
-      "releaseDate": "2026-08-11"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-07-30",
-      "contextTokens": 1048576,
-      "id": "openrouter/thinkingmachines/inkling-small:free",
-      "name": "Inkling Small (free)",
-      "releaseDate": "2026-07-30"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-07-21",
-      "contextTokens": 262144,
-      "id": "openrouter/poolside/laguna-s-2.1:free",
-      "name": "Laguna S 2.1 (free)",
-      "releaseDate": "2026-07-21"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-07-15",
-      "contextTokens": 1048576,
-      "id": "openrouter/thinkingmachines/inkling:free",
-      "name": "Inkling (free)",
-      "releaseDate": "2026-07-15"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-07-02",
-      "contextTokens": 262144,
-      "id": "openrouter/poolside/laguna-xs-2.1:free",
-      "name": "Laguna XS 2.1 (free)",
-      "releaseDate": "2026-07-02"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-06-09",
-      "contextTokens": 256000,
-      "id": "openrouter/cohere/north-mini-code:free",
-      "name": "North Mini Code (free)",
-      "releaseDate": "2026-06-09"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-06-04",
-      "contextTokens": 1000000,
-      "id": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
-      "name": "Nemotron 3 Ultra (free)",
-      "releaseDate": "2026-06-04"
-    },
-    {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-04-28",
-      "contextTokens": 256000,
-      "id": "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-      "name": "Nemotron 3 Nano Omni (free)",
-      "releaseDate": "2026-04-28"
     },
     {
       "availability": "models.dev-zero-price; provider access must be checked at run time",
@@ -167,6 +57,22 @@
       "contextTokens": 262144,
       "id": "openrouter/google/gemma-4-31b-it:free",
       "name": "Gemma 4 31B (free)",
+      "priority": {
+        "reason": "benchmarks (arena_webdev, arena_text)",
+        "score": 0.431,
+        "sources": {
+          "arena_text": {
+            "as": "Gemma 4 31B",
+            "pct": 0.842,
+            "value": 1442.9302800487967
+          },
+          "arena_webdev": {
+            "as": "Gemma 4 31B",
+            "pct": 0.255,
+            "value": 1368.4006194951648
+          }
+        }
+      },
       "releaseDate": "2026-04-02"
     },
     {
@@ -179,6 +85,22 @@
       "contextTokens": 262144,
       "id": "openrouter/google/gemma-4-26b-a4b-it:free",
       "name": "Gemma 4 26B A4B  (free)",
+      "priority": {
+        "reason": "benchmarks (arena_webdev, arena_text)",
+        "score": 0.4004,
+        "sources": {
+          "arena_text": {
+            "as": "Gemma 4 26B A4B",
+            "pct": 0.787,
+            "value": 1434.0561530421796
+          },
+          "arena_webdev": {
+            "as": "Gemma 4 26B A4B",
+            "pct": 0.235,
+            "value": 1359.7327863678452
+          }
+        }
+      },
       "releaseDate": "2026-04-02"
     },
     {
@@ -187,11 +109,177 @@
         "input": 0,
         "output": 0
       },
-      "catalogUpdated": "2026-03-11",
+      "catalogUpdated": "2026-10-21",
       "contextTokens": 262144,
-      "id": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
-      "name": "Nemotron 3 Super (free)",
-      "releaseDate": "2026-03-11"
+      "id": "openrouter/recursive/flint-v1.0:free",
+      "name": "Flint (free)",
+      "priority": {
+        "reason": "unscored",
+        "score": 0.3456,
+        "sources": {}
+      },
+      "releaseDate": "2026-10-21"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-15",
+      "contextTokens": 1048576,
+      "id": "openrouter/thinkingmachines/inkling:free",
+      "name": "Inkling (free)",
+      "priority": {
+        "reason": "benchmarks (arena_agent, arena_webdev, arena_text)",
+        "score": 0.3235,
+        "sources": {
+          "arena_agent": {
+            "as": "Inkling",
+            "pct": 0.041,
+            "value": -0.1489927374913336
+          },
+          "arena_text": {
+            "as": "Inkling",
+            "pct": 0.83,
+            "value": 1442.0289629349381
+          },
+          "arena_webdev": {
+            "as": "Inkling",
+            "pct": 0.389,
+            "value": 1414.8956787019624
+          }
+        }
+      },
+      "releaseDate": "2026-07-15"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-06-04",
+      "contextTokens": 1000000,
+      "id": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "name": "Nemotron 3 Ultra (free)",
+      "priority": {
+        "reason": "benchmarks (arena_agent, arena_text)",
+        "score": 0.2983,
+        "sources": {
+          "arena_agent": {
+            "as": "Nemotron 3 Ultra",
+            "pct": 0.061,
+            "value": -0.14707661311997178
+          },
+          "arena_text": {
+            "as": "NVIDIA-Nemotron-3-Ultra-550B-A55B (NVFP4)",
+            "pct": 0.851,
+            "value": 1444.6569572968128
+          }
+        }
+      },
+      "releaseDate": "2026-06-04"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-15",
+      "contextTokens": 1000000,
+      "id": "openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "name": "Nemotron 3.5 Super VL (free)",
+      "priority": {
+        "reason": "benchmarks (arena_agent, arena_webdev, arena_text)",
+        "score": 0.2861,
+        "sources": {
+          "arena_agent": {
+            "as": "NVIDIA-Nemotron-3.5-Super-VL-120B-A12B (NVFP4)",
+            "pct": 0.082,
+            "value": -0.1355922785166938
+          },
+          "arena_text": {
+            "as": "NVIDIA-Nemotron-3.5-Super-VL-120B-A12B (NVFP4)",
+            "pct": 0.647,
+            "value": 1405.3652819070217
+          },
+          "arena_webdev": {
+            "as": "NVIDIA-Nemotron-3.5-Super-VL-120B-A12B (NVFP4)",
+            "pct": 0.336,
+            "value": 1398.1242544997715
+          }
+        }
+      },
+      "releaseDate": "2026-10-15"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-30",
+      "contextTokens": 1048576,
+      "id": "openrouter/thinkingmachines/inkling-small:free",
+      "name": "Inkling Small (free)",
+      "priority": {
+        "reason": "benchmarks (arena_agent, arena_webdev, arena_text)",
+        "score": 0.2857,
+        "sources": {
+          "arena_agent": {
+            "as": "Inkling-Small",
+            "pct": 0.02,
+            "value": -0.1613904153223582
+          },
+          "arena_text": {
+            "as": "Inkling-Small",
+            "pct": 0.679,
+            "value": 1413.382792181862
+          },
+          "arena_webdev": {
+            "as": "Inkling-Small",
+            "pct": 0.383,
+            "value": 1409.1533996439543
+          }
+        }
+      },
+      "releaseDate": "2026-07-30"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-08-14",
+      "contextTokens": 512000,
+      "id": "openrouter/dots-studio/dots-3-note-preview:free",
+      "name": "Dots3-Note Preview (free)",
+      "priority": {
+        "reason": "unscored",
+        "score": 0.27,
+        "sources": {}
+      },
+      "releaseDate": "2026-08-14"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-21",
+      "contextTokens": 262144,
+      "id": "openrouter/poolside/laguna-s-2.1:free",
+      "name": "Laguna S 2.1 (free)",
+      "priority": {
+        "reason": "unscored",
+        "score": 0.25,
+        "sources": {}
+      },
+      "releaseDate": "2026-07-21"
     },
     {
       "availability": "models.dev-zero-price; provider access must be checked at run time",
@@ -203,11 +291,102 @@
       "contextTokens": 200000,
       "id": "openrouter/openrouter/free",
       "name": "Free Models Router",
+      "priority": {
+        "reason": "unscored",
+        "score": 0.25,
+        "sources": {}
+      },
       "releaseDate": "2026-02-01"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-16",
+      "contextTokens": 262144,
+      "id": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+      "name": "Xing4.0 29B A4B (free)",
+      "priority": {
+        "reason": "unscored, small-model penalty",
+        "score": 0.19,
+        "sources": {}
+      },
+      "releaseDate": "2026-10-16"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-08-11",
+      "contextTokens": 65536,
+      "id": "openrouter/liquid/lfm-2.5-2.6b:free",
+      "name": "LFM2.5-2.6B (free)",
+      "priority": {
+        "reason": "unscored, small-model penalty",
+        "score": 0.1167,
+        "sources": {}
+      },
+      "releaseDate": "2026-08-11"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-02",
+      "contextTokens": 262144,
+      "id": "openrouter/poolside/laguna-xs-2.1:free",
+      "name": "Laguna XS 2.1 (free)",
+      "priority": {
+        "reason": "unscored, small-model penalty",
+        "score": 0.1,
+        "sources": {}
+      },
+      "releaseDate": "2026-07-02"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-06-09",
+      "contextTokens": 256000,
+      "id": "openrouter/cohere/north-mini-code:free",
+      "name": "North Mini Code (free)",
+      "priority": {
+        "reason": "unscored, small-model penalty",
+        "score": 0.1,
+        "sources": {}
+      },
+      "releaseDate": "2026-06-09"
+    },
+    {
+      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-04-28",
+      "contextTokens": 256000,
+      "id": "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "name": "Nemotron 3 Nano Omni (free)",
+      "priority": {
+        "reason": "unscored, small-model penalty",
+        "score": 0.1,
+        "sources": {}
+      },
+      "releaseDate": "2026-04-28"
     }
   ],
   "benchmark": {
     "agent": "OpenCode v2 with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
+    "candidateOrder": "LMArena agent, webdev, and text indexes, plus Artificial Analysis coding, agentic, and intelligence indexes when a key is configured",
     "corpusDigest": "e08d50418427c4e73ea8f45b0ae7fbbf6e4db7d81f48fb0581f1774adf083531",
     "corpusId": "nixbench-public",
     "corpusStatus": "calibrating",
@@ -225,11 +404,11 @@
     "taskCount": 18
   },
   "catalog": {
-    "retrievedAt": "Sat, 24 Oct 2026 09:34:44 GMT",
+    "retrievedAt": "Sat, 24 Oct 2026 23:59:51 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "openrouter/thinkingmachines/inkling:free",
-  "generatedAt": "2026-10-24T09:34:44Z",
+  "generatedAt": "2026-10-24T23:59:54Z",
   "models": [
     {
       "completedAt": "2026-10-21T06:35:57.639882+00:00",
@@ -256,7 +435,7 @@
       "trials": 1
     }
   ],
-  "nextCandidate": null,
+  "nextCandidate": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
   "rankingNote": "Provisional one-run screens only. NixBench 3.2.0 is in calibration; this is not an official leaderboard or a statistically stable recommendation.",
   "recommendationStatus": "provisional-screening",
   "schemaVersion": 1

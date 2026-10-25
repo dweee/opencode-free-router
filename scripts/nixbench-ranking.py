@@ -6,7 +6,9 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
 import re
+import subprocess
 import sys
 import urllib.error
 import urllib.request
@@ -82,6 +84,63 @@ def discover(data: dict[str, Any]) -> list[dict[str, Any]]:
     return sorted(out, key=lambda row: (row.get("releaseDate") or "", row["id"]), reverse=True)
 
 
+def order_available(available: list[dict[str, Any]], priority: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Put benchmarked models first. An empty priority keeps the release-date order."""
+    if not priority:
+        return list(available)
+    rank = {row.get("id"): index for index, row in enumerate(priority) if isinstance(row, dict)}
+    original = {row.get("id"): index for index, row in enumerate(available)}
+
+    def key(row: dict[str, Any]) -> tuple[int, int]:
+        index = rank.get(row.get("id"))
+        if index is None:
+            return (1, original.get(row.get("id"), 0))
+        return (0, index)
+
+    ordered = sorted(available, key=key)
+    by_id = {row.get("id"): row for row in priority if isinstance(row, dict)}
+    for row in ordered:
+        hit = by_id.get(row.get("id"))
+        score = hit.get("score") if isinstance(hit, dict) else None
+        if isinstance(score, (int, float)):
+            row["priority"] = {
+                "score": score,
+                "reason": hit.get("reason") if isinstance(hit, dict) else None,
+                "sources": hit.get("sources") if isinstance(hit, dict) and isinstance(hit.get("sources"), dict) else {},
+            }
+    return ordered
+
+
+def screen_priority(available: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    script = Path(__file__).with_name("nixbench-priority.mts")
+    node = os.environ.get("NODE") or "node"
+    try:
+        completed = subprocess.run(
+            [node, "--experimental-strip-types", str(script)],
+            input=json.dumps(available),
+            text=True,
+            capture_output=True,
+            timeout=120,
+            check=False,
+        )
+    except (OSError, subprocess.SubprocessError) as error:
+        print(f"nixbench-ranking: screening priority unavailable ({error}); using release order", file=sys.stderr)
+        return []
+    if completed.returncode != 0:
+        detail = completed.stderr.strip() or f"exit {completed.returncode}"
+        print(f"nixbench-ranking: screening priority unavailable ({detail}); using release order", file=sys.stderr)
+        return []
+    try:
+        parsed = json.loads(completed.stdout)
+    except json.JSONDecodeError as error:
+        print(f"nixbench-ranking: screening priority unavailable ({error}); using release order", file=sys.stderr)
+        return []
+    if not isinstance(parsed, list):
+        print("nixbench-ranking: screening priority unavailable (not a list); using release order", file=sys.stderr)
+        return []
+    return [row for row in parsed if isinstance(row, dict)]
+
+
 def load(path: Path) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
@@ -118,11 +177,12 @@ def refresh(args: argparse.Namespace) -> int:
     catalog, fetched = fetch_catalog()
     doc = load(args.file)
     available = discover(catalog)
+    available = order_available(available, screen_priority(available))
     attempted = {row.get("id") for row in doc.get("attempted", []) if isinstance(row, dict)}
     screened = {row.get("id") for row in doc.get("models", []) if isinstance(row, dict)}
-    # One newly eligible model per scheduled run keeps provider quotas bounded.
+    # One model per scheduled run keeps provider quotas bounded. The queue follows
+    # the same LMArena and Artificial Analysis weights as the free-model ranker.
     new = [row for row in available if row["id"] not in attempted and row["id"] not in screened]
-    # Prefer the newest model, one candidate per scheduled run to bound provider quotas.
     candidate = next(iter(new), None)
     doc.update({
         "schemaVersion": SCHEMA,
@@ -145,6 +205,7 @@ def refresh(args: argparse.Namespace) -> int:
                 "state-directory-ownership-after-hardening",
             ],
             "agent": "OpenCode v2 with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
+            "candidateOrder": "LMArena agent, webdev, and text indexes, plus Artificial Analysis coding, agentic, and intelligence indexes when a key is configured",
         },
         "availableModels": available,
         "nextCandidate": candidate["id"] if candidate else None,
