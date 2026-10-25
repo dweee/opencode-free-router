@@ -4,6 +4,11 @@
       "at": "2026-10-25T09:28:28Z",
       "id": "openrouter/recursive/flint-v1.0:free",
       "status": "runner-failed"
+    },
+    {
+      "at": "2026-10-25T09:55:19Z",
+      "id": "openrouter/dots-studio/dots-3-note-preview:free",
+      "status": "runner-failed"
     }
   ],
   "availableModels": [
@@ -36,7 +41,7 @@
       "name": "Dots3-Note Preview (free)",
       "priority": {
         "reason": "unscored",
-        "score": 0.2696,
+        "score": 0.2695,
         "sources": {}
       },
       "releaseDate": "2026-08-14"
@@ -70,7 +75,7 @@
       "name": "Xing4.0 29B A4B (free)",
       "priority": {
         "reason": "unscored, small-model penalty",
-        "score": 0.1896,
+        "score": 0.1895,
         "sources": {}
       },
       "releaseDate": "2026-10-16"
@@ -393,11 +398,11 @@
     "taskCount": 18
   },
   "catalog": {
-    "retrievedAt": "Sun, 25 Oct 2026 09:26:42 GMT",
+    "retrievedAt": "Sun, 25 Oct 2026 09:54:50 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "openrouter/thinkingmachines/inkling:free",
-  "generatedAt": "2026-10-25T09:26:45Z",
+  "generatedAt": "2026-10-25T09:54:52Z",
   "models": [
     {
       "completedAt": "2026-10-21T06:35:57.639882+00:00",
