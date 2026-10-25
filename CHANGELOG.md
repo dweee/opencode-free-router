@@ -6,6 +6,10 @@ release. A `[minor]` or `[major]` marker in a commit subject picks the bump; oth
 
 ## Unreleased
 
+## 0.1.7 — 2026-10-25
+
+- Screen free models with no leaderboard match before scored ones.
+
 ## 0.1.6 — 2026-10-25
 
 - Order NixBench screens by the public leaderboards.
