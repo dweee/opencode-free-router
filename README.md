@@ -83,8 +83,10 @@ an OpenRouter key here. OpenCode's free Console models require the OpenCode clie
 uses OpenCode v2 and the native `opencode` provider route. `opencode-go` subscription models are
 kept out of this candidate pool. Without the secret, the workflow refreshes model availability but
 defers benchmarking. These scores are separate from the OpenRouter ranking and are still one-run
-screening results. A detected provider quota/rate-limit failure keeps that same candidate queued for
-the next daily run instead of consuming it as a permanent failed attempt. Beam and newly discovered
+screening results. Provider quota/rate-limit failures are recorded as deferred for 24 hours, allowing
+the queue to try another model and retry the deferred candidate after the cooldown. Each run uploads
+its NixBench task summaries and agent traces as a 30-day Actions artifact, with the Console key
+redacted. Beam and newly discovered
 models with no curated coding-agent benchmark run first; then comes Big Pickle's limited alias-level
 evidence; then models with public agentic-coding results in the order recorded by
 `scripts/nixbench-ranking.py`. New catalog entries default to the no-benchmark group until reviewed.

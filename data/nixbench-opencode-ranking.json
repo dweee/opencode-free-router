@@ -1,5 +1,13 @@
 {
-  "attempted": [],
+  "attempted": [
+    {
+      "at": "2026-10-26T07:20:18Z",
+      "id": "opencode/beam-free",
+      "retryAfter": "2026-10-27T07:20:18Z",
+      "runId": "40281278458",
+      "status": "deferred"
+    }
+  ],
   "availableModels": [],
   "benchmark": {
     "agent": "OpenCode v2 using the opencode provider with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
@@ -28,7 +36,7 @@
   "models": [],
   "nextCandidate": null,
   "provider": "opencode",
-  "rankingNote": "No currently free, eligible OpenCode provider model has a recorded NixBench run. Catalog availability is not proof of account access.",
+  "rankingNote": "No currently free, eligible opencode model has a recorded NixBench run. Catalog availability is not proof of account access.",
   "recommendationStatus": "no-benchmarked-free-model",
   "schemaVersion": 1
 }

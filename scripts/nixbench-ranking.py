@@ -192,7 +192,14 @@ def recompute(doc: dict[str, Any]) -> None:
     )
 
 
-def choose_candidate(new: list[dict[str, Any]], provider_id: str) -> dict[str, Any] | None:
+def choose_candidate(
+    new: list[dict[str, Any]], provider_id: str, candidate_override: str = ""
+) -> dict[str, Any] | None:
+    if candidate_override:
+        candidate = next((row for row in new if row["id"] == candidate_override), None)
+        if candidate is None:
+            raise RuntimeError(f"candidate override is not currently eligible and unscreened: {candidate_override}")
+        return candidate
     if provider_id != "opencode":
         return next(iter(new), None)
     low_rank = {model_id: index for index, model_id in enumerate(OPENCODE_LOW_EVIDENCE)}
@@ -224,13 +231,27 @@ def refresh(args: argparse.Namespace) -> int:
     available = discover(catalog, args.provider)
     if args.provider == "openrouter":
         available = order_available(available, screen_priority(available))
-    attempted = {row.get("id") for row in doc.get("attempted", []) if isinstance(row, dict)}
+    current_time = dt.datetime.now(dt.timezone.utc)
+    attempted = set()
+    for row in doc.get("attempted", []):
+        if not isinstance(row, dict) or not isinstance(row.get("id"), str):
+            continue
+        if row.get("status") != "deferred":
+            attempted.add(row["id"])
+            continue
+        try:
+            retry_after = dt.datetime.fromisoformat(row["retryAfter"].replace("Z", "+00:00"))
+        except (KeyError, AttributeError, ValueError):
+            attempted.add(row["id"])
+            continue
+        if retry_after > current_time:
+            attempted.add(row["id"])
     screened = {row.get("id") for row in doc.get("models", []) if isinstance(row, dict)}
     # One model per scheduled run keeps provider quotas bounded. Models with no
     # leaderboard match go first; scored models follow the free-model ranker weights.
     new = [row for row in available if row["id"] not in attempted and row["id"] not in screened]
     # One new candidate per scheduled run bounds provider quotas.
-    candidate = choose_candidate(new, args.provider)
+    candidate = choose_candidate(new, args.provider, args.candidate_override)
     doc.update({
         "schemaVersion": SCHEMA,
         "generatedAt": now(),
@@ -322,10 +343,15 @@ def record(args: argparse.Namespace) -> int:
 
 def failed(args: argparse.Namespace) -> int:
     doc = load(args.file)
-    if args.status != "deferred":
-        attempted = [row for row in doc.get("attempted", []) if not isinstance(row, dict) or row.get("id") != args.model]
-        attempted.append({"id": args.model, "at": now(), "status": args.status})
-        doc["attempted"] = attempted[-500:]
+    attempted = [row for row in doc.get("attempted", []) if not isinstance(row, dict) or row.get("id") != args.model]
+    entry = {"id": args.model, "at": now(), "status": args.status}
+    if args.status == "deferred":
+        retry_after = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=24)
+        entry["retryAfter"] = retry_after.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    if args.run_id:
+        entry["runId"] = args.run_id
+    attempted.append(entry)
+    doc["attempted"] = attempted[-500:]
     doc["nextCandidate"] = None
     recompute(doc)
     save(args.file, doc)
@@ -338,6 +364,7 @@ def main() -> int:
     refresh_parser = sub.add_parser("refresh")
     refresh_parser.add_argument("--file", type=Path, required=True)
     refresh_parser.add_argument("--provider", default="openrouter", choices=("openrouter", "opencode"))
+    refresh_parser.add_argument("--candidate-override", default="")
     refresh_parser.add_argument("--nixbench-revision", default="")
     refresh_parser.add_argument("--corpus-version", default="3.2.0")
     refresh_parser.add_argument("--corpus-task-count", type=int, default=0)
@@ -354,6 +381,7 @@ def main() -> int:
     failed_parser.add_argument("--file", type=Path, required=True)
     failed_parser.add_argument("--model", required=True)
     failed_parser.add_argument("--status", choices=("runner-failed", "unavailable", "deferred"), default="runner-failed")
+    failed_parser.add_argument("--run-id", default="")
     failed_parser.set_defaults(func=failed)
     args = parser.parse_args()
     try:
