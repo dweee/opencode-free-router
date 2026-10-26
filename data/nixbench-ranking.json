@@ -9,11 +9,16 @@
       "at": "2026-10-25T09:55:19Z",
       "id": "openrouter/dots-studio/dots-3-note-preview:free",
       "status": "runner-failed"
+    },
+    {
+      "at": "2026-10-26T11:10:08Z",
+      "id": "openrouter/poolside/laguna-s-2.1:free",
+      "status": "runner-failed"
     }
   ],
   "availableModels": [
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -24,13 +29,13 @@
       "name": "Flint (free)",
       "priority": {
         "reason": "unscored",
-        "score": 0.3451,
+        "score": 0.3439,
         "sources": {}
       },
       "releaseDate": "2026-10-21"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -41,13 +46,13 @@
       "name": "Dots3-Note Preview (free)",
       "priority": {
         "reason": "unscored",
-        "score": 0.2695,
+        "score": 0.2684,
         "sources": {}
       },
       "releaseDate": "2026-08-14"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -64,7 +69,7 @@
       "releaseDate": "2026-07-21"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -75,13 +80,13 @@
       "name": "Xing4.0 29B A4B (free)",
       "priority": {
         "reason": "unscored, small-model penalty",
-        "score": 0.1895,
+        "score": 0.1884,
         "sources": {}
       },
       "releaseDate": "2026-10-16"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -92,13 +97,13 @@
       "name": "LFM2.5-2.6B (free)",
       "priority": {
         "reason": "unscored, small-model penalty",
-        "score": 0.1162,
+        "score": 0.115,
         "sources": {}
       },
       "releaseDate": "2026-08-11"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -115,7 +120,7 @@
       "releaseDate": "2026-07-02"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -132,7 +137,7 @@
       "releaseDate": "2026-06-09"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -149,7 +154,7 @@
       "releaseDate": "2026-04-28"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -172,7 +177,7 @@
       "releaseDate": "2026-03-11"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -195,7 +200,7 @@
       "releaseDate": "2026-08-11"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -223,7 +228,7 @@
       "releaseDate": "2026-04-02"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -251,7 +256,7 @@
       "releaseDate": "2026-04-02"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -284,7 +289,7 @@
       "releaseDate": "2026-07-15"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -312,7 +317,7 @@
       "releaseDate": "2026-06-04"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -345,7 +350,7 @@
       "releaseDate": "2026-10-15"
     },
     {
-      "availability": "models.dev-zero-price; provider access must be checked at run time",
+      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
       "catalogCost": {
         "input": 0,
         "output": 0
@@ -379,7 +384,7 @@
     }
   ],
   "benchmark": {
-    "agent": "OpenCode v2 with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
+    "agent": "OpenCode v2 using the openrouter provider with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
     "candidateOrder": "Unmatched models first, then LMArena agent, webdev, and text indexes, plus Artificial Analysis coding, agentic, and intelligence indexes when a key is configured",
     "corpusDigest": "e08d50418427c4e73ea8f45b0ae7fbbf6e4db7d81f48fb0581f1774adf083531",
     "corpusId": "nixbench-public",
@@ -397,12 +402,13 @@
     "scope": "NixBench public corpus tasks supported by GitHub-hosted runners; KVM-dependent tasks omitted",
     "taskCount": 18
   },
+  "candidateOrdering": null,
   "catalog": {
-    "retrievedAt": "Sun, 25 Oct 2026 09:54:50 GMT",
+    "retrievedAt": "Mon, 26 Oct 2026 11:09:41 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "openrouter/thinkingmachines/inkling:free",
-  "generatedAt": "2026-10-25T09:54:52Z",
+  "generatedAt": "2026-10-26T11:09:44Z",
   "models": [
     {
       "completedAt": "2026-10-21T06:35:57.639882+00:00",
@@ -430,6 +436,7 @@
     }
   ],
   "nextCandidate": null,
+  "provider": "openrouter",
   "rankingNote": "Provisional one-run screens only. NixBench 3.2.0 is in calibration; this is not an official leaderboard or a statistically stable recommendation.",
   "recommendationStatus": "provisional-screening",
   "schemaVersion": 1
