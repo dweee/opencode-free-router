@@ -6,12 +6,572 @@
       "retryAfter": "2026-10-27T07:20:18Z",
       "runId": "40281278458",
       "status": "deferred"
+    },
+    {
+      "at": "2026-10-26T07:56:38Z",
+      "id": "opencode/big-pickle",
+      "retryAfter": "2026-10-27T07:56:38Z",
+      "runId": "40285242484",
+      "status": "deferred"
     }
   ],
-  "availableModels": [],
+  "availableModels": [
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-21",
+      "contextTokens": 262144,
+      "id": "opencode/flint-40b-free",
+      "name": "Flint 40B Free",
+      "releaseDate": "2026-10-21"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-19",
+      "contextTokens": 1000000,
+      "id": "opencode/minimax-m3.1-flash-free",
+      "name": "MiniMax M3.1 Flash Free",
+      "releaseDate": "2026-10-19"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-15",
+      "contextTokens": 1048576,
+      "id": "opencode/nemotron-3.5-super-vl-free",
+      "name": "Nemotron 3.5 Super VL Free",
+      "releaseDate": "2026-10-15"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-15",
+      "contextTokens": 262144,
+      "id": "opencode/ll-alpha-free",
+      "name": "LL Alpha Free",
+      "releaseDate": "2026-10-15"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-12",
+      "contextTokens": 1048576,
+      "id": "opencode/cat-jam-free",
+      "name": "Cat Jam Free",
+      "releaseDate": "2026-10-12"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-06",
+      "contextTokens": 1048576,
+      "id": "opencode/exo-free",
+      "name": "Exo Free",
+      "releaseDate": "2026-10-06"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-16",
+      "contextTokens": 1048576,
+      "id": "opencode/beam-free",
+      "name": "Beam Free",
+      "releaseDate": "2026-10-05"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-01",
+      "contextTokens": 1048576,
+      "id": "opencode/fledge-alpha-free",
+      "name": "Fledge Alpha Free",
+      "releaseDate": "2026-10-01"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-09-29",
+      "contextTokens": 262144,
+      "id": "opencode/ling-3.1-flash-free",
+      "name": "Ling 3.1 Flash Free",
+      "releaseDate": "2026-09-29"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-09-25",
+      "contextTokens": 1000000,
+      "id": "opencode/longcat-2.5-preview-free",
+      "name": "LongCat 2.5 Preview Free",
+      "releaseDate": "2026-09-25"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-09-23",
+      "contextTokens": 1048576,
+      "id": "opencode/space-bunny-free",
+      "name": "Space Bunny Free",
+      "releaseDate": "2026-09-23"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-09-22",
+      "contextTokens": 200000,
+      "id": "opencode/mimo-v2.6-flash-free",
+      "name": "MiMo-V2.6-Flash Free",
+      "releaseDate": "2026-09-22"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-09-20",
+      "contextTokens": 1000000,
+      "id": "opencode/step-5-preview-free",
+      "name": "Step 5 Preview Free",
+      "releaseDate": "2026-09-16"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-09-10",
+      "contextTokens": 200000,
+      "id": "opencode/deepseek-v4.1-flash-free",
+      "name": "DeepSeek V4.1 Flash Free",
+      "releaseDate": "2026-09-10"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-09-02",
+      "contextTokens": 1048576,
+      "id": "opencode/muse-spark-1.3-contributor-free",
+      "name": "Muse Spark 1.3 Free",
+      "releaseDate": "2026-09-02"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-09-03",
+      "contextTokens": 262144,
+      "id": "opencode/ling-3.0-flash-fin-free",
+      "name": "Ling 3.0 Flash Fin Free",
+      "releaseDate": "2026-08-27"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-08-26",
+      "contextTokens": 200000,
+      "id": "opencode/glm-5.3-flash-free",
+      "name": "GLM-5.3-Flash Free",
+      "releaseDate": "2026-08-26"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-08-21",
+      "contextTokens": 1000000,
+      "id": "opencode/x-preview-f-free",
+      "name": "Ox Alpha Free (Unlimited)",
+      "releaseDate": "2026-08-21"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-08-11",
+      "contextTokens": 262144,
+      "id": "opencode/nemotron-3.5-lightning-free",
+      "name": "Nemotron 3.5 Lightning Free",
+      "releaseDate": "2026-08-11"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-08-06",
+      "contextTokens": 262144,
+      "id": "opencode/ling-3.0-tiny-free",
+      "name": "Ling-3.0-tiny Free",
+      "releaseDate": "2026-08-06"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-08-05",
+      "contextTokens": 1048576,
+      "id": "opencode/muse-spark-1.2-contributor-free",
+      "name": "Muse Spark 1.2 Free",
+      "releaseDate": "2026-08-05"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-31",
+      "contextTokens": 200000,
+      "id": "opencode/deepseek-v4-flash-free",
+      "name": "DeepSeek V4 Flash Free",
+      "releaseDate": "2026-07-31"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-23",
+      "contextTokens": 262144,
+      "id": "opencode/ling-3.0-flash-free",
+      "name": "Ling-3.0-flash Free",
+      "releaseDate": "2026-07-23"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-21",
+      "contextTokens": 256000,
+      "id": "opencode/laguna-s-2.1-free",
+      "name": "Laguna S 2.1 Free",
+      "releaseDate": "2026-07-21"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-07-06",
+      "contextTokens": 190000,
+      "id": "opencode/hy3-free",
+      "name": "Hy3 Free",
+      "releaseDate": "2026-07-06"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-06-30",
+      "contextTokens": 1000000,
+      "id": "opencode/longcat-2.0-free",
+      "name": "LongCat-2.0 Free",
+      "releaseDate": "2026-06-30"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-06-09",
+      "contextTokens": 256000,
+      "id": "opencode/north-mini-code-free",
+      "name": "North Mini Code Free",
+      "releaseDate": "2026-06-09"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-06-04",
+      "contextTokens": 1000000,
+      "id": "opencode/nemotron-3-ultra-free",
+      "name": "Nemotron 3 Ultra Free",
+      "releaseDate": "2026-06-04"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-06-01",
+      "contextTokens": 200000,
+      "id": "opencode/minimax-m3-free",
+      "name": "MiniMax-M3 Free",
+      "releaseDate": "2026-06-01"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-05-08",
+      "contextTokens": 262000,
+      "id": "opencode/ring-2.6-1t-free",
+      "name": "Ring 2.6 1T Free",
+      "releaseDate": "2026-05-08"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-04-22",
+      "contextTokens": 200000,
+      "id": "opencode/mimo-v2.5-free",
+      "name": "MiMo V2.5 Free",
+      "releaseDate": "2026-04-22"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-04-21",
+      "contextTokens": 262100,
+      "id": "opencode/ling-2.6-flash-free",
+      "name": "Ling 2.6 Flash Free",
+      "releaseDate": "2026-04-21"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-04-20",
+      "contextTokens": 256000,
+      "id": "opencode/hy3-preview-free",
+      "name": "Hy3 preview Free",
+      "releaseDate": "2026-04-20"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-04-02",
+      "contextTokens": 262144,
+      "id": "opencode/qwen3.6-plus-free",
+      "name": "Qwen3.6 Plus Free",
+      "releaseDate": "2026-04-02"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-03-18",
+      "contextTokens": 1048576,
+      "id": "opencode/mimo-v2-pro-free",
+      "name": "MiMo V2 Pro Free",
+      "releaseDate": "2026-03-18"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-03-18",
+      "contextTokens": 262144,
+      "id": "opencode/mimo-v2-omni-free",
+      "name": "MiMo V2 Omni Free",
+      "releaseDate": "2026-03-18"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-03-11",
+      "contextTokens": 204800,
+      "id": "opencode/nemotron-3-super-free",
+      "name": "Nemotron 3 Super Free",
+      "releaseDate": "2026-03-11"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-02-12",
+      "contextTokens": 204800,
+      "id": "opencode/minimax-m2.5-free",
+      "name": "MiniMax-M2.5 Free",
+      "releaseDate": "2026-02-12"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-02-12",
+      "contextTokens": 204800,
+      "id": "opencode/glm-5-free",
+      "name": "GLM-5 Free",
+      "releaseDate": "2026-02-12"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-05-28",
+      "contextTokens": 131072,
+      "id": "opencode/trinity-large-preview-free",
+      "name": "Trinity Large Preview",
+      "releaseDate": "2026-01-27"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-01-27",
+      "contextTokens": 262144,
+      "id": "opencode/kimi-k2.5-free",
+      "name": "Kimi K2.5 Free",
+      "releaseDate": "2026-01-27"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2025-12-23",
+      "contextTokens": 204800,
+      "id": "opencode/minimax-m2.1-free",
+      "name": "MiniMax-M2.1 Free",
+      "releaseDate": "2025-12-23"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2025-12-22",
+      "contextTokens": 204800,
+      "id": "opencode/glm-4.7-free",
+      "name": "GLM-4.7 Free",
+      "releaseDate": "2025-12-22"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-02-04",
+      "contextTokens": 262144,
+      "id": "opencode/mimo-v2-flash-free",
+      "name": "MiMo V2 Flash Free",
+      "releaseDate": "2025-12-16"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2025-10-17",
+      "contextTokens": 200000,
+      "id": "opencode/big-pickle",
+      "name": "Big Pickle",
+      "releaseDate": "2025-10-17"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2025-09-02",
+      "contextTokens": 256000,
+      "id": "opencode/grok-code",
+      "name": "Grok Code Fast 1",
+      "releaseDate": "2025-09-02"
+    }
+  ],
   "benchmark": {
     "agent": "OpenCode v2 using the opencode provider with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
-    "corpusDigest": null,
+    "corpusDigest": "e08d50418427c4e73ea8f45b0ae7fbbf6e4db7d81f48fb0581f1774adf083531",
     "corpusId": "nixbench-public",
     "corpusStatus": "calibrating",
     "corpusVersion": "3.2.0",
@@ -25,14 +585,32 @@
     "repository": "https://github.com/maximilianpw/nixbench",
     "revision": "290eb8c18d4a0833fcc3746662ff08766102232c",
     "scope": "NixBench public corpus tasks supported by GitHub-hosted runners; KVM-dependent tasks omitted",
-    "taskCount": null
+    "taskCount": 18
+  },
+  "candidateOrdering": {
+    "benchmarkOrder": [
+      "opencode/deepseek-v4.1-flash-free",
+      "opencode/mimo-v2.6-flash-free",
+      "opencode/glm-5.3-flash-free",
+      "opencode/nemotron-3.5-super-vl-free",
+      "opencode/flint-40b-free",
+      "opencode/nemotron-3-ultra-free",
+      "opencode/nemotron-3.5-lightning-free"
+    ],
+    "limitedEvidenceNext": [
+      "opencode/big-pickle"
+    ],
+    "sparseEvidenceFirst": [
+      "opencode/beam-free"
+    ],
+    "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": null,
+    "retrievedAt": "Mon, 26 Oct 2026 07:21:17 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": null,
-  "generatedAt": null,
+  "generatedAt": "2026-10-26T07:21:17Z",
   "models": [],
   "nextCandidate": null,
   "provider": "opencode",
