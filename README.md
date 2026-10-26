@@ -73,6 +73,22 @@ Without that secret, the workflow still refreshes the catalog but skips the mode
 is an eligibility signal, not proof that your OpenRouter account can access a model for free; provider
 availability is checked again at runtime.
 
+The separate **NixBench OpenCode provider screens** workflow discovers zero-priced models under the
+`opencode` provider and stores results in [`data/nixbench-opencode-ranking.json`](data/nixbench-opencode-ranking.json).
+It runs once daily and screens at most one new model each time. To enable model calls, create an
+OpenCode Console API key and add it to your repository as the Actions secret `OPENCODE_API_KEY`
+(**Settings → Secrets and variables → Actions**). The key is supplied to OpenCode through its
+`OPENCODE_API_KEY` environment variable and is never written into the benchmark config. Do not use
+an OpenRouter key here. OpenCode's free Console models require the OpenCode client; this workflow
+uses OpenCode v2 and the native `opencode` provider route. `opencode-go` subscription models are
+kept out of this candidate pool. Without the secret, the workflow refreshes model availability but
+defers benchmarking. These scores are separate from the OpenRouter ranking and are still one-run
+screening results. A detected provider quota/rate-limit failure keeps that same candidate queued for
+the next daily run instead of consuming it as a permanent failed attempt. Beam and newly discovered
+models with no curated coding-agent benchmark run first; then comes Big Pickle's limited alias-level
+evidence; then models with public agentic-coding results in the order recorded by
+`scripts/nixbench-ranking.py`. New catalog entries default to the no-benchmark group until reviewed.
+
 Scores are **one-run screening results**, not a stable or official leaderboard. NixBench 3.2.0
 identifies its public corpus as calibrating, so the JSON explicitly labels results `screening-only`.
 GitHub-hosted runners lack KVM, so the workflow omits NixBench's three VM tasks and records that
@@ -290,3 +306,29 @@ Model scores come from [LMArena](https://lmarena.ai) (`lmarena-ai/leaderboard-da
 ## License
 
 [BSD-2-Clause](LICENSE)
+
+### Separate benchmark contributors
+
+Each contributor can run the queue with their own OpenRouter credentials and
+independent progress. Select one account explicitly per invocation:
+
+```sh
+NIXBENCH_ACCOUNT=alice \
+OPENROUTER_API_KEY_FILE=/absolute/path/to/alice-openrouter-key \
+python3 scripts/nixbench-daily.py
+```
+
+The key file must have mode `600` and contain only the API key. Alternatively,
+provide `OPENROUTER_API_KEY` through your secret manager or service environment.
+Do not commit credentials. Named accounts require an explicit credential and
+never fall back to the OpenCode login. Account labels use letters, digits,
+underscores and hyphens, up to 64 characters.
+
+Named accounts keep their queue, traces and `comparison.json` under
+`~/.local/state/nixbench-guidance-compare/accounts/<label>/`. The default account
+retains the existing paths and OpenCode credential fallback. A label is local
+bookkeeping, not proof of OpenRouter account ownership: use one stable label per
+contributor account. Each invocation checks that credential's reported quota and
+stops when it is exhausted; it never switches accounts automatically. Separate
+accounts must belong to separate legitimate contributors, consistent with
+OpenRouter's terms. This does not install additional timers.

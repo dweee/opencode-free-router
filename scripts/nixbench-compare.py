@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Run NixBench guidance variants for every eligible free OpenRouter model.
 
-Variants are mcp, skills, and both. Different models run together. The three
-variants of one model do not run at the same time, because free-model rate
-limits are per model. Results stay out of data/nixbench-ranking.json.
+The combined MCP and skills variant runs first, then MCP only, then skills
+only. Within each variant, models with stronger public agentic-coding results
+run first. One model runs at a time. Results stay out of data/nixbench-ranking.json.
 """
 
 from __future__ import annotations
@@ -11,27 +11,59 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
+import re
 import shutil
 import sqlite3
 import subprocess
 import sys
 import threading
 import time
+import urllib.request
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+ACCOUNT = os.environ.get("NIXBENCH_ACCOUNT", "default")
+if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}", ACCOUNT):
+    raise RuntimeError("NIXBENCH_ACCOUNT must be a short account label using letters, digits, _ or -")
 STATE_DIR = Path.home() / ".local" / "state" / "nixbench-guidance-compare"
 SUMMARY_PATH = ROOT / "data" / "nixbench-guidance-comparison.json"
+if ACCOUNT != "default":
+    STATE_DIR = STATE_DIR / "accounts" / ACCOUNT
+    SUMMARY_PATH = STATE_DIR / "comparison.json"
 TEMPLATE = ROOT / "templates" / "nixbench-opencode.json"
 NIXBENCH_REV = "290eb8c18d4a0833fcc3746662ff08766102232c"
-NIXPKGS_STORE = Path("/nix/store/3zvg83mg9aavm9bgh26ydljchply7i25-source")
+NIXPKGS_STORE = Path()
 EXCLUDED = {
     "boot-hook-marker-survives-reboot",
     "firewall-nftables-forwarding-silently-dropped",
     "state-directory-ownership-after-hardening",
 }
-VARIANTS = ("mcp", "skills", "both")
+VARIANTS = ("both", "mcp", "skills")
+# Prioritize models without published repo-coding/agentic-coding scores, then
+# models with strong public results, then weaker or less relevant evidence.
+# Sources are model/vendor cards and public coding-agent benchmarks; these
+# scores are not directly comparable across harnesses. The free router is a
+# variable-model baseline and stays last.
+MODEL_PRIORITY = (
+    "openrouter/dots-studio/dots-3-note-preview:free",
+    "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "openrouter/minimax/minimax-m3.1-flash:free",
+    "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+    "openrouter/nvidia/nemotron-3.5-super-vl:free",
+    "openrouter/poolside/laguna-s-2.1:free",
+    "openrouter/thinkingmachines/inkling:free",
+    "openrouter/cohere/north-mini-code:free",
+    "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+    "openrouter/thinkingmachines/inkling-small:free",
+    "openrouter/google/gemma-4-31b-it:free",
+    "openrouter/google/gemma-4-26b-a4b-it:free",
+    "openrouter/nvidia/nemotron-3.5-lightning:free",
+    "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+    "openrouter/poolside/laguna-xs-2.1:free",
+    "openrouter/liquid/lfm-2.5-2.6b:free",
+    "openrouter/openrouter/free",
+)
 JOB_TIMEOUT_SECONDS = 8 * 60 * 60
 
 
@@ -49,6 +81,22 @@ RANKING = load_module("nixbench_ranking", ROOT / "scripts" / "nixbench-ranking.p
 
 
 def openrouter_key() -> str:
+    # Select one credential explicitly for this invocation; never rotate keys
+    # after quota exhaustion. Non-default profiles cannot inherit the local key.
+    key_file = os.environ.get("OPENROUTER_API_KEY_FILE")
+    if key_file:
+        path = Path(key_file).expanduser()
+        if path.stat().st_mode & 0o077:
+            raise RuntimeError("OpenRouter key file must not be accessible to group or others (chmod 600)")
+        key = path.read_text(encoding="utf-8").strip()
+        if not key:
+            raise RuntimeError("OpenRouter key file is empty")
+        return key
+    key = os.environ.get("OPENROUTER_API_KEY", "").strip()
+    if key:
+        return key
+    if ACCOUNT != "default":
+        raise RuntimeError("A named account requires OPENROUTER_API_KEY_FILE or OPENROUTER_API_KEY")
     database = Path.home() / ".local" / "share" / "opencode" / "opencode.db"
     connection = sqlite3.connect(f"file:{database}?mode=ro", uri=True)
     row = connection.execute(
@@ -63,8 +111,67 @@ def openrouter_key() -> str:
     return key
 
 
+def resolve_nixpkgs_store(nixbench: Path) -> Path:
+    """Restore the exact pinned nixpkgs source if Nix garbage-collected it."""
+    global NIXPKGS_STORE
+    pin_path = nixbench / "vendor" / "nixpkgs" / "pin.json"
+    pin = json.loads(pin_path.read_text(encoding="utf-8"))
+    revision = pin.get("rev")
+    if not isinstance(revision, str) or not re.fullmatch(r"[0-9a-f]{40}", revision):
+        raise RuntimeError(f"invalid nixpkgs revision in {pin_path}")
+    store_path = Path(str(pin.get("store_path", "")))
+    if not store_path.joinpath("default.nix").is_file():
+        print(f"restoring pinned nixpkgs {revision}", flush=True)
+        prefetched = json.loads(
+            subprocess.check_output(
+                ["nix", "flake", "prefetch", "--json", f"github:NixOS/nixpkgs/{revision}"],
+                text=True,
+            )
+        )
+        store_path = Path(prefetched["storePath"])
+        if not store_path.joinpath("default.nix").is_file():
+            raise RuntimeError(f"prefetched nixpkgs is missing default.nix: {store_path}")
+        pin["store_path"] = str(store_path)
+        pin_path.write_text(json.dumps(pin, indent=2) + "\n", encoding="utf-8")
+    NIXPKGS_STORE = store_path
+    return store_path
+
+
 def redact(text: str, secret: str) -> str:
     return text.replace(secret, "[redacted]")
+
+
+def free_daily_remaining(secret: str) -> int | None:
+    request = urllib.request.Request(
+        "https://openrouter.ai/api/v1/key",
+        headers={"Authorization": f"Bearer {secret}"},
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        body = json.loads(response.read().decode())
+    remaining = ((body.get("data") or {}).get("free_model_daily_requests") or {}).get("remaining")
+    return remaining if isinstance(remaining, int) else None
+
+
+def ordered_jobs(eligible: list[dict[str, Any]]) -> list[dict[str, str]]:
+    variant_rank = {name: index for index, name in enumerate(VARIANTS)}
+    model_rank = {model_id: index for index, model_id in enumerate(MODEL_PRIORITY)}
+    unindexed = len(MODEL_PRIORITY)
+    router = "openrouter/openrouter/free"
+    jobs = [
+        {"key": f"{variant}/{row['id']}", "variant": variant, "model": row["id"]}
+        for row in eligible
+        for variant in VARIANTS
+    ]
+
+    def sort_key(job: dict[str, str]) -> tuple[int, int, str]:
+        model_id = job["model"]
+        if model_id == router:
+            rank = unindexed + 1
+        else:
+            rank = model_rank.get(model_id, unindexed)
+        return (variant_rank[job["variant"]], rank, model_id)
+
+    return sorted(jobs, key=sort_key)
 
 
 def prepare_corpus(nixbench: Path) -> Path:
@@ -272,12 +379,57 @@ def run_job(
         record = {"status": "failed", "reason": redact(str(error), secret), "finishedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
     store.update(lambda document, record=record: document["runs"].__setitem__(job["key"], {**document["runs"].get(job["key"], job), **record}))
     print(f"done {variant} {model_id} {record.get('status')} score={record.get('score')}", flush=True)
+    return record
 
 
-def main() -> int:
-    if not NIXPKGS_STORE.joinpath("default.nix").is_file():
-        raise RuntimeError(f"pinned nixpkgs is missing: {NIXPKGS_STORE}")
+def daily_main() -> int:
+    """One night's work. A finished corpus ends the night. A first-task failure
+    stays queued and the next model runs if the daily allowance is still there.
+    """
+    minimum_remaining = int(os.environ.get("NIXBENCH_DAILY_MIN_REMAINING", "200"))
+    context = bootstrap()
+    pending = context["pending"]
+    if not pending:
+        print("every queued run is complete", flush=True)
+        return 0
+    for job in pending:
+        remaining = free_daily_remaining(context["secret"])
+        if remaining is None or remaining < minimum_remaining:
+            print(
+                f"only {remaining} free-model requests remain; need {minimum_remaining}; leaving the queue for tomorrow",
+                flush=True,
+            )
+            return 0
+        record = run_job(
+            context["store"],
+            job,
+            context["by_model"][job["model"]],
+            context["nixbench"],
+            context["corpus"],
+            context["bwrap"],
+            context["nix_bin"],
+            context["opencode"],
+            context["secret"],
+        )
+        if record.get("status") == "complete":
+            print(f"complete {job['key']}; stopping until the next window", flush=True)
+            return 0
+        remaining = free_daily_remaining(context["secret"])
+        tasks = record.get("taskCount") or 0
+        if remaining is None or remaining < minimum_remaining or tasks > 1:
+            print(
+                f"requeue {job['key']}; remaining={remaining} tasks={tasks}; stopping for today",
+                flush=True,
+            )
+            return 0
+        print(f"requeue {job['key']} after a first-task failure; trying the next model", flush=True)
+    print("walked the queue; unfinished jobs stay queued", flush=True)
+    return 0
+
+
+def bootstrap() -> dict[str, Any]:
     nixbench = Path(os.environ.get("NIXBENCH_ROOT", "/tmp/nixbench-src"))
+    resolve_nixpkgs_store(nixbench)
     revision = subprocess.check_output(["git", "-C", str(nixbench), "rev-parse", "HEAD"], text=True).strip()
     if revision != NIXBENCH_REV:
         raise RuntimeError(f"NixBench checkout {nixbench} is {revision}, expected {NIXBENCH_REV}")
@@ -299,18 +451,15 @@ def main() -> int:
     corpus = prepare_corpus(nixbench)
     probe_path = Path("/tmp/openrouter-probe.json")
     probe = json.loads(probe_path.read_text(encoding="utf-8")) if probe_path.is_file() else []
-    jobs = [
-        {"key": f"{variant}/{row['id']}", "variant": variant, "model": row["id"]}
-        for row in eligible
-        for variant in VARIANTS
-    ]
+    jobs = ordered_jobs(eligible)
     by_model = {row["id"]: row for row in eligible}
-    limit = int(os.environ.get("NIXBENCH_COMPARE_JOBS", "4"))
+    limit = int(os.environ.get("NIXBENCH_COMPARE_JOBS", "1"))
     store = Store(secret)
     store.update(
         lambda document: document.update(
             {
                 "schemaVersion": 1,
+                "account": ACCOUNT,
                 "catalogRetrievedAt": fetched,
                 "eligibleModels": eligible,
                 "catalogDelta": {
@@ -339,13 +488,49 @@ def main() -> int:
         f"removed {sorted(stored_ids - live_ids) or 'none'}; queued {len(pending)} at {limit} workers",
         flush=True,
     )
+    for job in pending[:8]:
+        print(f"queue {job['variant']} {job['model']}", flush=True)
+    return {
+        "secret": secret,
+        "nixbench": nixbench,
+        "corpus": corpus,
+        "bwrap": bwrap,
+        "nix_bin": nix_bin,
+        "opencode": opencode,
+        "store": store,
+        "pending": pending,
+        "by_model": by_model,
+        "limit": limit,
+    }
+
+
+def main() -> int:
+    context = bootstrap()
+    remaining = free_daily_remaining(context["secret"])
+    if remaining == 0:
+        print("free-model daily quota is spent; next window is 00:00 UTC. not starting.", flush=True)
+        return 0
+    pending = context["pending"]
+    by_model = context["by_model"]
+    limit = context["limit"]
+    store = context["store"]
     running: set[str] = set()
     threads: list[threading.Thread] = []
     schedule = threading.Lock()
 
     def finish(job: dict[str, str]) -> None:
         try:
-            run_job(store, job, by_model[job["model"]], nixbench, corpus, bwrap, nix_bin, opencode, secret)
+            run_job(
+                store,
+                job,
+                by_model[job["model"]],
+                context["nixbench"],
+                context["corpus"],
+                context["bwrap"],
+                context["nix_bin"],
+                context["opencode"],
+                context["secret"],
+            )
         finally:
             with schedule:
                 running.discard(job["model"])

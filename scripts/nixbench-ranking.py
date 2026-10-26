@@ -19,6 +19,21 @@ CATALOG_URL = "https://models.dev/api.json"
 NIXBENCH_REPO = "https://github.com/maximilianpw/nixbench"
 MODEL_RE = re.compile(r"^[A-Za-z0-9._:/+@-]{1,240}$")
 SCHEMA = 1
+OPENCODE_LOW_EVIDENCE = (
+    "opencode/beam-free",
+)
+OPENCODE_WEAK_EVIDENCE = (
+    "opencode/big-pickle",
+)
+OPENCODE_BENCHMARK_ORDER = (
+    "opencode/deepseek-v4.1-flash-free",
+    "opencode/mimo-v2.6-flash-free",
+    "opencode/glm-5.3-flash-free",
+    "opencode/nemotron-3.5-super-vl-free",
+    "opencode/flint-40b-free",
+    "opencode/nemotron-3-ultra-free",
+    "opencode/nemotron-3.5-lightning-free",
+)
 
 
 def now() -> str:
@@ -54,8 +69,8 @@ def zero_cost(value: Any) -> bool:
     return True
 
 
-def discover(data: dict[str, Any]) -> list[dict[str, Any]]:
-    provider = data.get("openrouter")
+def discover(data: dict[str, Any], provider_id: str = "openrouter") -> list[dict[str, Any]]:
+    provider = data.get(provider_id)
     if not isinstance(provider, dict):
         return []
     out = []
@@ -69,11 +84,10 @@ def discover(data: dict[str, Any]) -> list[dict[str, Any]]:
         if not isinstance(context, int) or context < 64000:
             continue
         model_id = str(model.get("id", key))
-        # openrouter/free, auto, and fusion are routers. They report a zero price
-        # and then pick another model, sometimes a paid one.
-        if model_id.startswith("openrouter/"):
+        # OpenRouter routers may select a paid model despite reporting zero cost.
+        if provider_id == "openrouter" and model_id.startswith("openrouter/"):
             continue
-        selector = f"openrouter/{model_id}"
+        selector = f"{provider_id}/{model_id}"
         if not MODEL_RE.fullmatch(selector):
             continue
         out.append({
@@ -83,7 +97,7 @@ def discover(data: dict[str, Any]) -> list[dict[str, Any]]:
             "releaseDate": model.get("release_date"),
             "catalogUpdated": model.get("last_updated"),
             "catalogCost": {"input": 0, "output": 0},
-            "availability": "models.dev-zero-price; provider access must be checked at run time",
+            "availability": f"models.dev-zero-price for {provider_id}; account access must be checked at run time",
         })
     return sorted(out, key=lambda row: (row.get("releaseDate") or "", row["id"]), reverse=True)
 
@@ -163,6 +177,7 @@ def save(path: Path, doc: dict[str, Any]) -> None:
 
 
 def recompute(doc: dict[str, Any]) -> None:
+    provider = doc.get("provider", "openrouter")
     available = {m["id"] for m in doc.get("availableModels", []) if isinstance(m, dict) and isinstance(m.get("id"), str)}
     models = [m for m in doc.get("models", []) if isinstance(m, dict) and isinstance(m.get("scoreRate"), (int, float))]
     models.sort(key=lambda m: (m["scoreRate"], m.get("completedAt", "")), reverse=True)
@@ -173,24 +188,59 @@ def recompute(doc: dict[str, Any]) -> None:
     doc["rankingNote"] = (
         "Provisional one-run screens only. NixBench 3.2.0 is in calibration; this is not an official leaderboard or a statistically stable recommendation."
         if current else
-        "No currently free, eligible OpenRouter model has a recorded NixBench run. Catalog availability is not proof of account access."
+        f"No currently free, eligible {provider} model has a recorded NixBench run. Catalog availability is not proof of account access."
     )
+
+
+def choose_candidate(new: list[dict[str, Any]], provider_id: str) -> dict[str, Any] | None:
+    if provider_id != "opencode":
+        return next(iter(new), None)
+    low_rank = {model_id: index for index, model_id in enumerate(OPENCODE_LOW_EVIDENCE)}
+    weak_rank = {model_id: index for index, model_id in enumerate(OPENCODE_WEAK_EVIDENCE)}
+    benchmark_rank = {model_id: index for index, model_id in enumerate(OPENCODE_BENCHMARK_ORDER)}
+    # Prefer known sparse-evidence models first, then newly discovered models
+    # without a curated benchmark record, followed by benchmarked candidates.
+    # Big Pickle has a small independent battery, so Beam stays ahead of it.
+    def key(model: dict[str, Any]) -> tuple[int, int]:
+        model_id = model["id"]
+        if model_id in low_rank:
+            tier, rank = 0, low_rank[model_id]
+        elif model_id not in benchmark_rank:
+            if model_id in weak_rank:
+                tier, rank = 2, weak_rank[model_id]
+            else:
+                tier, rank = 1, 0
+        else:
+            tier, rank = 3, benchmark_rank[model_id]
+        return (tier, rank)
+
+    # `new` inherits release-date-descending catalog order, retained for ties.
+    return min(new, key=key) if new else None
 
 
 def refresh(args: argparse.Namespace) -> int:
     catalog, fetched = fetch_catalog()
     doc = load(args.file)
-    available = discover(catalog)
-    available = order_available(available, screen_priority(available))
+    available = discover(catalog, args.provider)
+    if args.provider == "openrouter":
+        available = order_available(available, screen_priority(available))
     attempted = {row.get("id") for row in doc.get("attempted", []) if isinstance(row, dict)}
     screened = {row.get("id") for row in doc.get("models", []) if isinstance(row, dict)}
     # One model per scheduled run keeps provider quotas bounded. Models with no
     # leaderboard match go first; scored models follow the free-model ranker weights.
     new = [row for row in available if row["id"] not in attempted and row["id"] not in screened]
-    candidate = next(iter(new), None)
+    # One new candidate per scheduled run bounds provider quotas.
+    candidate = choose_candidate(new, args.provider)
     doc.update({
         "schemaVersion": SCHEMA,
         "generatedAt": now(),
+        "provider": args.provider,
+        "candidateOrdering": ({
+            "sparseEvidenceFirst": list(OPENCODE_LOW_EVIDENCE),
+            "limitedEvidenceNext": list(OPENCODE_WEAK_EVIDENCE),
+            "benchmarkOrder": list(OPENCODE_BENCHMARK_ORDER),
+            "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates",
+        } if args.provider == "opencode" else None),
         "catalog": {"url": CATALOG_URL, "retrievedAt": fetched},
         "benchmark": {
             "name": "NixBench",
@@ -208,8 +258,8 @@ def refresh(args: argparse.Namespace) -> int:
                 "firewall-nftables-forwarding-silently-dropped",
                 "state-directory-ownership-after-hardening",
             ],
-            "agent": "OpenCode v2 with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
-            "candidateOrder": "Unmatched models first, then LMArena agent, webdev, and text indexes, plus Artificial Analysis coding, agentic, and intelligence indexes when a key is configured",
+            "agent": f"OpenCode v2 using the {args.provider} provider with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
+            **({"candidateOrder": "Unmatched models first, then LMArena agent, webdev, and text indexes, plus Artificial Analysis coding, agentic, and intelligence indexes when a key is configured"} if args.provider == "openrouter" else {}),
         },
         "availableModels": available,
         "nextCandidate": candidate["id"] if candidate else None,
@@ -253,7 +303,13 @@ def record(args: argparse.Namespace) -> int:
         "completedAt": summary.get("created_at") or now(),
         "runId": summary.get("run_id"),
         "status": "screening-only",
-        "configuration": {"agent": "opencode", "version": args.agent_version, "tools": ["read", "edit", "glob", "grep", "shell"], "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only"},
+        "configuration": {
+            "agent": "opencode",
+            "provider": args.model.split("/", 1)[0],
+            "version": args.agent_version,
+            "tools": ["read", "edit", "glob", "grep", "shell"],
+            "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        },
     }
     models = [m for m in doc.get("models", []) if not isinstance(m, dict) or m.get("id") != args.model]
     models.append(entry)
@@ -266,9 +322,10 @@ def record(args: argparse.Namespace) -> int:
 
 def failed(args: argparse.Namespace) -> int:
     doc = load(args.file)
-    attempted = [row for row in doc.get("attempted", []) if not isinstance(row, dict) or row.get("id") != args.model]
-    attempted.append({"id": args.model, "at": now(), "status": args.status})
-    doc["attempted"] = attempted[-500:]
+    if args.status != "deferred":
+        attempted = [row for row in doc.get("attempted", []) if not isinstance(row, dict) or row.get("id") != args.model]
+        attempted.append({"id": args.model, "at": now(), "status": args.status})
+        doc["attempted"] = attempted[-500:]
     doc["nextCandidate"] = None
     recompute(doc)
     save(args.file, doc)
@@ -280,6 +337,7 @@ def main() -> int:
     sub = parser.add_subparsers(dest="command", required=True)
     refresh_parser = sub.add_parser("refresh")
     refresh_parser.add_argument("--file", type=Path, required=True)
+    refresh_parser.add_argument("--provider", default="openrouter", choices=("openrouter", "opencode"))
     refresh_parser.add_argument("--nixbench-revision", default="")
     refresh_parser.add_argument("--corpus-version", default="3.2.0")
     refresh_parser.add_argument("--corpus-task-count", type=int, default=0)
@@ -295,7 +353,7 @@ def main() -> int:
     failed_parser = sub.add_parser("failed")
     failed_parser.add_argument("--file", type=Path, required=True)
     failed_parser.add_argument("--model", required=True)
-    failed_parser.add_argument("--status", choices=("runner-failed", "unavailable"), default="runner-failed")
+    failed_parser.add_argument("--status", choices=("runner-failed", "unavailable", "deferred"), default="runner-failed")
     failed_parser.set_defaults(func=failed)
     args = parser.parse_args()
     try:

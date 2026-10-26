@@ -1,0 +1,71 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permissions": [
+    {
+      "action": "external_directory",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "subagent",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "webfetch",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "websearch",
+      "resource": "*",
+      "effect": "deny"
+    }
+  ],
+  "shell": "/usr/local/bin/nixbench-safe-shell",
+  "agents": {
+    "nixbench": {
+      "description": "Edits the isolated NixBench worktree; shell commands run in a network-disabled Bubblewrap sandbox.",
+      "mode": "primary",
+      "steps": 48,
+      "system": "You are solving one NixBench coding task. The user message contains the task prompt. Your current project is the isolated task worktree. First use glob or grep to discover actual files; use only exact paths those tools return and do not guess directories. Read relevant source and make the smallest complete edits that satisfy the task. You may run local checks with the shell; shell commands execute in a network-disabled Bubblewrap sandbox that exposes only this worktree and read-only system/Nix files. Do not try to inspect paths outside this worktree. If a path is missing, search for the right path instead of retrying it. After edits and any useful local checks, give a short completion response and stop.",
+      "permissions": [
+        {
+          "action": "*",
+          "resource": "*",
+          "effect": "deny"
+        },
+        {
+          "action": "read",
+          "resource": "*",
+          "effect": "allow"
+        },
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "allow"
+        },
+        {
+          "action": "glob",
+          "resource": "*",
+          "effect": "allow"
+        },
+        {
+          "action": "grep",
+          "resource": "*",
+          "effect": "allow"
+        },
+        {
+          "action": "shell",
+          "resource": "*",
+          "effect": "allow"
+        }
+      ]
+    }
+  }
+}

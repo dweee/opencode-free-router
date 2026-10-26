@@ -1,0 +1,1336 @@
+{
+  "schemaVersion": 1,
+  "catalogRetrievedAt": "Sun, 25 Oct 2026 02:00:00 GMT",
+  "eligibleModels": [
+    {
+      "id": "openrouter/recursive/flint-v1.0:free",
+      "name": "Flint (free)",
+      "contextTokens": 262144,
+      "releaseDate": "2026-10-21",
+      "catalogUpdated": "2026-10-21",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+      "name": "Xing4.0 29B A4B (free)",
+      "contextTokens": 262144,
+      "releaseDate": "2026-10-16",
+      "catalogUpdated": "2026-10-16",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "name": "Nemotron 3.5 Super VL (free)",
+      "contextTokens": 1000000,
+      "releaseDate": "2026-10-15",
+      "catalogUpdated": "2026-10-15",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/dots-studio/dots-3-note-preview:free",
+      "name": "Dots3-Note Preview (free)",
+      "contextTokens": 512000,
+      "releaseDate": "2026-08-14",
+      "catalogUpdated": "2026-08-14",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3.5-lightning:free",
+      "name": "Nemotron 3.5 Lightning (free)",
+      "contextTokens": 1000000,
+      "releaseDate": "2026-08-11",
+      "catalogUpdated": "2026-08-11",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/liquid/lfm-2.5-2.6b:free",
+      "name": "LFM2.5-2.6B (free)",
+      "contextTokens": 65536,
+      "releaseDate": "2026-08-11",
+      "catalogUpdated": "2026-08-11",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling-small:free",
+      "name": "Inkling Small (free)",
+      "contextTokens": 1048576,
+      "releaseDate": "2026-07-30",
+      "catalogUpdated": "2026-07-30",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/poolside/laguna-s-2.1:free",
+      "name": "Laguna S 2.1 (free)",
+      "contextTokens": 262144,
+      "releaseDate": "2026-07-21",
+      "catalogUpdated": "2026-07-21",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/thinkingmachines/inkling:free",
+      "name": "Inkling (free)",
+      "contextTokens": 1048576,
+      "releaseDate": "2026-07-15",
+      "catalogUpdated": "2026-07-15",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/poolside/laguna-xs-2.1:free",
+      "name": "Laguna XS 2.1 (free)",
+      "contextTokens": 262144,
+      "releaseDate": "2026-07-02",
+      "catalogUpdated": "2026-07-02",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/cohere/north-mini-code:free",
+      "name": "North Mini Code (free)",
+      "contextTokens": 256000,
+      "releaseDate": "2026-06-09",
+      "catalogUpdated": "2026-06-09",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "name": "Nemotron 3 Ultra (free)",
+      "contextTokens": 1000000,
+      "releaseDate": "2026-06-04",
+      "catalogUpdated": "2026-06-04",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "name": "Nemotron 3 Nano Omni (free)",
+      "contextTokens": 256000,
+      "releaseDate": "2026-04-28",
+      "catalogUpdated": "2026-04-28",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/google/gemma-4-31b-it:free",
+      "name": "Gemma 4 31B (free)",
+      "contextTokens": 262144,
+      "releaseDate": "2026-04-02",
+      "catalogUpdated": "2026-04-02",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/google/gemma-4-26b-a4b-it:free",
+      "name": "Gemma 4 26B A4B  (free)",
+      "contextTokens": 262144,
+      "releaseDate": "2026-04-02",
+      "catalogUpdated": "2026-04-02",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "name": "Nemotron 3 Super (free)",
+      "contextTokens": 262144,
+      "releaseDate": "2026-03-11",
+      "catalogUpdated": "2026-03-11",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    },
+    {
+      "id": "openrouter/openrouter/free",
+      "name": "Free Models Router",
+      "contextTokens": 200000,
+      "releaseDate": "2026-02-01",
+      "catalogUpdated": "2026-02-01",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "availability": "models.dev-zero-price; provider access must be checked at run time"
+    }
+  ],
+  "catalogDelta": {
+    "added": [
+      "openrouter/recursive/flint-v1.0:free"
+    ],
+    "removed": [
+      "openrouter/minimax/minimax-m3.1-flash:free"
+    ]
+  },
+  "probe": [
+    {
+      "id": "nvidia/nemotron-3.5-super-vl:free",
+      "http": 200,
+      "ok": true,
+      "empty": false
+    },
+    {
+      "id": "liquid/lfm-2.5-2.6b:free",
+      "http": 200,
+      "ok": true,
+      "empty": false
+    },
+    {
+      "id": "thinkingmachines/inkling-small:free",
+      "http": 403,
+      "ok": false,
+      "error": "{\"error\":{\"message\":\"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+    },
+    {
+      "id": "nvidia/nemotron-3.5-lightning:free",
+      "http": 200,
+      "ok": true,
+      "empty": true
+    },
+    {
+      "id": "thinkingmachines/inkling:free",
+      "http": 403,
+      "ok": false,
+      "error": "{\"error\":{\"message\":\"thinkingmachines/inkling:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps\",\"code\":403,\"metadata\":{\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Gate Free Endpoints by Agentic Harness\"}}}"
+    },
+    {
+      "id": "poolside/laguna-xs-2.1:free",
+      "http": 200,
+      "ok": true,
+      "empty": true
+    },
+    {
+      "id": "poolside/laguna-s-2.1:free",
+      "http": 200,
+      "ok": true,
+      "empty": false
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "http": 200,
+      "ok": true,
+      "empty": true
+    },
+    {
+      "id": "dots-studio/dots-3-note-preview:free",
+      "http": 200,
+      "ok": true,
+      "empty": false
+    },
+    {
+      "id": "cohere/north-mini-code:free",
+      "http": 200,
+      "ok": true,
+      "empty": false
+    },
+    {
+      "id": "google/gemma-4-31b-it:free",
+      "http": 429,
+      "ok": false,
+      "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"google/gemma-4-31b-it:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google AI Studio\",\"is_byok\":false,\"provider_error_code\":\"429\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to"
+    },
+    {
+      "id": "minimax/minimax-m3.1-flash:free",
+      "http": 200,
+      "ok": true,
+      "empty": false
+    },
+    {
+      "id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "http": 404,
+      "ok": false,
+      "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":404,\"metadata\":{\"raw\":\"{\\\"status\\\":404,\\\"title\\\":\\\"Not Found\\\",\\\"detail\\\":\\\"Function 'ac74040f-9fc9-4c5e-ac74-279ba5161d69': Not found for account 'sxpm0VR-knE2_K2__i14ZbzmXEludXpJbFGRvrvc08w'\\\"}\",\"provider_name\":\"Nvidia\",\"is_byok\":false}},\"user_id\":\"user_2ljmGWuLkKNvUMUYFxL9wR6omQL\"}"
+    },
+    {
+      "id": "google/gemma-4-26b-a4b-it:free",
+      "http": 429,
+      "ok": false,
+      "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"google/gemma-4-26b-a4b-it:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google AI Studio\",\"is_byok\":false,\"provider_error_code\":\"429\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or rout"
+    },
+    {
+      "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "http": 200,
+      "ok": true,
+      "empty": false
+    },
+    {
+      "id": "openrouter/free",
+      "http": 200,
+      "ok": true,
+      "empty": false
+    },
+    {
+      "id": "xingchen-agi/xing4.0-29b-a4b:free",
+      "http": 429,
+      "ok": false,
+      "error": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"xingchen-agi/xing4.0-29b-a4b:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Phala\",\"is_byok\":false,\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider "
+    }
+  ],
+  "nixbenchRevision": "290eb8c18d4a0833fcc3746662ff08766102232c",
+  "nixpkgs": "/nix/store/3zvg83mg9aavm9bgh26ydljchply7i25-source",
+  "parallelJobs": 1,
+  "runs": {
+    "mcp/openrouter/nvidia/nemotron-3.5-super-vl:free": {
+      "key": "mcp/openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "variant": "mcp",
+      "model": "openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:25:15Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__nvidia__nemotron-3.5-super-vl_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__nvidia__nemotron-3.5-super-vl_free/20261021T202516Z-dd751a99/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T202516Z-dd751a99",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:26:41Z"
+    },
+    "mcp/openrouter/xingchen-agi/xing4.0-29b-a4b:free": {
+      "key": "mcp/openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+      "variant": "mcp",
+      "model": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:25:15Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__xingchen-agi__xing4.0-29b-a4b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__xingchen-agi__xing4.0-29b-a4b_free/20261021T202516Z-448d4aaa/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T202516Z-448d4aaa",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:32:06Z"
+    },
+    "mcp/openrouter/dots-studio/dots-3-note-preview:free": {
+      "key": "mcp/openrouter/dots-studio/dots-3-note-preview:free",
+      "variant": "mcp",
+      "model": "openrouter/dots-studio/dots-3-note-preview:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:25:15Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__dots-studio__dots-3-note-preview_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__dots-studio__dots-3-note-preview_free/20261021T202516Z-72b9da99/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T202516Z-72b9da99",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:25:20Z"
+    },
+    "mcp/openrouter/minimax/minimax-m3.1-flash:free": {
+      "key": "mcp/openrouter/minimax/minimax-m3.1-flash:free",
+      "variant": "mcp",
+      "model": "openrouter/minimax/minimax-m3.1-flash:free",
+      "status": "complete",
+      "startedAt": "2026-10-21T20:25:15Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__minimax__minimax-m3.1-flash_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__minimax__minimax-m3.1-flash_free/20261021T202516Z-17fd33e5/summary.json",
+      "taskCount": 18,
+      "passedTasks": 8,
+      "score": 1135.0,
+      "maxScore": 1800.0,
+      "runId": "20261021T202516Z-17fd33e5",
+      "scoreRate": 0.630556,
+      "exitCode": 1,
+      "finishedAt": "2026-10-21T22:42:38Z"
+    },
+    "skills/openrouter/xingchen-agi/xing4.0-29b-a4b:free": {
+      "key": "skills/openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+      "variant": "skills",
+      "model": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:32:07Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__xingchen-agi__xing4.0-29b-a4b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__xingchen-agi__xing4.0-29b-a4b_free/20261021T203208Z-118dd695/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203208Z-118dd695",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:32:09Z"
+    },
+    "skills/openrouter/minimax/minimax-m3.1-flash:free": {
+      "key": "skills/openrouter/minimax/minimax-m3.1-flash:free",
+      "variant": "skills",
+      "model": "openrouter/minimax/minimax-m3.1-flash:free",
+      "status": "complete",
+      "startedAt": "2026-10-21T22:42:38Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__minimax__minimax-m3.1-flash_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__minimax__minimax-m3.1-flash_free/20261021T224239Z-6b46a753/summary.json",
+      "taskCount": 18,
+      "passedTasks": 6,
+      "score": 1030.0,
+      "maxScore": 1800.0,
+      "runId": "20261021T224239Z-6b46a753",
+      "scoreRate": 0.572222,
+      "exitCode": 1,
+      "finishedAt": "2026-10-22T00:53:28Z"
+    },
+    "skills/openrouter/dots-studio/dots-3-note-preview:free": {
+      "key": "skills/openrouter/dots-studio/dots-3-note-preview:free",
+      "variant": "skills",
+      "model": "openrouter/dots-studio/dots-3-note-preview:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:25:20Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__dots-studio__dots-3-note-preview_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__dots-studio__dots-3-note-preview_free/20261021T202521Z-d37166c6/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T202521Z-d37166c6",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:25:22Z"
+    },
+    "skills/openrouter/nvidia/nemotron-3.5-super-vl:free": {
+      "key": "skills/openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "variant": "skills",
+      "model": "openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:26:41Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__nvidia__nemotron-3.5-super-vl_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__nvidia__nemotron-3.5-super-vl_free/20261021T202641Z-fa67ed08/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T202641Z-fa67ed08",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:28:07Z"
+    },
+    "both/openrouter/dots-studio/dots-3-note-preview:free": {
+      "key": "both/openrouter/dots-studio/dots-3-note-preview:free",
+      "variant": "both",
+      "model": "openrouter/dots-studio/dots-3-note-preview:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-25T02:00:01Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__dots-studio__dots-3-note-preview_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__dots-studio__dots-3-note-preview_free/20261025T020002Z-6b2f692c/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261025T020002Z-6b2f692c",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-25T02:00:04Z"
+    },
+    "both/openrouter/xingchen-agi/xing4.0-29b-a4b:free": {
+      "key": "both/openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+      "variant": "both",
+      "model": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:32:09Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__xingchen-agi__xing4.0-29b-a4b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__xingchen-agi__xing4.0-29b-a4b_free/20261021T203210Z-119e4bfb/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203210Z-119e4bfb",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:33:54Z"
+    },
+    "both/openrouter/nvidia/nemotron-3.5-super-vl:free": {
+      "key": "both/openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "variant": "both",
+      "model": "openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-25T02:00:08Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__nvidia__nemotron-3.5-super-vl_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__nvidia__nemotron-3.5-super-vl_free/20261025T020008Z-bf9b52df/summary.json",
+      "taskCount": 9,
+      "passedTasks": 2,
+      "score": 495.0,
+      "maxScore": 900.0,
+      "runId": "20261025T020008Z-bf9b52df",
+      "scoreRate": 0.55,
+      "invalid": [
+        "overlay-finalattrs-reoverride: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-25T02:58:55Z"
+    },
+    "both/openrouter/minimax/minimax-m3.1-flash:free": {
+      "key": "both/openrouter/minimax/minimax-m3.1-flash:free",
+      "variant": "both",
+      "model": "openrouter/minimax/minimax-m3.1-flash:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-22T00:53:29Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__minimax__minimax-m3.1-flash_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__minimax__minimax-m3.1-flash_free/20261022T005329Z-a3fac87e/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261022T005329Z-a3fac87e",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-22T00:53:32Z"
+    },
+    "mcp/openrouter/nvidia/nemotron-3.5-lightning:free": {
+      "key": "mcp/openrouter/nvidia/nemotron-3.5-lightning:free",
+      "variant": "mcp",
+      "model": "openrouter/nvidia/nemotron-3.5-lightning:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:25:28Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__nvidia__nemotron-3.5-lightning_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__nvidia__nemotron-3.5-lightning_free/20261021T202528Z-9e684a26/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T202528Z-9e684a26",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:26:54Z"
+    },
+    "mcp/openrouter/poolside/laguna-s-2.1:free": {
+      "key": "mcp/openrouter/poolside/laguna-s-2.1:free",
+      "variant": "mcp",
+      "model": "openrouter/poolside/laguna-s-2.1:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:33:55Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__poolside__laguna-s-2.1_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__poolside__laguna-s-2.1_free/20261021T203357Z-ea2a157b/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203357Z-ea2a157b",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:34:05Z"
+    },
+    "mcp/openrouter/thinkingmachines/inkling-small:free": {
+      "key": "mcp/openrouter/thinkingmachines/inkling-small:free",
+      "variant": "mcp",
+      "model": "openrouter/thinkingmachines/inkling-small:free",
+      "status": "complete",
+      "startedAt": "2026-10-21T20:29:53Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__thinkingmachines__inkling-small_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__thinkingmachines__inkling-small_free/20261021T202953Z-19a0f055/summary.json",
+      "taskCount": 18,
+      "passedTasks": 7,
+      "score": 1320.0,
+      "maxScore": 1800.0,
+      "runId": "20261021T202953Z-19a0f055",
+      "scoreRate": 0.733333,
+      "exitCode": 1,
+      "finishedAt": "2026-10-21T21:10:23Z"
+    },
+    "mcp/openrouter/liquid/lfm-2.5-2.6b:free": {
+      "key": "mcp/openrouter/liquid/lfm-2.5-2.6b:free",
+      "variant": "mcp",
+      "model": "openrouter/liquid/lfm-2.5-2.6b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:29:39Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__liquid__lfm-2.5-2.6b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__liquid__lfm-2.5-2.6b_free/20261021T202939Z-e4597665/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T202939Z-e4597665",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:31:10Z"
+    },
+    "skills/openrouter/poolside/laguna-s-2.1:free": {
+      "key": "skills/openrouter/poolside/laguna-s-2.1:free",
+      "variant": "skills",
+      "model": "openrouter/poolside/laguna-s-2.1:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:34:06Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__poolside__laguna-s-2.1_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__poolside__laguna-s-2.1_free/20261021T203407Z-ee695ef7/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203407Z-ee695ef7",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:34:09Z"
+    },
+    "skills/openrouter/liquid/lfm-2.5-2.6b:free": {
+      "key": "skills/openrouter/liquid/lfm-2.5-2.6b:free",
+      "variant": "skills",
+      "model": "openrouter/liquid/lfm-2.5-2.6b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:31:11Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__liquid__lfm-2.5-2.6b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__liquid__lfm-2.5-2.6b_free/20261021T203112Z-9991d521/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203112Z-9991d521",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:32:35Z"
+    },
+    "skills/openrouter/nvidia/nemotron-3.5-lightning:free": {
+      "key": "skills/openrouter/nvidia/nemotron-3.5-lightning:free",
+      "variant": "skills",
+      "model": "openrouter/nvidia/nemotron-3.5-lightning:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:26:54Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__nvidia__nemotron-3.5-lightning_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__nvidia__nemotron-3.5-lightning_free/20261021T202654Z-a422276b/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T202654Z-a422276b",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:28:25Z"
+    },
+    "skills/openrouter/thinkingmachines/inkling-small:free": {
+      "key": "skills/openrouter/thinkingmachines/inkling-small:free",
+      "variant": "skills",
+      "model": "openrouter/thinkingmachines/inkling-small:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T21:10:23Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__thinkingmachines__inkling-small_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__thinkingmachines__inkling-small_free/20261021T211024Z-2a14074d/summary.json",
+      "taskCount": 3,
+      "passedTasks": 0,
+      "score": 150.0,
+      "maxScore": 300.0,
+      "runId": "20261021T211024Z-2a14074d",
+      "scoreRate": 0.5,
+      "invalid": [
+        "esphome-persistence-wrong-state-path: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T21:19:32Z"
+    },
+    "both/openrouter/thinkingmachines/inkling-small:free": {
+      "key": "both/openrouter/thinkingmachines/inkling-small:free",
+      "variant": "both",
+      "model": "openrouter/thinkingmachines/inkling-small:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T21:19:33Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__thinkingmachines__inkling-small_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__thinkingmachines__inkling-small_free/20261021T211933Z-d459c8ea/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T211933Z-d459c8ea",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T21:21:03Z"
+    },
+    "both/openrouter/nvidia/nemotron-3.5-lightning:free": {
+      "key": "both/openrouter/nvidia/nemotron-3.5-lightning:free",
+      "variant": "both",
+      "model": "openrouter/nvidia/nemotron-3.5-lightning:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:28:26Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__nvidia__nemotron-3.5-lightning_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__nvidia__nemotron-3.5-lightning_free/20261021T202826Z-8f687de8/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T202826Z-8f687de8",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:29:52Z"
+    },
+    "both/openrouter/liquid/lfm-2.5-2.6b:free": {
+      "key": "both/openrouter/liquid/lfm-2.5-2.6b:free",
+      "variant": "both",
+      "model": "openrouter/liquid/lfm-2.5-2.6b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:32:36Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__liquid__lfm-2.5-2.6b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__liquid__lfm-2.5-2.6b_free/20261021T203237Z-820077c7/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203237Z-820077c7",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:34:08Z"
+    },
+    "both/openrouter/poolside/laguna-s-2.1:free": {
+      "key": "both/openrouter/poolside/laguna-s-2.1:free",
+      "variant": "both",
+      "model": "openrouter/poolside/laguna-s-2.1:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-25T02:00:04Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__poolside__laguna-s-2.1_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__poolside__laguna-s-2.1_free/20261025T020005Z-7b0c389e/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261025T020005Z-7b0c389e",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-25T02:00:08Z"
+    },
+    "mcp/openrouter/nvidia/nemotron-3-ultra-550b-a55b:free": {
+      "key": "mcp/openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "variant": "mcp",
+      "model": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:38:50Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__nvidia__nemotron-3-ultra-550b-a55b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__nvidia__nemotron-3-ultra-550b-a55b_free/20261021T203851Z-6f3024c4/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203851Z-6f3024c4",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:40:19Z"
+    },
+    "mcp/openrouter/cohere/north-mini-code:free": {
+      "key": "mcp/openrouter/cohere/north-mini-code:free",
+      "variant": "mcp",
+      "model": "openrouter/cohere/north-mini-code:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:34:28Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__cohere__north-mini-code_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__cohere__north-mini-code_free/20261021T203429Z-2d77e976/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203429Z-2d77e976",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:35:53Z"
+    },
+    "mcp/openrouter/poolside/laguna-xs-2.1:free": {
+      "key": "mcp/openrouter/poolside/laguna-xs-2.1:free",
+      "variant": "mcp",
+      "model": "openrouter/poolside/laguna-xs-2.1:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:34:14Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__poolside__laguna-xs-2.1_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__poolside__laguna-xs-2.1_free/20261021T203415Z-ffcd0fa8/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203415Z-ffcd0fa8",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:34:18Z"
+    },
+    "mcp/openrouter/thinkingmachines/inkling:free": {
+      "key": "mcp/openrouter/thinkingmachines/inkling:free",
+      "variant": "mcp",
+      "model": "openrouter/thinkingmachines/inkling:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:34:09Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__thinkingmachines__inkling_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__thinkingmachines__inkling_free/20261021T203410Z-4c0b8121/summary.json",
+      "taskCount": 7,
+      "passedTasks": 1,
+      "score": 445.0,
+      "maxScore": 700.0,
+      "runId": "20261021T203410Z-4c0b8121",
+      "scoreRate": 0.635714,
+      "invalid": [
+        "lazy-type-error-boundary: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:57:58Z"
+    },
+    "skills/openrouter/nvidia/nemotron-3-ultra-550b-a55b:free": {
+      "key": "skills/openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "variant": "skills",
+      "model": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:40:20Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__nvidia__nemotron-3-ultra-550b-a55b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__nvidia__nemotron-3-ultra-550b-a55b_free/20261021T204021Z-563f46c7/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T204021Z-563f46c7",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:41:49Z"
+    },
+    "skills/openrouter/cohere/north-mini-code:free": {
+      "key": "skills/openrouter/cohere/north-mini-code:free",
+      "variant": "skills",
+      "model": "openrouter/cohere/north-mini-code:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:35:53Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__cohere__north-mini-code_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__cohere__north-mini-code_free/20261021T203554Z-d6c41f06/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203554Z-d6c41f06",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:37:19Z"
+    },
+    "skills/openrouter/poolside/laguna-xs-2.1:free": {
+      "key": "skills/openrouter/poolside/laguna-xs-2.1:free",
+      "variant": "skills",
+      "model": "openrouter/poolside/laguna-xs-2.1:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:34:19Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__poolside__laguna-xs-2.1_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__poolside__laguna-xs-2.1_free/20261021T203420Z-0c22909b/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203420Z-0c22909b",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:34:23Z"
+    },
+    "skills/openrouter/thinkingmachines/inkling:free": {
+      "key": "skills/openrouter/thinkingmachines/inkling:free",
+      "variant": "skills",
+      "model": "openrouter/thinkingmachines/inkling:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:57:58Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__thinkingmachines__inkling_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__thinkingmachines__inkling_free/20261021T205759Z-07930e52/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T205759Z-07930e52",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:59:34Z"
+    },
+    "both/openrouter/poolside/laguna-xs-2.1:free": {
+      "key": "both/openrouter/poolside/laguna-xs-2.1:free",
+      "variant": "both",
+      "model": "openrouter/poolside/laguna-xs-2.1:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:34:23Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__poolside__laguna-xs-2.1_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__poolside__laguna-xs-2.1_free/20261021T203424Z-9e2b1d03/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203424Z-9e2b1d03",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:34:27Z"
+    },
+    "both/openrouter/thinkingmachines/inkling:free": {
+      "key": "both/openrouter/thinkingmachines/inkling:free",
+      "variant": "both",
+      "model": "openrouter/thinkingmachines/inkling:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:59:34Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__thinkingmachines__inkling_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__thinkingmachines__inkling_free/20261021T205935Z-b80fba3d/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T205935Z-b80fba3d",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T21:00:58Z"
+    },
+    "both/openrouter/nvidia/nemotron-3-ultra-550b-a55b:free": {
+      "key": "both/openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "variant": "both",
+      "model": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:41:49Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__nvidia__nemotron-3-ultra-550b-a55b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__nvidia__nemotron-3-ultra-550b-a55b_free/20261021T204150Z-cb90b2e0/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T204150Z-cb90b2e0",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:43:18Z"
+    },
+    "both/openrouter/cohere/north-mini-code:free": {
+      "key": "both/openrouter/cohere/north-mini-code:free",
+      "variant": "both",
+      "model": "openrouter/cohere/north-mini-code:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:37:20Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__cohere__north-mini-code_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__cohere__north-mini-code_free/20261021T203720Z-46ff86ad/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T203720Z-46ff86ad",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:38:50Z"
+    },
+    "mcp/openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+      "key": "mcp/openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "variant": "mcp",
+      "model": "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:43:18Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__nvidia__nemotron-3-nano-omni-30b-a3b-reasoning_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__nvidia__nemotron-3-nano-omni-30b-a3b-reasoning_free/20261021T204319Z-7b9e027a/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T204319Z-7b9e027a",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:44:46Z"
+    },
+    "mcp/openrouter/google/gemma-4-31b-it:free": {
+      "key": "mcp/openrouter/google/gemma-4-31b-it:free",
+      "variant": "mcp",
+      "model": "openrouter/google/gemma-4-31b-it:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:47:50Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__google__gemma-4-31b-it_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__google__gemma-4-31b-it_free/20261021T204750Z-39f7461a/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T204750Z-39f7461a",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:49:21Z"
+    },
+    "mcp/openrouter/google/gemma-4-26b-a4b-it:free": {
+      "key": "mcp/openrouter/google/gemma-4-26b-a4b-it:free",
+      "variant": "mcp",
+      "model": "openrouter/google/gemma-4-26b-a4b-it:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:52:22Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__google__gemma-4-26b-a4b-it_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__google__gemma-4-26b-a4b-it_free/20261021T205223Z-b9e6139b/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T205223Z-b9e6139b",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:53:55Z"
+    },
+    "mcp/openrouter/nvidia/nemotron-3-super-120b-a12b:free": {
+      "key": "mcp/openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "variant": "mcp",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:56:51Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__nvidia__nemotron-3-super-120b-a12b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__nvidia__nemotron-3-super-120b-a12b_free/20261021T205652Z-0a8de3c1/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T205652Z-0a8de3c1",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:58:21Z"
+    },
+    "skills/openrouter/nvidia/nemotron-3-super-120b-a12b:free": {
+      "key": "skills/openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "variant": "skills",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:58:21Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__nvidia__nemotron-3-super-120b-a12b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__nvidia__nemotron-3-super-120b-a12b_free/20261021T205822Z-2a844426/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T205822Z-2a844426",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:59:50Z"
+    },
+    "skills/openrouter/google/gemma-4-26b-a4b-it:free": {
+      "key": "skills/openrouter/google/gemma-4-26b-a4b-it:free",
+      "variant": "skills",
+      "model": "openrouter/google/gemma-4-26b-a4b-it:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:53:55Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__google__gemma-4-26b-a4b-it_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__google__gemma-4-26b-a4b-it_free/20261021T205356Z-3da66d7b/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T205356Z-3da66d7b",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:55:22Z"
+    },
+    "skills/openrouter/google/gemma-4-31b-it:free": {
+      "key": "skills/openrouter/google/gemma-4-31b-it:free",
+      "variant": "skills",
+      "model": "openrouter/google/gemma-4-31b-it:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:49:22Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__google__gemma-4-31b-it_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__google__gemma-4-31b-it_free/20261021T204923Z-62c74228/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T204923Z-62c74228",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:50:51Z"
+    },
+    "skills/openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+      "key": "skills/openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "variant": "skills",
+      "model": "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:44:47Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__nvidia__nemotron-3-nano-omni-30b-a3b-reasoning_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__nvidia__nemotron-3-nano-omni-30b-a3b-reasoning_free/20261021T204448Z-471a4992/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T204448Z-471a4992",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:46:14Z"
+    },
+    "both/openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+      "key": "both/openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "variant": "both",
+      "model": "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:46:14Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__nvidia__nemotron-3-nano-omni-30b-a3b-reasoning_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__nvidia__nemotron-3-nano-omni-30b-a3b-reasoning_free/20261021T204615Z-c9837ab8/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T204615Z-c9837ab8",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:47:49Z"
+    },
+    "both/openrouter/google/gemma-4-26b-a4b-it:free": {
+      "key": "both/openrouter/google/gemma-4-26b-a4b-it:free",
+      "variant": "both",
+      "model": "openrouter/google/gemma-4-26b-a4b-it:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:55:22Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__google__gemma-4-26b-a4b-it_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__google__gemma-4-26b-a4b-it_free/20261021T205523Z-ec858c1a/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T205523Z-ec858c1a",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:56:51Z"
+    },
+    "both/openrouter/google/gemma-4-31b-it:free": {
+      "key": "both/openrouter/google/gemma-4-31b-it:free",
+      "variant": "both",
+      "model": "openrouter/google/gemma-4-31b-it:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:50:51Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__google__gemma-4-31b-it_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__google__gemma-4-31b-it_free/20261021T205052Z-73f0dde4/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T205052Z-73f0dde4",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T20:52:22Z"
+    },
+    "both/openrouter/nvidia/nemotron-3-super-120b-a12b:free": {
+      "key": "both/openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "variant": "both",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T20:59:50Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__nvidia__nemotron-3-super-120b-a12b_free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__nvidia__nemotron-3-super-120b-a12b_free/20261021T205951Z-354316d6/summary.json",
+      "taskCount": 1,
+      "passedTasks": 0,
+      "score": 0,
+      "maxScore": 100.0,
+      "runId": "20261021T205951Z-354316d6",
+      "scoreRate": 0.0,
+      "invalid": [
+        "devshell-tooling-contract: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T21:01:19Z"
+    },
+    "mcp/openrouter/openrouter/free": {
+      "key": "mcp/openrouter/openrouter/free",
+      "variant": "mcp",
+      "model": "openrouter/openrouter/free",
+      "status": "incomplete",
+      "startedAt": "2026-10-21T21:00:58Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/mcp/openrouter__openrouter__free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/mcp/openrouter__openrouter__free/20261021T210059Z-b437822c/summary.json",
+      "taskCount": 8,
+      "passedTasks": 1,
+      "score": 395.0,
+      "maxScore": 800.0,
+      "runId": "20261021T210059Z-b437822c",
+      "scoreRate": 0.49375,
+      "invalid": [
+        "module-generated-jobs-fixed-point: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-21T22:00:30Z"
+    },
+    "skills/openrouter/openrouter/free": {
+      "key": "skills/openrouter/openrouter/free",
+      "variant": "skills",
+      "model": "openrouter/openrouter/free",
+      "status": "complete",
+      "startedAt": "2026-10-21T22:00:30Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/skills/openrouter__openrouter__free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/skills/openrouter__openrouter__free/20261021T220030Z-c5dda299/summary.json",
+      "taskCount": 18,
+      "passedTasks": 6,
+      "score": 1140.0,
+      "maxScore": 1800.0,
+      "runId": "20261021T220030Z-c5dda299",
+      "scoreRate": 0.633333,
+      "exitCode": 1,
+      "finishedAt": "2026-10-22T01:10:40Z"
+    },
+    "both/openrouter/openrouter/free": {
+      "key": "both/openrouter/openrouter/free",
+      "variant": "both",
+      "model": "openrouter/openrouter/free",
+      "status": "incomplete",
+      "startedAt": "2026-10-22T01:10:41Z",
+      "log": "/home/d/.local/state/nixbench-guidance-compare/jobs/both/openrouter__openrouter__free/bench.log",
+      "summary": "/home/d/.local/state/nixbench-guidance-compare/results/both/openrouter__openrouter__free/20261022T011042Z-79d8111f/summary.json",
+      "taskCount": 15,
+      "passedTasks": 5,
+      "score": 880.0,
+      "maxScore": 1500.0,
+      "runId": "20261022T011042Z-79d8111f",
+      "scoreRate": 0.586667,
+      "invalid": [
+        "tor-onion-socket-outside-chroot: agent-process-error"
+      ],
+      "exitCode": 2,
+      "finishedAt": "2026-10-22T03:17:14Z"
+    }
+  },
+  "account": "default"
+}

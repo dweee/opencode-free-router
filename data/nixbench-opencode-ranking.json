@@ -1,0 +1,34 @@
+{
+  "attempted": [],
+  "availableModels": [],
+  "benchmark": {
+    "agent": "OpenCode v2 using the opencode provider with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
+    "corpusDigest": null,
+    "corpusId": "nixbench-public",
+    "corpusStatus": "calibrating",
+    "corpusVersion": "3.2.0",
+    "excludedTasks": [
+      "boot-hook-marker-survives-reboot",
+      "firewall-nftables-forwarding-silently-dropped",
+      "state-directory-ownership-after-hardening"
+    ],
+    "interpretation": "screening-only",
+    "name": "NixBench",
+    "repository": "https://github.com/maximilianpw/nixbench",
+    "revision": "290eb8c18d4a0833fcc3746662ff08766102232c",
+    "scope": "NixBench public corpus tasks supported by GitHub-hosted runners; KVM-dependent tasks omitted",
+    "taskCount": null
+  },
+  "catalog": {
+    "retrievedAt": null,
+    "url": "https://models.dev/api.json"
+  },
+  "currentModel": null,
+  "generatedAt": null,
+  "models": [],
+  "nextCandidate": null,
+  "provider": "opencode",
+  "rankingNote": "No currently free, eligible OpenCode provider model has a recorded NixBench run. Catalog availability is not proof of account access.",
+  "recommendationStatus": "no-benchmarked-free-model",
+  "schemaVersion": 1
+}
