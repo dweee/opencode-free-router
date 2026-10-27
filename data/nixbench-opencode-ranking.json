@@ -1,13 +1,6 @@
 {
   "attempted": [
     {
-      "at": "2026-10-26T07:20:18Z",
-      "id": "opencode/beam-free",
-      "retryAfter": "2026-10-27T07:20:18Z",
-      "runId": "40281278458",
-      "status": "deferred"
-    },
-    {
       "at": "2026-10-26T07:56:38Z",
       "id": "opencode/big-pickle",
       "retryAfter": "2026-10-27T07:56:38Z",
@@ -31,6 +24,13 @@
       "id": "opencode/deepseek-v4.1-flash-free",
       "retryAfter": "2026-10-28T07:55:56Z",
       "runId": "40466385376",
+      "status": "deferred"
+    },
+    {
+      "at": "2026-10-27T12:05:22Z",
+      "id": "opencode/beam-free",
+      "retryAfter": "2026-10-28T12:05:22Z",
+      "runId": "40492971806",
       "status": "deferred"
     }
   ],
@@ -181,11 +181,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Tue, 27 Oct 2026 07:19:22 GMT",
+    "retrievedAt": "Tue, 27 Oct 2026 11:12:00 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": null,
-  "generatedAt": "2026-10-27T07:19:22Z",
+  "generatedAt": "2026-10-27T11:12:00Z",
   "models": [],
   "nextCandidate": null,
   "provider": "opencode",
