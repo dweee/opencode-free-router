@@ -14,6 +14,11 @@
       "at": "2026-10-26T11:10:08Z",
       "id": "openrouter/poolside/laguna-s-2.1:free",
       "status": "runner-failed"
+    },
+    {
+      "at": "2026-10-27T11:26:14Z",
+      "id": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+      "status": "runner-failed"
     }
   ],
   "availableModels": [
@@ -29,44 +34,10 @@
       "name": "Flint (free)",
       "priority": {
         "reason": "unscored",
-        "score": 0.3439,
+        "score": 0.3428,
         "sources": {}
       },
       "releaseDate": "2026-10-21"
-    },
-    {
-      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-08-14",
-      "contextTokens": 512000,
-      "id": "openrouter/dots-studio/dots-3-note-preview:free",
-      "name": "Dots3-Note Preview (free)",
-      "priority": {
-        "reason": "unscored",
-        "score": 0.2684,
-        "sources": {}
-      },
-      "releaseDate": "2026-08-14"
-    },
-    {
-      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-07-21",
-      "contextTokens": 262144,
-      "id": "openrouter/poolside/laguna-s-2.1:free",
-      "name": "Laguna S 2.1 (free)",
-      "priority": {
-        "reason": "unscored",
-        "score": 0.25,
-        "sources": {}
-      },
-      "releaseDate": "2026-07-21"
     },
     {
       "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
@@ -80,7 +51,7 @@
       "name": "Xing4.0 29B A4B (free)",
       "priority": {
         "reason": "unscored, small-model penalty",
-        "score": 0.1884,
+        "score": 0.1872,
         "sources": {}
       },
       "releaseDate": "2026-10-16"
@@ -97,27 +68,10 @@
       "name": "LFM2.5-2.6B (free)",
       "priority": {
         "reason": "unscored, small-model penalty",
-        "score": 0.115,
+        "score": 0.1139,
         "sources": {}
       },
       "releaseDate": "2026-08-11"
-    },
-    {
-      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-07-02",
-      "contextTokens": 262144,
-      "id": "openrouter/poolside/laguna-xs-2.1:free",
-      "name": "Laguna XS 2.1 (free)",
-      "priority": {
-        "reason": "unscored, small-model penalty",
-        "score": 0.1,
-        "sources": {}
-      },
-      "releaseDate": "2026-07-02"
     },
     {
       "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
@@ -152,29 +106,6 @@
         "sources": {}
       },
       "releaseDate": "2026-04-28"
-    },
-    {
-      "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-03-11",
-      "contextTokens": 262144,
-      "id": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
-      "name": "Nemotron 3 Super (free)",
-      "priority": {
-        "reason": "benchmarks (arena_text)",
-        "score": 0.5779,
-        "sources": {
-          "arena_text": {
-            "as": "NVIDIA-Nemotron-3-Super-120B-A12B",
-            "pct": 0.578,
-            "value": 1377.5793249756439
-          }
-        }
-      },
-      "releaseDate": "2026-03-11"
     },
     {
       "availability": "models.dev-zero-price for openrouter; account access must be checked at run time",
@@ -404,11 +335,11 @@
   },
   "candidateOrdering": null,
   "catalog": {
-    "retrievedAt": "Mon, 26 Oct 2026 11:09:41 GMT",
+    "retrievedAt": "Tue, 27 Oct 2026 11:24:22 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "openrouter/thinkingmachines/inkling:free",
-  "generatedAt": "2026-10-26T11:09:44Z",
+  "generatedAt": "2026-10-27T11:24:26Z",
   "models": [
     {
       "completedAt": "2026-10-21T06:35:57.639882+00:00",
