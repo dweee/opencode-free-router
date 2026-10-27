@@ -13,6 +13,12 @@
       "retryAfter": "2026-10-27T07:56:38Z",
       "runId": "40285242484",
       "status": "deferred"
+    },
+    {
+      "at": "2026-10-27T02:44:23Z",
+      "id": "opencode/minimax-m3.1-flash-free",
+      "runId": "40440109752",
+      "status": "runner-failed"
     }
   ],
   "availableModels": [
@@ -606,11 +612,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Mon, 26 Oct 2026 07:21:17 GMT",
+    "retrievedAt": "Tue, 27 Oct 2026 02:44:02 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": null,
-  "generatedAt": "2026-10-26T07:21:17Z",
+  "generatedAt": "2026-10-27T02:44:02Z",
   "models": [],
   "nextCandidate": null,
   "provider": "opencode",
