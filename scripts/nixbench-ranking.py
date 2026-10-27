@@ -77,6 +77,9 @@ def discover(data: dict[str, Any], provider_id: str = "openrouter") -> list[dict
     for key, model in (provider.get("models") or {}).items():
         if not isinstance(model, dict) or not zero_cost(model.get("cost")):
             continue
+        # models.dev keeps retired models listed; the provider rejects them as unavailable.
+        if model.get("status") == "deprecated":
+            continue
         modalities = model.get("modalities") or {}
         if model.get("tool_call") is not True or "text" not in (modalities.get("input") or []):
             continue

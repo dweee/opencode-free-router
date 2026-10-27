@@ -103,6 +103,40 @@ print(json.dumps([item["id"] for item in mod.discover(catalog)]))
   assert.deepEqual(JSON.parse(run.stdout), ["openrouter/recursive/flint-v1.0:free"])
 })
 
+test("deprecated catalog models are not screening candidates", () => {
+  const run = spawnSync(
+    "python3",
+    [
+      "-c",
+      `
+import importlib.util, json, sys
+spec = importlib.util.spec_from_file_location("ranking", sys.argv[1])
+mod = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+def row(model_id, **extra):
+    return {
+        "id": model_id,
+        "cost": {"input": 0, "output": 0},
+        "modalities": {"input": ["text"]},
+        "tool_call": True,
+        "limit": {"context": 128000},
+        "release_date": "2026-01-01",
+        **extra,
+    }
+catalog = {"opencode": {"models": {
+    "old": row("old-free", status="deprecated"),
+    "live": row("live-free"),
+}}}
+print(json.dumps([item["id"] for item in mod.discover(catalog, "opencode")]))
+`,
+      RANKING,
+    ],
+    { encoding: "utf8" },
+  )
+  assert.equal(run.status, 0, run.stderr)
+  assert.deepEqual(JSON.parse(run.stdout), ["opencode/live-free"])
+})
+
 test("the queue keeps a higher screening score ahead of a newer release", () => {
   const run = spawnSync(
     "python3",
