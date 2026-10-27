@@ -32,6 +32,9 @@ jobs:
       - uses: cachix/install-nix-action@3c6342b75005b9cc7c7d4069c3e9179247c89012
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          # Agents reach this daemon through the sandbox socket. A trusted
+          # user can disable the build sandbox and import unsigned paths.
+          set_as_trusted_user: false
       - uses: actions/checkout@v7
         with:
           repository: maximilianpw/nixbench
@@ -101,6 +104,9 @@ jobs:
           OPENCODE_CONFIG_DIR: ${{ runner.temp }}/opencode-config
           OPENCODE_HOME: ${{ runner.temp }}/opencode-home
           NIXBENCH_WORKSPACE: ${{ github.workspace }}
+          # Store writes go through the daemon as an untrusted client; the
+          # store itself stays read-only inside the sandbox.
+          NIXBENCH_NIX_DAEMON: "1"
         run: |
           if [ -z "$OPENCODE_API_KEY" ]; then
             echo "No OPENCODE_API_KEY Actions secret; catalog refreshed, benchmark deferred." >> "$GITHUB_STEP_SUMMARY"

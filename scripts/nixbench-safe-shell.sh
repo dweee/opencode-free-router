@@ -54,6 +54,8 @@ if [ ! -x /bin/bash ]; then
 fi
 if [ "${NIXBENCH_NIX_DAEMON:-}" = "1" ] && [ -S /nix/var/nix/daemon-socket/socket ]; then
   args+=(--bind /nix/var/nix/daemon-socket /nix/var/nix/daemon-socket)
+  if [ -d /etc/nix ]; then args+=(--ro-bind /etc/nix /etc/nix); fi
+  nix_remote=daemon
 fi
 
 args+=(
@@ -65,6 +67,7 @@ args+=(
   --setenv NIXBENCH_WORKDIR "$NIXBENCH_WORKDIR"
   --setenv NIXBENCH_PROMPT "$NIXBENCH_WORKDIR/NIXBENCH_PROMPT.md"
 )
+if [ -n "${nix_remote:-}" ]; then args+=(--setenv NIX_REMOTE "$nix_remote"); fi
 if [ -n "${NIX_PATH:-}" ]; then args+=(--setenv NIX_PATH "$NIX_PATH"); fi
 args+=(--chdir "$NIXBENCH_WORKDIR" -- "$inner_shell" "$@")
 exec "$bwrap_bin" "${args[@]}"
