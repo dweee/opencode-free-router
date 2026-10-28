@@ -74,11 +74,11 @@
   },
   "candidateOrdering": null,
   "catalog": {
-    "retrievedAt": "Wed, 28 Oct 2026 06:59:06 GMT",
+    "retrievedAt": "Wed, 28 Oct 2026 11:40:30 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode-go/deepseek-v4.1-flash",
-  "generatedAt": "2026-10-28T06:59:06Z",
+  "generatedAt": "2026-10-28T11:40:31Z",
   "models": [
     {
       "completedAt": "2026-10-28T08:05:13.654789+00:00",
@@ -126,6 +126,31 @@
       "runId": null,
       "score": 1650.0,
       "scoreRate": 0.916667,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
+    {
+      "completedAt": "2026-10-28T15:10:48.729125+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode-go",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode-go/mimo-v2.6-flash",
+      "maxScore": 1800.0,
+      "passedTasks": 7,
+      "runId": "20261028T114055Z-5c4b1f84",
+      "score": 1195.0,
+      "scoreRate": 0.663889,
       "status": "screening-only",
       "taskCount": 18,
       "trials": 1

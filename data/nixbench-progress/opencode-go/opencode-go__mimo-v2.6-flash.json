@@ -1,0 +1,1698 @@
+{
+  "model": "opencode-go/mimo-v2.6-flash",
+  "nixbenchRevision": "290eb8c18d4a0833fcc3746662ff08766102232c",
+  "schemaVersion": 1,
+  "taskCount": 18,
+  "tasks": {
+    "devshell-tooling-contract": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 124.25,
+          "log_path": "results/20261028T114055Z-5c4b1f84/devshell-tooling-contract/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "devshells",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/devshell-tooling-contract/tests/check.sh /tmp/nixbench-isolated-l0qgtziz/work",
+          "duration_seconds": 0.265,
+          "log_path": "results/20261028T114055Z-5c4b1f84/devshell-tooling-contract/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T11:42:59.582122+00:00",
+        "criteria": {
+          "experimental-features": true,
+          "formatter-contract": true,
+          "required-tools": true,
+          "shell-construction": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/devshell-tooling-contract/diff.patch",
+        "difficulty": "easy",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Development Shell Tooling Contract",
+        "passed": true,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/devshell-tooling-contract",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "experimental-features": true,
+            "formatter-contract": true,
+            "required-tools": true,
+            "shell-construction": true
+          },
+          "criterion_failure_classes": {
+            "experimental-features": "wrong-value",
+            "formatter-contract": "wrong-value",
+            "required-tools": "wrong-value",
+            "shell-construction": "evaluation"
+          },
+          "criterion_points": {
+            "experimental-features": 25.0,
+            "formatter-contract": 25.0,
+            "required-tools": 25.0,
+            "shell-construction": 25.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "shell-construction",
+            "required-tools",
+            "formatter-contract",
+            "experimental-features"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "devshell-tooling-contract",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "b7e5c46509eb16a4d922f547f6d5268fe462d1a8cdca0fc985aa04b84f70b072"
+    },
+    "dovecot-structured-settings-versions": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 900.002,
+          "log_path": "results/20261028T114055Z-5c4b1f84/dovecot-structured-settings-versions/agent.log",
+          "returncode": 124,
+          "timed_out": true
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/dovecot-structured-settings-versions/tests/check.sh /tmp/nixbench-isolated-kir2ryg1/work",
+          "duration_seconds": 11.105,
+          "log_path": "results/20261028T114055Z-5c4b1f84/dovecot-structured-settings-versions/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T11:58:10.696406+00:00",
+        "criteria": {
+          "format-versions": false,
+          "hosts-evaluate": false,
+          "mail-storage-preserved": false,
+          "protocols-and-auth": false,
+          "tls-paths": false
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/dovecot-structured-settings-versions/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "evaluation",
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Migrate Two Mail Hosts On Different Dovecot Releases To Structured Settings",
+        "passed": false,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/dovecot-structured-settings-versions",
+        "score": 0,
+        "score_detail": {
+          "criteria": {
+            "format-versions": false,
+            "hosts-evaluate": false,
+            "mail-storage-preserved": false,
+            "protocols-and-auth": false,
+            "tls-paths": false
+          },
+          "criterion_failure_classes": {
+            "format-versions": "wrong-value",
+            "hosts-evaluate": "evaluation",
+            "mail-storage-preserved": "wrong-value",
+            "protocols-and-auth": "wrong-value",
+            "tls-paths": "wrong-value"
+          },
+          "criterion_points": {
+            "format-versions": 20.0,
+            "hosts-evaluate": 15.0,
+            "mail-storage-preserved": 25.0,
+            "protocols-and-auth": 20.0,
+            "tls-paths": 20.0
+          },
+          "failed_criteria": [
+            "hosts-evaluate",
+            "format-versions",
+            "tls-paths",
+            "protocols-and-auth",
+            "mail-storage-preserved"
+          ],
+          "failure_classes": [
+            "evaluation",
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "hosts-evaluate failed: Set 'services.dovecot2.settings.protocols.pop3 = true/false;' instead.",
+            "format-versions failed: Set 'services.dovecot2.settings.protocols.pop3 = true/false;' instead.",
+            "tls-paths failed: archive: ssl_cert is None",
+            "protocols-and-auth failed: archive: enabled protocols []",
+            "mail-storage-preserved failed: archive: mail_location is None"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "format-versions",
+            "tls-paths",
+            "protocols-and-auth",
+            "mail-storage-preserved"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "dovecot-structured-settings-versions",
+        "task_outcome": "agent-timeout",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "13f5b0560afe370db462a571a1ea54b1bea41b96d7e316443950e24e96b8d2ab"
+    },
+    "esphome-persistence-wrong-state-path": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 900.003,
+          "log_path": "results/20261028T114055Z-5c4b1f84/esphome-persistence-wrong-state-path/agent.log",
+          "returncode": 124,
+          "timed_out": true
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/esphome-persistence-wrong-state-path/tests/check.sh /tmp/nixbench-isolated-hkgp40t3/work",
+          "duration_seconds": 66.009,
+          "log_path": "results/20261028T114055Z-5c4b1f84/esphome-persistence-wrong-state-path/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T12:14:16.722085+00:00",
+        "criteria": {
+          "hosts-evaluate": true,
+          "other-persistence-unchanged": true,
+          "sandbox-paths-kept": true,
+          "state-ownership": false,
+          "state-persisted": false,
+          "static-service-user": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/esphome-persistence-wrong-state-path/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "ESPHome Forgets Its Devices On Every Reboot",
+        "passed": false,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/esphome-persistence-wrong-state-path",
+        "score": 65.0,
+        "score_detail": {
+          "criteria": {
+            "hosts-evaluate": true,
+            "other-persistence-unchanged": true,
+            "sandbox-paths-kept": true,
+            "state-ownership": false,
+            "state-persisted": false,
+            "static-service-user": true
+          },
+          "criterion_failure_classes": {
+            "hosts-evaluate": "evaluation",
+            "other-persistence-unchanged": "wrong-value",
+            "sandbox-paths-kept": "wrong-value",
+            "state-ownership": "wrong-value",
+            "state-persisted": "wrong-value",
+            "static-service-user": "wrong-value"
+          },
+          "criterion_points": {
+            "hosts-evaluate": 15.0,
+            "other-persistence-unchanged": 15.0,
+            "sandbox-paths-kept": 20.0,
+            "state-ownership": 15.0,
+            "state-persisted": 20.0,
+            "static-service-user": 15.0
+          },
+          "failed_criteria": [
+            "state-persisted",
+            "state-ownership"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "state-persisted: probe evaluated to false",
+            "state-ownership: probe evaluated to false"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "static-service-user",
+            "state-persisted",
+            "state-ownership",
+            "sandbox-paths-kept",
+            "other-persistence-unchanged"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "esphome-persistence-wrong-state-path",
+        "task_outcome": "agent-timeout",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "b4d6916da693d5a707db44f6514112ff20bdaabdfd78a9810c3a02d51999f566"
+    },
+    "fleet-shared-profile-conflict": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 840.065,
+          "log_path": "results/20261028T114055Z-5c4b1f84/fleet-shared-profile-conflict/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/fleet-shared-profile-conflict/tests/check.sh /tmp/nixbench-isolated-7quecfxu/work",
+          "duration_seconds": 13.159,
+          "log_path": "results/20261028T114055Z-5c4b1f84/fleet-shared-profile-conflict/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T12:28:29.964163+00:00",
+        "criteria": {
+          "baseline-kept": true,
+          "follows-transport": true,
+          "hosts-evaluate": true,
+          "profile-unchanged-elsewhere": true,
+          "sendmail-unit": false
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/fleet-shared-profile-conflict/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Shared Hardening Profile Versus A Sendmail Gitea",
+        "passed": false,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/fleet-shared-profile-conflict",
+        "score": 80.0,
+        "score_detail": {
+          "criteria": {
+            "baseline-kept": true,
+            "follows-transport": true,
+            "hosts-evaluate": true,
+            "profile-unchanged-elsewhere": true,
+            "sendmail-unit": false
+          },
+          "criterion_failure_classes": {
+            "baseline-kept": "wrong-value",
+            "follows-transport": "overfit",
+            "hosts-evaluate": "evaluation",
+            "profile-unchanged-elsewhere": "wrong-value",
+            "sendmail-unit": "wrong-value"
+          },
+          "criterion_points": {
+            "baseline-kept": 20.0,
+            "follows-transport": 20.0,
+            "hosts-evaluate": 20.0,
+            "profile-unchanged-elsewhere": 20.0,
+            "sendmail-unit": 20.0
+          },
+          "failed_criteria": [
+            "sendmail-unit"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "sendmail-unit did not hold"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "sendmail-unit",
+            "baseline-kept",
+            "profile-unchanged-elsewhere",
+            "follows-transport"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "fleet-shared-profile-conflict",
+        "task_outcome": "fail",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "d673826aaf2a35d8a0212961229c923c877527c781cd09c92d652171f677f227"
+    },
+    "hardened-profile-import-no-op": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 900.004,
+          "log_path": "results/20261028T114055Z-5c4b1f84/hardened-profile-import-no-op/agent.log",
+          "returncode": 124,
+          "timed_out": true
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/hardened-profile-import-no-op/tests/check.sh /tmp/nixbench-isolated-iqu3balf/work",
+          "duration_seconds": 19.468,
+          "log_path": "results/20261028T114055Z-5c4b1f84/hardened-profile-import-no-op/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T12:43:49.453802+00:00",
+        "criteria": {
+          "firewall-scoped": false,
+          "hosts-evaluate": true,
+          "kernel-hardening": false,
+          "network-hardening": false,
+          "userns-policy": false
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/hardened-profile-import-no-op/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Restore A Fleet Security Baseline That Silently Disappeared",
+        "passed": false,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/hardened-profile-import-no-op",
+        "score": 10.0,
+        "score_detail": {
+          "criteria": {
+            "firewall-scoped": false,
+            "hosts-evaluate": true,
+            "kernel-hardening": false,
+            "network-hardening": false,
+            "userns-policy": false
+          },
+          "criterion_failure_classes": {
+            "firewall-scoped": "wrong-value",
+            "hosts-evaluate": "evaluation",
+            "kernel-hardening": "wrong-value",
+            "network-hardening": "wrong-value",
+            "userns-policy": "wrong-value"
+          },
+          "criterion_points": {
+            "firewall-scoped": 25.0,
+            "hosts-evaluate": 10.0,
+            "kernel-hardening": 25.0,
+            "network-hardening": 20.0,
+            "userns-policy": 20.0
+          },
+          "failed_criteria": [
+            "kernel-hardening",
+            "network-hardening",
+            "userns-policy",
+            "firewall-scoped"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "kernel-hardening: probe evaluated to false",
+            "network-hardening: probe evaluated to false",
+            "userns-policy: probe evaluated to false",
+            "firewall-scoped: probe evaluated to false"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "kernel-hardening",
+            "network-hardening",
+            "userns-policy",
+            "firewall-scoped"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "hardened-profile-import-no-op",
+        "task_outcome": "agent-timeout",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "4fd68e57ea3c7d7274564bb9f0702e058da65173a57927f23adf84e38bc9be5c"
+    },
+    "initrd-hook-systemd-stage1-migration": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 900.004,
+          "log_path": "results/20261028T114055Z-5c4b1f84/initrd-hook-systemd-stage1-migration/agent.log",
+          "returncode": 124,
+          "timed_out": true
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/initrd-hook-systemd-stage1-migration/tests/check.sh /tmp/nixbench-isolated-rhycp5xx/work",
+          "duration_seconds": 16.416,
+          "log_path": "results/20261028T114055Z-5c4b1f84/initrd-hook-systemd-stage1-migration/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T12:59:05.888481+00:00",
+        "criteria": {
+          "hook-ordering": false,
+          "hook-runs-in-initrd": false,
+          "hosts-evaluate": false,
+          "root-on-mapper": false,
+          "stage2-and-edge-preserved": true,
+          "systemd-stage1-kept": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/initrd-hook-systemd-stage1-migration/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "evaluation",
+          "wrong-value",
+          "unavailable-helper"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Move A Stage-1 Storage Hook To The Systemd Initrd",
+        "passed": false,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/initrd-hook-systemd-stage1-migration",
+        "score": 30.0,
+        "score_detail": {
+          "criteria": {
+            "hook-ordering": false,
+            "hook-runs-in-initrd": false,
+            "hosts-evaluate": false,
+            "root-on-mapper": false,
+            "stage2-and-edge-preserved": true,
+            "systemd-stage1-kept": true
+          },
+          "criterion_failure_classes": {
+            "hook-ordering": "wrong-value",
+            "hook-runs-in-initrd": "unavailable-helper",
+            "hosts-evaluate": "evaluation",
+            "root-on-mapper": "wrong-value",
+            "stage2-and-edge-preserved": "wrong-value",
+            "systemd-stage1-kept": "wrong-value"
+          },
+          "criterion_points": {
+            "hook-ordering": 25.0,
+            "hook-runs-in-initrd": 15.0,
+            "hosts-evaluate": 20.0,
+            "root-on-mapper": 10.0,
+            "stage2-and-edge-preserved": 15.0,
+            "systemd-stage1-kept": 15.0
+          },
+          "failed_criteria": [
+            "hosts-evaluate",
+            "hook-ordering",
+            "hook-runs-in-initrd",
+            "root-on-mapper"
+          ],
+          "failure_classes": [
+            "evaluation",
+            "wrong-value",
+            "unavailable-helper"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "hosts-evaluate: probe evaluated to false",
+            "hook-ordering: probe evaluated to false",
+            "hook-runs-in-initrd: probe evaluated to false",
+            "root-on-mapper: probe evaluated to false"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "systemd-stage1-kept",
+            "hook-ordering",
+            "hook-runs-in-initrd",
+            "root-on-mapper",
+            "stage2-and-edge-preserved"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "initrd-hook-systemd-stage1-migration",
+        "task_outcome": "agent-timeout",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "e9d3d6a8088df01b45e9b6888946a53276fedbbc0b6c89b395f894014ca868e4"
+    },
+    "lazy-type-error-boundary": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 177.803,
+          "log_path": "results/20261028T114055Z-5c4b1f84/lazy-type-error-boundary/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "nix-language",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/lazy-type-error-boundary/tests/check.sh /tmp/nixbench-isolated-o615nfd6/work",
+          "duration_seconds": 0.216,
+          "log_path": "results/20261028T114055Z-5c4b1f84/lazy-type-error-boundary/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T13:02:03.919536+00:00",
+        "criteria": {
+          "disabled-records-unforced": true,
+          "missing-fields-rejected": true,
+          "thrown-values-rejected": true,
+          "type-mismatch-rejected": true,
+          "valid-records-computed": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/lazy-type-error-boundary/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Reject Malformed Records Without Aborting The Batch",
+        "passed": true,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/lazy-type-error-boundary",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "disabled-records-unforced": true,
+            "missing-fields-rejected": true,
+            "thrown-values-rejected": true,
+            "type-mismatch-rejected": true,
+            "valid-records-computed": true
+          },
+          "criterion_failure_classes": {
+            "disabled-records-unforced": "evaluation",
+            "missing-fields-rejected": "missing-attr",
+            "thrown-values-rejected": "evaluation",
+            "type-mismatch-rejected": "evaluation",
+            "valid-records-computed": "wrong-value"
+          },
+          "criterion_points": {
+            "disabled-records-unforced": 20.0,
+            "missing-fields-rejected": 15.0,
+            "thrown-values-rejected": 20.0,
+            "type-mismatch-rejected": 25.0,
+            "valid-records-computed": 20.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "valid-records-computed",
+            "type-mismatch-rejected",
+            "missing-fields-rejected",
+            "thrown-values-rejected",
+            "disabled-records-unforced"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "lazy-type-error-boundary",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "e2127bcae20c5c8db213f9629e0611c32989d8a2ee41d34bd7c2d3ceb0d70689"
+    },
+    "module-generated-jobs-fixed-point": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 566.794,
+          "log_path": "results/20261028T114055Z-5c4b1f84/module-generated-jobs-fixed-point/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/module-generated-jobs-fixed-point/tests/check.sh /tmp/nixbench-isolated-thyb5kqe/work",
+          "duration_seconds": 0.315,
+          "log_path": "results/20261028T114055Z-5c4b1f84/module-generated-jobs-fixed-point/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T13:11:31.032529+00:00",
+        "criteria": {
+          "coexists-with-other-modules": true,
+          "disabled-jobs": true,
+          "option-jobs-evaluate": true,
+          "unit-fields": true,
+          "unit-names": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/module-generated-jobs-fixed-point/diff.patch",
+        "difficulty": "medium",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Generate Units From A Module-Defined Job List",
+        "passed": true,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/module-generated-jobs-fixed-point",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "coexists-with-other-modules": true,
+            "disabled-jobs": true,
+            "option-jobs-evaluate": true,
+            "unit-fields": true,
+            "unit-names": true
+          },
+          "criterion_failure_classes": {
+            "coexists-with-other-modules": "wrong-value",
+            "disabled-jobs": "wrong-value",
+            "option-jobs-evaluate": "evaluation",
+            "unit-fields": "wrong-value",
+            "unit-names": "wrong-value"
+          },
+          "criterion_points": {
+            "coexists-with-other-modules": 20.0,
+            "disabled-jobs": 15.0,
+            "option-jobs-evaluate": 25.0,
+            "unit-fields": 20.0,
+            "unit-names": 20.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "option-jobs-evaluate",
+            "unit-names",
+            "unit-fields",
+            "disabled-jobs",
+            "coexists-with-other-modules"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "module-generated-jobs-fixed-point",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "f52b4eff6441b8a599c720d1873e7b559aa14c7e8c6f36375425d8e761c1de1c"
+    },
+    "overlay-finalattrs-reoverride": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 900.012,
+          "log_path": "results/20261028T114055Z-5c4b1f84/overlay-finalattrs-reoverride/agent.log",
+          "returncode": 124,
+          "timed_out": true
+        },
+        "agent_status": null,
+        "category": "overlays",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/overlay-finalattrs-reoverride/tests/check.sh /tmp/nixbench-isolated-2cunu0es/work",
+          "duration_seconds": 0.318,
+          "log_path": "results/20261028T114055Z-5c4b1f84/overlay-finalattrs-reoverride/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T13:26:31.368424+00:00",
+        "criteria": {
+          "consumers-isolated": true,
+          "dependency-reoverride": true,
+          "passthru-preserved": true,
+          "vendor-overlay-result": true,
+          "version-reoverride": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/overlay-finalattrs-reoverride/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Keep A Package Report Correct Across Repeated Overrides",
+        "passed": false,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/overlay-finalattrs-reoverride",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "consumers-isolated": true,
+            "dependency-reoverride": true,
+            "passthru-preserved": true,
+            "vendor-overlay-result": true,
+            "version-reoverride": true
+          },
+          "criterion_failure_classes": {
+            "consumers-isolated": "wrong-value",
+            "dependency-reoverride": "wrong-value",
+            "passthru-preserved": "missing-attr",
+            "vendor-overlay-result": "wrong-value",
+            "version-reoverride": "wrong-value"
+          },
+          "criterion_points": {
+            "consumers-isolated": 20.0,
+            "dependency-reoverride": 20.0,
+            "passthru-preserved": 20.0,
+            "vendor-overlay-result": 20.0,
+            "version-reoverride": 20.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "vendor-overlay-result",
+            "version-reoverride",
+            "dependency-reoverride",
+            "passthru-preserved",
+            "consumers-isolated"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "overlay-finalattrs-reoverride",
+        "task_outcome": "agent-timeout",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "cb9f4fe16dbec4c3d5bbe12edab86036be3167e649b0206d9ee63fc6ca85be31"
+    },
+    "python-package-set-override-fleet": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 900.005,
+          "log_path": "results/20261028T114055Z-5c4b1f84/python-package-set-override-fleet/agent.log",
+          "returncode": 124,
+          "timed_out": true
+        },
+        "agent_status": null,
+        "category": "overlays",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/python-package-set-override-fleet/tests/check.sh /tmp/nixbench-isolated-sc6z7596/work",
+          "duration_seconds": 11.745,
+          "log_path": "results/20261028T114055Z-5c4b1f84/python-package-set-override-fleet/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T13:41:43.138023+00:00",
+        "criteria": {
+          "app-interfaces-unchanged": true,
+          "apps-instantiate": false,
+          "click-pin-resolves-once": false,
+          "edge-compression-dependency": false,
+          "host-overlay-repin-wins": false,
+          "msgpack-pin-resolves-once": false
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/python-package-set-override-fleet/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "evaluation",
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Compose Python Library Pins Across Team And Host Overlays",
+        "passed": false,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/python-package-set-override-fleet",
+        "score": 20.0,
+        "score_detail": {
+          "criteria": {
+            "app-interfaces-unchanged": true,
+            "apps-instantiate": false,
+            "click-pin-resolves-once": false,
+            "edge-compression-dependency": false,
+            "host-overlay-repin-wins": false,
+            "msgpack-pin-resolves-once": false
+          },
+          "criterion_failure_classes": {
+            "app-interfaces-unchanged": "overfit",
+            "apps-instantiate": "evaluation",
+            "click-pin-resolves-once": "wrong-value",
+            "edge-compression-dependency": "wrong-value",
+            "host-overlay-repin-wins": "wrong-value",
+            "msgpack-pin-resolves-once": "wrong-value"
+          },
+          "criterion_points": {
+            "app-interfaces-unchanged": 20.0,
+            "apps-instantiate": 15.0,
+            "click-pin-resolves-once": 20.0,
+            "edge-compression-dependency": 15.0,
+            "host-overlay-repin-wins": 15.0,
+            "msgpack-pin-resolves-once": 15.0
+          },
+          "failed_criteria": [
+            "apps-instantiate",
+            "click-pin-resolves-once",
+            "msgpack-pin-resolves-once",
+            "edge-compression-dependency",
+            "host-overlay-repin-wins"
+          ],
+          "failure_classes": [
+            "evaluation",
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "apps-instantiate probe did not evaluate to true",
+            "click-pin-resolves-once probe did not evaluate to true",
+            "msgpack-pin-resolves-once probe did not evaluate to true",
+            "edge-compression-dependency probe did not evaluate to true",
+            "host-overlay-repin-wins probe did not evaluate to true"
+          ],
+          "required_criteria": [
+            "apps-instantiate",
+            "click-pin-resolves-once",
+            "msgpack-pin-resolves-once",
+            "edge-compression-dependency",
+            "host-overlay-repin-wins",
+            "app-interfaces-unchanged"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "python-package-set-override-fleet",
+        "task_outcome": "agent-timeout",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "66fcff6831f28068d2fafe6a4f45e3fa1938b3e469a926eb6005a43077a27504"
+    },
+    "rust-no-network-build": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 74.769,
+          "log_path": "results/20261028T114055Z-5c4b1f84/rust-no-network-build/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "packages",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/rust-no-network-build/tests/check.sh /tmp/nixbench-isolated-q104o_nh/work",
+          "duration_seconds": 0.215,
+          "log_path": "results/20261028T114055Z-5c4b1f84/rust-no-network-build/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T13:42:58.135898+00:00",
+        "criteria": {
+          "no-network-escape": true,
+          "package-source": true,
+          "pinned-model": false,
+          "system-onnxruntime": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/rust-no-network-build/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "impurity"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Keep Rust Builds Offline",
+        "passed": false,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/rust-no-network-build",
+        "score": 75.0,
+        "score_detail": {
+          "criteria": {
+            "no-network-escape": true,
+            "package-source": true,
+            "pinned-model": false,
+            "system-onnxruntime": true
+          },
+          "criterion_failure_classes": {
+            "no-network-escape": "impurity",
+            "package-source": "wrong-value",
+            "pinned-model": "impurity",
+            "system-onnxruntime": "impurity"
+          },
+          "criterion_points": {
+            "no-network-escape": 25.0,
+            "package-source": 25.0,
+            "pinned-model": 25.0,
+            "system-onnxruntime": 25.0
+          },
+          "failed_criteria": [
+            "pinned-model"
+          ],
+          "failure_classes": [
+            "impurity"
+          ],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "package-source",
+            "system-onnxruntime",
+            "pinned-model",
+            "no-network-escape"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "rust-no-network-build",
+        "task_outcome": "fail",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "5b9bf77198ef1685f0e407b9648964c2782a2b1a724d77e747c0fcd892a7a3b0"
+    },
+    "service-requires-removed-network-setup": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 659.439,
+          "log_path": "results/20261028T114055Z-5c4b1f84/service-requires-removed-network-setup/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/service-requires-removed-network-setup/tests/check.sh /tmp/nixbench-isolated-jq0c7n8l/work",
+          "duration_seconds": 36.962,
+          "log_path": "results/20261028T114055Z-5c4b1f84/service-requires-removed-network-setup/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T13:54:34.543950+00:00",
+        "criteria": {
+          "hosts-evaluate": true,
+          "relay-ordered-after-address": true,
+          "relay-requires-address": true,
+          "sibling-ssh-unchanged": true,
+          "vendor-link-intact": true,
+          "vendor-password-login": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/service-requires-removed-network-setup/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Vendor Relay Never Starts After The nixpkgs Update",
+        "passed": true,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/service-requires-removed-network-setup",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "hosts-evaluate": true,
+            "relay-ordered-after-address": true,
+            "relay-requires-address": true,
+            "sibling-ssh-unchanged": true,
+            "vendor-link-intact": true,
+            "vendor-password-login": true
+          },
+          "criterion_failure_classes": {
+            "hosts-evaluate": "evaluation",
+            "relay-ordered-after-address": "wrong-value",
+            "relay-requires-address": "wrong-value",
+            "sibling-ssh-unchanged": "wrong-value",
+            "vendor-link-intact": "wrong-value",
+            "vendor-password-login": "wrong-value"
+          },
+          "criterion_points": {
+            "hosts-evaluate": 15.0,
+            "relay-ordered-after-address": 20.0,
+            "relay-requires-address": 20.0,
+            "sibling-ssh-unchanged": 15.0,
+            "vendor-link-intact": 15.0,
+            "vendor-password-login": 15.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "hosts-evaluate",
+            "relay-requires-address",
+            "relay-ordered-after-address",
+            "vendor-link-intact",
+            "vendor-password-login",
+            "sibling-ssh-unchanged"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "service-requires-removed-network-setup",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "da225fd8706102e48518c266c21868c4f3a01dd0da96fc68bb26660bdb59165b"
+    },
+    "stalwart-state-version-migration": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 563.271,
+          "log_path": "results/20261028T114055Z-5c4b1f84/stalwart-state-version-migration/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/stalwart-state-version-migration/tests/check.sh /tmp/nixbench-isolated-mhryq_md/work",
+          "duration_seconds": 21.072,
+          "log_path": "results/20261028T114055Z-5c4b1f84/stalwart-state-version-migration/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T14:04:18.898764+00:00",
+        "criteria": {
+          "fresh-host-defaults": true,
+          "hosts-evaluate": true,
+          "legacy-store-preserved": true,
+          "listeners-unchanged": true,
+          "secrets-and-backup-follow": true,
+          "unit-overrides-applied": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/stalwart-state-version-migration/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Bring Two Stalwart Hosts Through The Module State Change",
+        "passed": true,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/stalwart-state-version-migration",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "fresh-host-defaults": true,
+            "hosts-evaluate": true,
+            "legacy-store-preserved": true,
+            "listeners-unchanged": true,
+            "secrets-and-backup-follow": true,
+            "unit-overrides-applied": true
+          },
+          "criterion_failure_classes": {
+            "fresh-host-defaults": "wrong-value",
+            "hosts-evaluate": "evaluation",
+            "legacy-store-preserved": "wrong-value",
+            "listeners-unchanged": "wrong-value",
+            "secrets-and-backup-follow": "wrong-value",
+            "unit-overrides-applied": "wrong-value"
+          },
+          "criterion_points": {
+            "fresh-host-defaults": 20.0,
+            "hosts-evaluate": 15.0,
+            "legacy-store-preserved": 25.0,
+            "listeners-unchanged": 10.0,
+            "secrets-and-backup-follow": 15.0,
+            "unit-overrides-applied": 15.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "hosts-evaluate",
+            "legacy-store-preserved",
+            "fresh-host-defaults",
+            "unit-overrides-applied",
+            "secrets-and-backup-follow",
+            "listeners-unchanged"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "stalwart-state-version-migration",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "398d97010ba09865c0f0fb520e23a0d971fb82810b2c79aa28598fa88c16f7f4"
+    },
+    "stdenv-cross-and-host-tools": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 900.003,
+          "log_path": "results/20261028T114055Z-5c4b1f84/stdenv-cross-and-host-tools/agent.log",
+          "returncode": 124,
+          "timed_out": true
+        },
+        "agent_status": null,
+        "category": "packages",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/stdenv-cross-and-host-tools/tests/check.sh /tmp/nixbench-isolated-vrrxw0hu/work",
+          "duration_seconds": 9.917,
+          "log_path": "results/20261028T114055Z-5c4b1f84/stdenv-cross-and-host-tools/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T14:19:28.834341+00:00",
+        "criteria": {
+          "generator-build-compiler": false,
+          "instantiates": true,
+          "man-page-from-scdoc": false,
+          "pkg-config-and-libraries": false,
+          "wrapper-host-zstd": false
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/stdenv-cross-and-host-tools/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Cross-Compile A C CLI With Build-Time Tools",
+        "passed": false,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/stdenv-cross-and-host-tools",
+        "score": 15.0,
+        "score_detail": {
+          "criteria": {
+            "generator-build-compiler": false,
+            "instantiates": true,
+            "man-page-from-scdoc": false,
+            "pkg-config-and-libraries": false,
+            "wrapper-host-zstd": false
+          },
+          "criterion_failure_classes": {
+            "generator-build-compiler": "wrong-value",
+            "instantiates": "evaluation",
+            "man-page-from-scdoc": "wrong-value",
+            "pkg-config-and-libraries": "wrong-value",
+            "wrapper-host-zstd": "wrong-value"
+          },
+          "criterion_points": {
+            "generator-build-compiler": 20.0,
+            "instantiates": 15.0,
+            "man-page-from-scdoc": 25.0,
+            "pkg-config-and-libraries": 20.0,
+            "wrapper-host-zstd": 20.0
+          },
+          "failed_criteria": [
+            "pkg-config-and-libraries",
+            "generator-build-compiler",
+            "man-page-from-scdoc",
+            "wrapper-host-zstd"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "pkg-config-and-libraries probe did not evaluate to true",
+            "generator-build-compiler probe did not evaluate to true",
+            "man-page-from-scdoc probe did not evaluate to true",
+            "wrapper-host-zstd probe did not evaluate to true"
+          ],
+          "required_criteria": [
+            "instantiates",
+            "pkg-config-and-libraries",
+            "generator-build-compiler",
+            "man-page-from-scdoc",
+            "wrapper-host-zstd"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "stdenv-cross-and-host-tools",
+        "task_outcome": "agent-timeout",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "1c3f3b03b2df259fde5435b873474785e1df9fb9fa16843c131e070439ab10c0"
+    },
+    "tor-onion-socket-outside-chroot": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 900.004,
+          "log_path": "results/20261028T114055Z-5c4b1f84/tor-onion-socket-outside-chroot/agent.log",
+          "returncode": 124,
+          "timed_out": true
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/tor-onion-socket-outside-chroot/tests/check.sh /tmp/nixbench-isolated-qwbgi43b/work",
+          "duration_seconds": 23.24,
+          "log_path": "results/20261028T114055Z-5c4b1f84/tor-onion-socket-outside-chroot/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T14:34:52.093557+00:00",
+        "criteria": {
+          "hosts-evaluate": true,
+          "mirror-unchanged": true,
+          "socket-dir-lifecycle": false,
+          "tor-after-backend": false,
+          "tor-binds-socket-dir": false
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/tor-onion-socket-outside-chroot/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Bring A Unix-Socket Onion Service Back After The nixpkgs Update",
+        "passed": false,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/tor-onion-socket-outside-chroot",
+        "score": 30.0,
+        "score_detail": {
+          "criteria": {
+            "hosts-evaluate": true,
+            "mirror-unchanged": true,
+            "socket-dir-lifecycle": false,
+            "tor-after-backend": false,
+            "tor-binds-socket-dir": false
+          },
+          "criterion_failure_classes": {
+            "hosts-evaluate": "evaluation",
+            "mirror-unchanged": "wrong-value",
+            "socket-dir-lifecycle": "wrong-value",
+            "tor-after-backend": "wrong-value",
+            "tor-binds-socket-dir": "wrong-value"
+          },
+          "criterion_points": {
+            "hosts-evaluate": 10.0,
+            "mirror-unchanged": 20.0,
+            "socket-dir-lifecycle": 25.0,
+            "tor-after-backend": 15.0,
+            "tor-binds-socket-dir": 30.0
+          },
+          "failed_criteria": [
+            "tor-binds-socket-dir",
+            "socket-dir-lifecycle",
+            "tor-after-backend"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "tor-binds-socket-dir: probe evaluated to false",
+            "socket-dir-lifecycle: probe evaluated to false",
+            "tor-after-backend: probe evaluated to false"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "tor-binds-socket-dir",
+            "socket-dir-lifecycle",
+            "tor-after-backend",
+            "mirror-unchanged"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "tor-onion-socket-outside-chroot",
+        "task_outcome": "agent-timeout",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "6bdd5259142c65240ca98ef1c8e3064a16b9dd6e126b4a086dcbaccf6e89f060"
+    },
+    "vsftpd-local-login-without-pam": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 900.003,
+          "log_path": "results/20261028T114055Z-5c4b1f84/vsftpd-local-login-without-pam/agent.log",
+          "returncode": 124,
+          "timed_out": true
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/vsftpd-local-login-without-pam/tests/check.sh /tmp/nixbench-isolated-zd2bo00w/work",
+          "duration_seconds": 24.888,
+          "log_path": "results/20261028T114055Z-5c4b1f84/vsftpd-local-login-without-pam/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T14:50:16.998662+00:00",
+        "criteria": {
+          "ftp-pam-policy": false,
+          "hosts-evaluate": true,
+          "mirror-unchanged": true,
+          "system-password-auth": true,
+          "user-restrictions-kept": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/vsftpd-local-login-without-pam/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Scanner FTP Logins Fail After The nixpkgs Update",
+        "passed": false,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/vsftpd-local-login-without-pam",
+        "score": 70.0,
+        "score_detail": {
+          "criteria": {
+            "ftp-pam-policy": false,
+            "hosts-evaluate": true,
+            "mirror-unchanged": true,
+            "system-password-auth": true,
+            "user-restrictions-kept": true
+          },
+          "criterion_failure_classes": {
+            "ftp-pam-policy": "wrong-value",
+            "hosts-evaluate": "evaluation",
+            "mirror-unchanged": "wrong-value",
+            "system-password-auth": "wrong-value",
+            "user-restrictions-kept": "wrong-value"
+          },
+          "criterion_points": {
+            "ftp-pam-policy": 30.0,
+            "hosts-evaluate": 15.0,
+            "mirror-unchanged": 20.0,
+            "system-password-auth": 15.0,
+            "user-restrictions-kept": 20.0
+          },
+          "failed_criteria": [
+            "ftp-pam-policy"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "ftp-pam-policy: probe evaluated to false"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "ftp-pam-policy",
+            "system-password-auth",
+            "user-restrictions-kept",
+            "mirror-unchanged"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "vsftpd-local-login-without-pam",
+        "task_outcome": "agent-timeout",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "597863e96997a55ff1745073fc99291d449f302ee99bf30f21aa39ebacf0ebef"
+    },
+    "wireless-eap-key-unreadable-after-hardening": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 664.629,
+          "log_path": "results/20261028T114055Z-5c4b1f84/wireless-eap-key-unreadable-after-hardening/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/wireless-eap-key-unreadable-after-hardening/tests/check.sh /tmp/nixbench-isolated-ix1vfj5m/work",
+          "duration_seconds": 30.543,
+          "log_path": "results/20261028T114055Z-5c4b1f84/wireless-eap-key-unreadable-after-hardening/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T15:01:52.185893+00:00",
+        "criteria": {
+          "daemon-hardened": true,
+          "eap-config": true,
+          "hosts-evaluate": true,
+          "key-provisioned": true,
+          "psk-host-unchanged": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/wireless-eap-key-unreadable-after-hardening/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Get An EAP-TLS Kiosk Back On Wi-Fi After The nixpkgs Update",
+        "passed": true,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/wireless-eap-key-unreadable-after-hardening",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "daemon-hardened": true,
+            "eap-config": true,
+            "hosts-evaluate": true,
+            "key-provisioned": true,
+            "psk-host-unchanged": true
+          },
+          "criterion_failure_classes": {
+            "daemon-hardened": "wrong-value",
+            "eap-config": "wrong-value",
+            "hosts-evaluate": "evaluation",
+            "key-provisioned": "wrong-value",
+            "psk-host-unchanged": "wrong-value"
+          },
+          "criterion_points": {
+            "daemon-hardened": 20.0,
+            "eap-config": 25.0,
+            "hosts-evaluate": 10.0,
+            "key-provisioned": 25.0,
+            "psk-host-unchanged": 20.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "hosts-evaluate",
+            "eap-config",
+            "key-provisioned",
+            "daemon-hardened",
+            "psk-host-unchanged"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "wireless-eap-key-unreadable-after-hardening",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "f66177f462c6172c32bbb2ea2c1d5bf5da94b7ecbbcb84a4a4b76b33e883ce61"
+    },
+    "yggdrasil-credential-key-owner": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 508.175,
+          "log_path": "results/20261028T114055Z-5c4b1f84/yggdrasil-credential-key-owner/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/yggdrasil-credential-key-owner/tests/check.sh /tmp/nixbench-isolated-_rwvma8e/work",
+          "duration_seconds": 28.346,
+          "log_path": "results/20261028T114055Z-5c4b1f84/yggdrasil-credential-key-owner/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T15:10:48.720573+00:00",
+        "criteria": {
+          "dev-keeps-persistent-keys": true,
+          "edge-evaluates": true,
+          "edge-key-from-runtime-secret": true,
+          "key-never-in-store": true,
+          "mesh-settings-preserved": true
+        },
+        "diff_path": "results/20261028T114055Z-5c4b1f84/yggdrasil-credential-key-owner/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Move A Mesh Node Key Out Of The Store Without Changing Its Identity",
+        "passed": true,
+        "result_dir": "results/20261028T114055Z-5c4b1f84/yggdrasil-credential-key-owner",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "dev-keeps-persistent-keys": true,
+            "edge-evaluates": true,
+            "edge-key-from-runtime-secret": true,
+            "key-never-in-store": true,
+            "mesh-settings-preserved": true
+          },
+          "criterion_failure_classes": {
+            "dev-keeps-persistent-keys": "wrong-value",
+            "edge-evaluates": "evaluation",
+            "edge-key-from-runtime-secret": "wrong-value",
+            "key-never-in-store": "impurity",
+            "mesh-settings-preserved": "wrong-value"
+          },
+          "criterion_points": {
+            "dev-keeps-persistent-keys": 15.0,
+            "edge-evaluates": 15.0,
+            "edge-key-from-runtime-secret": 25.0,
+            "key-never-in-store": 20.0,
+            "mesh-settings-preserved": 25.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "edge-evaluates",
+            "edge-key-from-runtime-secret",
+            "dev-keeps-persistent-keys",
+            "key-never-in-store",
+            "mesh-settings-preserved"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "yggdrasil-credential-key-owner",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T114055Z-5c4b1f84",
+      "taskDigest": "b25332cdcb14378cd7210cd95f8c6c41f159017f565d420bb378374df39b159b"
+    }
+  },
+  "updatedAt": "2026-10-28T15:10:49Z"
+}
