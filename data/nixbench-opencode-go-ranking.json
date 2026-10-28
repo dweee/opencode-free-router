@@ -74,12 +74,37 @@
   },
   "candidateOrdering": null,
   "catalog": {
-    "retrievedAt": "Wed, 28 Oct 2026 06:32:58 GMT",
+    "retrievedAt": "Wed, 28 Oct 2026 06:59:06 GMT",
     "url": "https://models.dev/api.json"
   },
-  "currentModel": "opencode-go/beam-free",
-  "generatedAt": "2026-10-28T06:32:58Z",
+  "currentModel": "opencode-go/deepseek-v4.1-flash",
+  "generatedAt": "2026-10-28T06:59:06Z",
   "models": [
+    {
+      "completedAt": "2026-10-28T08:05:13.654789+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode-go",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode-go/deepseek-v4.1-flash",
+      "maxScore": 1800.0,
+      "passedTasks": 13,
+      "runId": "20261028T065928Z-cfc3867b",
+      "score": 1695.0,
+      "scoreRate": 0.941667,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
     {
       "completedAt": "2026-10-28T06:58:30Z",
       "configuration": {
