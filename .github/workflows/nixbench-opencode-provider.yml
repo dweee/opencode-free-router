@@ -270,7 +270,7 @@ jobs:
             git commit -m "Refresh OpenCode provider catalog and NixBench screening data"
             for attempt in 1 2 3; do
               git fetch origin "$GITHUB_REF_NAME"
-              git rebase FETCH_HEAD
+              git rebase -X theirs FETCH_HEAD
               if git push origin "HEAD:${GITHUB_REF_NAME}"; then
                 exit 0
               fi

@@ -77,12 +77,38 @@
     "retrievedAt": "Wed, 28 Oct 2026 06:32:58 GMT",
     "url": "https://models.dev/api.json"
   },
-  "currentModel": null,
+  "currentModel": "opencode-go/beam-free",
   "generatedAt": "2026-10-28T06:32:58Z",
-  "models": [],
-  "nextCandidate": "opencode-go/beam-free",
+  "models": [
+    {
+      "completedAt": "2026-10-28T06:58:30Z",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode-go",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode-go/beam-free",
+      "maxScore": 1800.0,
+      "passedTasks": 14,
+      "runId": null,
+      "score": 1650.0,
+      "scoreRate": 0.916667,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    }
+  ],
+  "nextCandidate": null,
   "provider": "opencode-go",
-  "rankingNote": "No currently eligible opencode-go model has a recorded NixBench run. Catalog availability is not proof of account access.",
-  "recommendationStatus": "no-benchmarked-free-model",
+  "rankingNote": "Provisional one-run screens only. NixBench 3.2.0 is in calibration; this is not an official leaderboard or a statistically stable recommendation.",
+  "recommendationStatus": "provisional-screening",
   "schemaVersion": 1
 }
