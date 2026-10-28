@@ -1,0 +1,96 @@
+{
+  "attempted": [
+    {
+      "at": "2026-10-28T06:31:30Z",
+      "id": "opencode-go/beam-free",
+      "retryAfter": "2026-10-29T06:31:30Z",
+      "runId": "40640141916",
+      "status": "deferred"
+    }
+  ],
+  "availableModels": [
+    {
+      "availability": "models.dev listing for opencode-go; covered by the OpenCode Go subscription",
+      "catalogCost": {
+        "cache_read": 0,
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-16",
+      "contextTokens": 1048576,
+      "id": "opencode-go/beam-free",
+      "name": "Beam Free",
+      "releaseDate": "2026-10-05"
+    },
+    {
+      "availability": "models.dev listing for opencode-go; covered by the OpenCode Go subscription",
+      "catalogCost": {
+        "cache_read": 0.0028,
+        "input": 0.14,
+        "output": 0.28
+      },
+      "catalogUpdated": "2026-09-22",
+      "contextTokens": 1048576,
+      "id": "opencode-go/mimo-v2.6-flash",
+      "name": "MiMo-V2.6-Flash",
+      "releaseDate": "2026-09-22"
+    },
+    {
+      "availability": "models.dev listing for opencode-go; covered by the OpenCode Go subscription",
+      "catalogCost": {
+        "cache_read": 0.003,
+        "input": 0.15,
+        "output": 0.6
+      },
+      "catalogUpdated": "2026-09-10",
+      "contextTokens": 1000000,
+      "id": "opencode-go/deepseek-v4.1-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "releaseDate": "2026-09-10"
+    },
+    {
+      "availability": "models.dev listing for opencode-go; covered by the OpenCode Go subscription",
+      "catalogCost": {
+        "cache_read": 0.03,
+        "input": 0.15,
+        "output": 0.5
+      },
+      "catalogUpdated": "2026-08-26",
+      "contextTokens": 1000000,
+      "id": "opencode-go/glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "releaseDate": "2026-08-26"
+    }
+  ],
+  "benchmark": {
+    "agent": "OpenCode v2 using the opencode-go provider with read/edit/glob/grep and Bubblewrap shell; shell network disabled, environment cleared, external file access denied",
+    "corpusDigest": "e08d50418427c4e73ea8f45b0ae7fbbf6e4db7d81f48fb0581f1774adf083531",
+    "corpusId": "nixbench-public",
+    "corpusStatus": "calibrating",
+    "corpusVersion": "3.2.0",
+    "excludedTasks": [
+      "boot-hook-marker-survives-reboot",
+      "firewall-nftables-forwarding-silently-dropped",
+      "state-directory-ownership-after-hardening"
+    ],
+    "interpretation": "screening-only",
+    "name": "NixBench",
+    "repository": "https://github.com/maximilianpw/nixbench",
+    "revision": "290eb8c18d4a0833fcc3746662ff08766102232c",
+    "scope": "NixBench public corpus tasks supported by GitHub-hosted runners; KVM-dependent tasks omitted",
+    "taskCount": 18
+  },
+  "candidateOrdering": null,
+  "catalog": {
+    "retrievedAt": "Wed, 28 Oct 2026 05:48:56 GMT",
+    "url": "https://models.dev/api.json"
+  },
+  "currentModel": null,
+  "generatedAt": "2026-10-28T05:48:56Z",
+  "models": [],
+  "nextCandidate": null,
+  "provider": "opencode-go",
+  "rankingNote": "No currently eligible opencode-go model has a recorded NixBench run. Catalog availability is not proof of account access.",
+  "recommendationStatus": "no-benchmarked-free-model",
+  "schemaVersion": 1
+}
