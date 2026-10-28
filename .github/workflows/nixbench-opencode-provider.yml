@@ -222,7 +222,7 @@ jobs:
                               print("Agent diagnostic:", line[-400:])
           PY
             failure_status=runner-failed
-            if grep -R -Eiq 'rate.?limit|quota|free messages|free usage limit|too many requests|HTTP 429|status.?code.?429|free tier.{0,30}limit|usage limit|limit reached' .nixbench-upstream/results; then
+            if grep -R --include=agent.log -Eiq 'Error:.{0,20}(rate.?limit|quota|free messages|free usage limit|too many requests|usage limit|limit reached|429)|HTTP 429|status.?code.?429' .nixbench-upstream/results; then
               failure_status=deferred
               echo "OpenCode provider quota/rate limit interrupted $NIXBENCH_MODEL_ID; finished tasks are saved and it resumes after 24 hours while the queue tries another candidate." >> "$GITHUB_STEP_SUMMARY"
             else
