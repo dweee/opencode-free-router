@@ -1,13 +1,5 @@
 {
-  "attempted": [
-    {
-      "at": "2026-10-28T06:31:30Z",
-      "id": "opencode-go/beam-free",
-      "retryAfter": "2026-10-29T06:31:30Z",
-      "runId": "40640141916",
-      "status": "deferred"
-    }
-  ],
+  "attempted": [],
   "availableModels": [
     {
       "availability": "models.dev listing for opencode-go; covered by the OpenCode Go subscription",
@@ -88,7 +80,7 @@
   "currentModel": null,
   "generatedAt": "2026-10-28T05:48:56Z",
   "models": [],
-  "nextCandidate": null,
+  "nextCandidate": "opencode-go/beam-free",
   "provider": "opencode-go",
   "rankingNote": "No currently eligible opencode-go model has a recorded NixBench run. Catalog availability is not proof of account access.",
   "recommendationStatus": "no-benchmarked-free-model",

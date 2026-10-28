@@ -23,7 +23,13 @@ opencode_bin=${OPENCODE_BIN:-opencode}
 # non-zero agent exit as an invalid measurement and stops the corpus, so retry
 # that one error once before giving up. The 900s task limit still applies.
 log=$(mktemp)
-trap 'rm -f "$log"' EXIT
+# nix-build leaves result* symlinks into /nix/store. NixBench treats any symlink
+# that leaves the worktree as a workspace escape and voids the task, so drop
+# those build outputs once the agent is done.
+drop_store_symlinks() {
+  find "$NIXBENCH_WORKDIR" -type l -lname '/nix/store/*' -delete
+}
+trap 'drop_store_symlinks; rm -f "$log"' EXIT
 attempt=1
 max_attempts=2
 while true; do
