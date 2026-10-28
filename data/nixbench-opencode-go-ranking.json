@@ -74,11 +74,11 @@
   },
   "candidateOrdering": null,
   "catalog": {
-    "retrievedAt": "Wed, 28 Oct 2026 05:48:56 GMT",
+    "retrievedAt": "Wed, 28 Oct 2026 06:32:58 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": null,
-  "generatedAt": "2026-10-28T05:48:56Z",
+  "generatedAt": "2026-10-28T06:32:58Z",
   "models": [],
   "nextCandidate": "opencode-go/beam-free",
   "provider": "opencode-go",
