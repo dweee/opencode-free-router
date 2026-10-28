@@ -19,6 +19,16 @@ CATALOG_URL = "https://models.dev/api.json"
 NIXBENCH_REPO = "https://github.com/maximilianpw/nixbench"
 MODEL_RE = re.compile(r"^[A-Za-z0-9._:/+@-]{1,240}$")
 SCHEMA = 1
+PROGRESS_SCHEMA = 1
+# OpenCode Go is a paid subscription, so its models are not zero-cost. Screen the
+# one model that is identical to its free-tier twin and the flash variants of the
+# free-tier models; Go results are stored separately from free-tier results.
+OPENCODE_GO_SCREEN = (
+    "beam-free",
+    "deepseek-v4.1-flash",
+    "mimo-v2.6-flash",
+    "glm-5.3-flash",
+)
 OPENCODE_LOW_EVIDENCE = (
     "opencode/beam-free",
 )
@@ -75,7 +85,12 @@ def discover(data: dict[str, Any], provider_id: str = "openrouter") -> list[dict
         return []
     out = []
     for key, model in (provider.get("models") or {}).items():
-        if not isinstance(model, dict) or not zero_cost(model.get("cost")):
+        if not isinstance(model, dict):
+            continue
+        if provider_id == "opencode-go":
+            if key not in OPENCODE_GO_SCREEN and model.get("id") not in OPENCODE_GO_SCREEN:
+                continue
+        elif not zero_cost(model.get("cost")):
             continue
         # models.dev keeps retired models listed; the provider rejects them as unavailable.
         if model.get("status") == "deprecated":
@@ -99,8 +114,12 @@ def discover(data: dict[str, Any], provider_id: str = "openrouter") -> list[dict
             "contextTokens": context,
             "releaseDate": model.get("release_date"),
             "catalogUpdated": model.get("last_updated"),
-            "catalogCost": {"input": 0, "output": 0},
-            "availability": f"models.dev-zero-price for {provider_id}; account access must be checked at run time",
+            "catalogCost": model.get("cost") if provider_id == "opencode-go" else {"input": 0, "output": 0},
+            "availability": (
+                "models.dev listing for opencode-go; covered by the OpenCode Go subscription"
+                if provider_id == "opencode-go"
+                else f"models.dev-zero-price for {provider_id}; account access must be checked at run time"
+            ),
         })
     return sorted(out, key=lambda row: (row.get("releaseDate") or "", row["id"]), reverse=True)
 
@@ -191,18 +210,28 @@ def recompute(doc: dict[str, Any]) -> None:
     doc["rankingNote"] = (
         "Provisional one-run screens only. NixBench 3.2.0 is in calibration; this is not an official leaderboard or a statistically stable recommendation."
         if current else
-        f"No currently free, eligible {provider} model has a recorded NixBench run. Catalog availability is not proof of account access."
+        f"No currently {'' if provider == 'opencode-go' else 'free, '}eligible {provider} model has a recorded NixBench run. Catalog availability is not proof of account access."
     )
 
 
 def choose_candidate(
-    new: list[dict[str, Any]], provider_id: str, candidate_override: str = ""
+    new: list[dict[str, Any]],
+    provider_id: str,
+    candidate_override: str = "",
+    resuming: frozenset[str] | set[str] = frozenset(),
 ) -> dict[str, Any] | None:
     if candidate_override:
         candidate = next((row for row in new if row["id"] == candidate_override), None)
         if candidate is None:
             raise RuntimeError(f"candidate override is not currently eligible and unscreened: {candidate_override}")
         return candidate
+    # A model with saved task results finishes before any new model starts.
+    partial = [row for row in new if row["id"] in resuming]
+    if partial:
+        return partial[0]
+    if provider_id == "opencode-go":
+        go_rank = {f"opencode-go/{name}": index for index, name in enumerate(OPENCODE_GO_SCREEN)}
+        return min(new, key=lambda row: go_rank.get(row["id"], len(go_rank)), default=None)
     if provider_id != "opencode":
         return next(iter(new), None)
     low_rank = {model_id: index for index, model_id in enumerate(OPENCODE_LOW_EVIDENCE)}
@@ -254,7 +283,11 @@ def refresh(args: argparse.Namespace) -> int:
     # leaderboard match go first; scored models follow the free-model ranker weights.
     new = [row for row in available if row["id"] not in attempted and row["id"] not in screened]
     # One new candidate per scheduled run bounds provider quotas.
-    candidate = choose_candidate(new, args.provider, args.candidate_override)
+    resuming = {
+        row["id"] for row in new
+        if progress_file(args.progress_dir, row["id"]).is_file()
+    } if args.progress_dir else set()
+    candidate = choose_candidate(new, args.provider, args.candidate_override, resuming)
     doc.update({
         "schemaVersion": SCHEMA,
         "generatedAt": now(),
@@ -294,14 +327,102 @@ def refresh(args: argparse.Namespace) -> int:
     return 0
 
 
+def progress_file(directory: Path, model: str) -> Path:
+    return directory / (model.replace("/", "__") + ".json")
+
+
+def load_corpus(path: Path) -> dict[str, Any]:
+    corpus = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(corpus.get("task_ids"), list) or not isinstance(corpus.get("task_digests"), dict):
+        raise RuntimeError("corpus JSON lacks task_ids or task_digests")
+    return corpus
+
+
+def fresh_progress(directory: Path, model: str, corpus: dict[str, Any], revision: str) -> dict[str, dict[str, Any]]:
+    """Saved valid task results that still match the corpus task digest and NixBench revision."""
+    path = progress_file(directory, model)
+    if not path.is_file():
+        return {}
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    if doc.get("nixbenchRevision") != revision:
+        return {}
+    digests = corpus["task_digests"]
+    return {
+        tid: row for tid, row in (doc.get("tasks") or {}).items()
+        if tid in digests and row.get("taskDigest") == digests[tid]
+        and isinstance(row.get("result"), dict)
+        and row["result"].get("measurement_status") == "valid"
+        and isinstance(row["result"].get("score"), (int, float))
+    }
+
+
+def progress_save(args: argparse.Namespace) -> int:
+    """Keep every valid task result so a quota stop does not discard finished tasks."""
+    corpus = load_corpus(args.corpus_json)
+    kept = fresh_progress(args.progress_dir, args.model, corpus, args.revision)
+    run_id = None
+    if args.summary is not None and args.summary.is_file():
+        summary = json.loads(args.summary.read_text(encoding="utf-8"))
+        run_id = summary.get("run_id")
+        for task in summary.get("tasks") or []:
+            tid = task.get("task_id") if isinstance(task, dict) else None
+            if (
+                tid in corpus["task_digests"]
+                and task.get("measurement_status") == "valid"
+                and isinstance(task.get("score"), (int, float))
+            ):
+                kept[tid] = {"taskDigest": corpus["task_digests"][tid], "result": task, "runId": run_id}
+    path = progress_file(args.progress_dir, args.model)
+    if not kept:
+        print(json.dumps({"model": args.model, "saved": 0}))
+        return 0
+    save(path, {
+        "schemaVersion": PROGRESS_SCHEMA,
+        "model": args.model,
+        "nixbenchRevision": args.revision,
+        "updatedAt": now(),
+        "taskCount": len(corpus["task_ids"]),
+        "tasks": kept,
+    })
+    print(json.dumps({"model": args.model, "saved": len(kept), "of": len(corpus["task_ids"])}))
+    return 0
+
+
+def progress_todo(args: argparse.Namespace) -> int:
+    corpus = load_corpus(args.corpus_json)
+    done = fresh_progress(args.progress_dir, args.model, corpus, args.revision)
+    for tid in corpus["task_ids"]:
+        if tid not in done:
+            print(tid)
+    return 0
+
+
 def record(args: argparse.Namespace) -> int:
     doc = load(args.file)
     if not MODEL_RE.fullmatch(args.model):
         raise RuntimeError("invalid model selector")
-    summary = json.loads(args.summary.read_text(encoding="utf-8"))
+    summary = {}
+    if args.summary is not None and args.summary.is_file():
+        summary = json.loads(args.summary.read_text(encoding="utf-8"))
+    tasks = summary.get("tasks")
+    if args.progress_dir is not None:
+        # Fold in task results saved by earlier runs; this run's results win.
+        corpus = load_corpus(args.corpus_json)
+        saved = fresh_progress(args.progress_dir, args.model, corpus, args.revision)
+        fresh = {t.get("task_id"): t for t in (tasks or []) if isinstance(t, dict)}
+        merged = {**{tid: row["result"] for tid, row in saved.items()}, **fresh}
+        tasks = [merged[tid] for tid in corpus["task_ids"] if tid in merged]
+        if any(not isinstance(t, dict) or not isinstance(t.get("score"), (int, float)) for t in tasks):
+            raise RuntimeError("NixBench task observations are missing scores")
+        summary = {
+            **summary,
+            "score": sum(t["score"] for t in tasks),
+            "max_score": sum(t.get("max_score", 0) for t in tasks),
+            "passed": sum(1 for t in tasks if t.get("passed")),
+            "tasks": tasks,
+        }
     score = summary.get("score")
     maximum = summary.get("max_score")
-    tasks = summary.get("tasks")
     if (
         not isinstance(score, (int, float))
         or not isinstance(maximum, (int, float))
@@ -366,7 +487,8 @@ def main() -> int:
     sub = parser.add_subparsers(dest="command", required=True)
     refresh_parser = sub.add_parser("refresh")
     refresh_parser.add_argument("--file", type=Path, required=True)
-    refresh_parser.add_argument("--provider", default="openrouter", choices=("openrouter", "opencode"))
+    refresh_parser.add_argument("--provider", default="openrouter", choices=("openrouter", "opencode", "opencode-go"))
+    refresh_parser.add_argument("--progress-dir", type=Path)
     refresh_parser.add_argument("--candidate-override", default="")
     refresh_parser.add_argument("--nixbench-revision", default="")
     refresh_parser.add_argument("--corpus-version", default="3.2.0")
@@ -376,10 +498,22 @@ def main() -> int:
     record_parser = sub.add_parser("record")
     record_parser.add_argument("--file", type=Path, required=True)
     record_parser.add_argument("--model", required=True)
-    record_parser.add_argument("--summary", type=Path, required=True)
+    record_parser.add_argument("--summary", type=Path)
     record_parser.add_argument("--expected-tasks", type=int, required=True)
     record_parser.add_argument("--agent-version", required=True)
+    record_parser.add_argument("--progress-dir", type=Path)
+    record_parser.add_argument("--corpus-json", type=Path)
+    record_parser.add_argument("--revision", default="")
     record_parser.set_defaults(func=record)
+    for name, func in (("progress-save", progress_save), ("progress-todo", progress_todo)):
+        progress_parser = sub.add_parser(name)
+        progress_parser.add_argument("--progress-dir", type=Path, required=True)
+        progress_parser.add_argument("--model", required=True)
+        progress_parser.add_argument("--corpus-json", type=Path, required=True)
+        progress_parser.add_argument("--revision", default="")
+        if name == "progress-save":
+            progress_parser.add_argument("--summary", type=Path)
+        progress_parser.set_defaults(func=func)
     failed_parser = sub.add_parser("failed")
     failed_parser.add_argument("--file", type=Path, required=True)
     failed_parser.add_argument("--model", required=True)

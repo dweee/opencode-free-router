@@ -9,6 +9,14 @@ on:
         description: Optional eligible model ID to screen instead of the queue's next choice
         required: false
         type: string
+      provider:
+        description: Provider route to screen (scheduled runs screen both)
+        required: false
+        default: opencode
+        type: choice
+        options:
+          - opencode
+          - opencode-go
 
 concurrency:
   group: nixbench-opencode-provider
@@ -22,6 +30,14 @@ jobs:
     if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-latest
     timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        provider: ${{ fromJSON(github.event_name == 'workflow_dispatch' && format('["{0}"]', inputs.provider) || '["opencode","opencode-go"]') }}
+    env:
+      PROVIDER: ${{ matrix.provider }}
+      RANKING_FILE: data/nixbench-${{ matrix.provider }}-ranking.json
+      PROGRESS_DIR: data/nixbench-progress/${{ matrix.provider }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -43,7 +59,7 @@ jobs:
           persist-credentials: false
       - name: Install OpenCode v2
         run: npm install --global @opencode/cli@2.0.18
-      - name: Refresh models.dev and choose one new candidate
+      - name: Refresh models.dev and choose the next candidate
         id: candidates
         env:
           NIXBENCH_REVISION: 290eb8c18d4a0833fcc3746662ff08766102232c
@@ -82,14 +98,15 @@ jobs:
             override_args=(--candidate-override "$NIXBENCH_CANDIDATE_OVERRIDE")
           fi
           python3 scripts/nixbench-ranking.py refresh \
-            --provider opencode \
-            --file data/nixbench-opencode-ranking.json \
+            --provider "$PROVIDER" \
+            --file "$RANKING_FILE" \
+            --progress-dir "$PROGRESS_DIR" \
             --nixbench-revision "$NIXBENCH_REVISION" \
             --corpus-version "$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("version", "3.2.0"))' "$RUNNER_TEMP/nixbench-corpus.json")" \
             --corpus-task-count "$task_count" \
             --corpus-digest "$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("digest", ""))' "$RUNNER_TEMP/nixbench-corpus.json")" \
             "${override_args[@]}"
-          model=$(python3 -c 'import json; print(json.load(open("data/nixbench-opencode-ranking.json")).get("nextCandidate") or "")')
+          model=$(python3 -c 'import json, sys; print(json.load(open(sys.argv[1])).get("nextCandidate") or "")' "$RANKING_FILE")
           if [ -n "$model" ]; then
             printf 'model=%s\n' "$model" >> "$GITHUB_OUTPUT"
           fi
@@ -104,6 +121,7 @@ jobs:
           OPENCODE_CONFIG_DIR: ${{ runner.temp }}/opencode-config
           OPENCODE_HOME: ${{ runner.temp }}/opencode-home
           NIXBENCH_WORKSPACE: ${{ github.workspace }}
+          NIXBENCH_REVISION: 290eb8c18d4a0833fcc3746662ff08766102232c
           # Store writes go through the daemon as an untrusted client; the
           # store itself stays read-only inside the sandbox.
           NIXBENCH_NIX_DAEMON: "1"
@@ -133,33 +151,66 @@ jobs:
           # Use OpenCode's native provider catalog and route. The Console key
           # is supplied through OPENCODE_API_KEY and is never written to config.
           cp "$GITHUB_WORKSPACE/templates/nixbench-opencode-zen.json" "$OPENCODE_CONFIG_DIR/opencode.json"
+          # Tasks finished by earlier runs are kept in $PROGRESS_DIR, so a quota
+          # stop only costs the task in flight. Run just the tasks still missing.
+          progress_args=(--progress-dir "$GITHUB_WORKSPACE/$PROGRESS_DIR" --model "$NIXBENCH_MODEL_ID" \
+            --corpus-json "$RUNNER_TEMP/nixbench-corpus.json" --revision "$NIXBENCH_REVISION")
+          python3 "$GITHUB_WORKSPACE/scripts/nixbench-ranking.py" progress-todo "${progress_args[@]}" > "$RUNNER_TEMP/nixbench-todo.txt"
+          todo_count=$(wc -l < "$RUNNER_TEMP/nixbench-todo.txt")
+          echo "$NIXBENCH_MODEL_ID: $todo_count of $NIXBENCH_EXPECTED_TASKS tasks left to run." >> "$GITHUB_STEP_SUMMARY"
           cd .nixbench-upstream
-          set +e
-          python3 bench.py --tasks-dir nixbench-github-hosted/tasks run-all \
-            --agent-cmd "$NIXBENCH_WORKSPACE/scripts/nixbench-agent.sh" \
-            --agent-timeout-seconds 900 \
-            --model "$NIXBENCH_MODEL_ID" \
-            --kind opencode \
-            --agent-version "$(opencode --version)" \
-            --network enabled \
-            --label "OpenCode v2 native provider screening: $NIXBENCH_MODEL_ID"
-          bench_status=$?
-          set -e
-          summary=$(find results -mindepth 2 -maxdepth 2 -type f -name summary.json -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
-          cd "$GITHUB_WORKSPACE"
-          if [ -n "$summary" ] && python3 scripts/nixbench-ranking.py record \
-              --file data/nixbench-opencode-ranking.json \
+          bench_status=0
+          summary=""
+          if [ "$todo_count" -gt 0 ]; then
+            python3 - "$RUNNER_TEMP/nixbench-todo.txt" <<'PY'
+          from pathlib import Path
+          import shutil
+          import sys
+
+          todo = set(Path(sys.argv[1]).read_text().split())
+          source = Path("nixbench-github-hosted")
+          target = Path("nixbench-todo")
+          (target / "tasks").mkdir(parents=True)
+          (target / "contracts").mkdir()
+          shutil.copy2(source / "corpus.toml", target / "corpus.toml")
+          for task in todo:
+              shutil.copytree(source / "tasks" / task, target / "tasks" / task)
+              if (source / "contracts" / task).is_dir():
+                  shutil.copytree(source / "contracts" / task, target / "contracts" / task)
+          PY
+            set +e
+            python3 bench.py --tasks-dir nixbench-todo/tasks run-all \
+              --agent-cmd "$NIXBENCH_WORKSPACE/scripts/nixbench-agent.sh" \
+              --agent-timeout-seconds 900 \
               --model "$NIXBENCH_MODEL_ID" \
-              --summary "$GITHUB_WORKSPACE/.nixbench-upstream/$summary" \
+              --kind opencode \
+              --agent-version "$(opencode --version)" \
+              --network enabled \
+              --label "OpenCode v2 native provider screening: $NIXBENCH_MODEL_ID"
+            bench_status=$?
+            set -e
+            summary=$(find results -mindepth 2 -maxdepth 2 -type f -name summary.json -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
+          fi
+          cd "$GITHUB_WORKSPACE"
+          summary_args=()
+          if [ -n "$summary" ]; then summary_args=(--summary "$GITHUB_WORKSPACE/.nixbench-upstream/$summary"); fi
+          python3 scripts/nixbench-ranking.py progress-save "${progress_args[@]}" "${summary_args[@]}"
+          if python3 scripts/nixbench-ranking.py record \
+              --file "$RANKING_FILE" \
+              --model "$NIXBENCH_MODEL_ID" \
+              "${summary_args[@]}" \
+              --progress-dir "$GITHUB_WORKSPACE/$PROGRESS_DIR" \
+              --corpus-json "$RUNNER_TEMP/nixbench-corpus.json" \
+              --revision "$NIXBENCH_REVISION" \
               --expected-tasks "$NIXBENCH_EXPECTED_TASKS" \
               --agent-version "$(opencode --version)"; then
             echo "Completed a full one-trial screening run for $NIXBENCH_MODEL_ID (bench exit $bench_status)." >> "$GITHUB_STEP_SUMMARY"
           else
-            python3 - "$GITHUB_WORKSPACE/.nixbench-upstream/$summary" <<'PY'
+            python3 - "${summary:+$GITHUB_WORKSPACE/.nixbench-upstream/$summary}" <<'PY'
           import json, re, sys
           from pathlib import Path
           summary = Path(sys.argv[1])
-          if summary.is_file():
+          if sys.argv[1] and summary.is_file():
               data = json.loads(summary.read_text())
               for task in data.get("tasks", []):
                   agent = task.get("agent") or {}
@@ -171,13 +222,13 @@ jobs:
                               print("Agent diagnostic:", line[-400:])
           PY
             failure_status=runner-failed
-            if grep -R -Eiq 'rate.?limit|quota|free messages|free usage limit|too many requests|HTTP 429|status.?code.?429|free tier.{0,30}limit' .nixbench-upstream/results; then
+            if grep -R -Eiq 'rate.?limit|quota|free messages|free usage limit|too many requests|HTTP 429|status.?code.?429|free tier.{0,30}limit|usage limit|limit reached' .nixbench-upstream/results; then
               failure_status=deferred
-              echo "OpenCode provider quota/rate limit interrupted $NIXBENCH_MODEL_ID; it is deferred for 24 hours while the queue tries another candidate." >> "$GITHUB_STEP_SUMMARY"
+              echo "OpenCode provider quota/rate limit interrupted $NIXBENCH_MODEL_ID; finished tasks are saved and it resumes after 24 hours while the queue tries another candidate." >> "$GITHUB_STEP_SUMMARY"
             else
               echo "NixBench did not produce a full, valid task summary for $NIXBENCH_MODEL_ID; the model was not ranked." >> "$GITHUB_STEP_SUMMARY"
             fi
-            python3 scripts/nixbench-ranking.py failed --file data/nixbench-opencode-ranking.json --model "$NIXBENCH_MODEL_ID" --status "$failure_status" --run-id "$GITHUB_RUN_ID"
+            python3 scripts/nixbench-ranking.py failed --file "$RANKING_FILE" --model "$NIXBENCH_MODEL_ID" --status "$failure_status" --run-id "$GITHUB_RUN_ID"
             exit 1
           fi
       - name: Redact the Console key from benchmark traces
@@ -202,7 +253,7 @@ jobs:
         if: always() && steps.candidates.outputs.model != ''
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: nixbench-opencode-${{ github.run_id }}
+          name: nixbench-${{ matrix.provider }}-${{ github.run_id }}
           path: .nixbench-upstream/results/
           if-no-files-found: warn
           retention-days: 30
@@ -211,7 +262,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/nixbench-opencode-ranking.json
+          git add "$RANKING_FILE"
+          if [ -d "$PROGRESS_DIR" ]; then git add "$PROGRESS_DIR"; fi
           if git diff --cached --quiet; then
             echo "No OpenCode provider catalog or ranking changes."
           else

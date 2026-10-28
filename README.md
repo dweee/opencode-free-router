@@ -75,7 +75,13 @@ availability is checked again at runtime.
 
 The separate **NixBench OpenCode provider screens** workflow discovers zero-priced models under the
 `opencode` provider and stores results in [`data/nixbench-opencode-ranking.json`](data/nixbench-opencode-ranking.json).
-It runs once daily and screens at most one new model each time. To enable model calls, create an
+It runs once daily and screens at most one new model each time. Every valid task result is saved
+under [`data/nixbench-progress/`](data/nixbench-progress/) as the run goes, so when the free quota runs out
+the next day's run resumes the same model and only runs the missing tasks. A model is ranked once all tasks
+have a valid result. Saved results are discarded if the NixBench revision or a task's digest changes. The same
+workflow also screens the `opencode-go` route (your OpenCode Go subscription, same `OPENCODE_API_KEY`) for a short
+allowlist of models and stores those in [`data/nixbench-opencode-go-ranking.json`](data/nixbench-opencode-go-ranking.json),
+separate from the free-tier results; run it by hand with the `provider` input. To enable model calls, create an
 OpenCode Console API key and add it to your repository as the Actions secret `OPENCODE_API_KEY`
 (**Settings → Secrets and variables → Actions**). The key is supplied to OpenCode through its
 `OPENCODE_API_KEY` environment variable and is never written into the benchmark config. Do not use

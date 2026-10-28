@@ -171,3 +171,87 @@ print(json.dumps(mod.order_available(available, priority)))
   assert.ok(top)
   assert.equal(top.priority.score, 0.9)
 })
+
+function ranking(script: string, ...args: string[]) {
+  return spawnSync(
+    "python3",
+    [
+      "-c",
+      `
+import importlib.util, json, sys
+spec = importlib.util.spec_from_file_location("ranking", sys.argv[1])
+mod = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mod)
+${script}
+`,
+      RANKING,
+      ...args,
+    ],
+    { encoding: "utf8" },
+  )
+}
+
+test("OpenCode Go screens only the allowlisted models, paid or not", () => {
+  const run = ranking(`
+def row(model_id, cost, **extra):
+    return {"id": model_id, "cost": cost, "modalities": {"input": ["text"]}, "tool_call": True,
+            "limit": {"context": 1000000}, "release_date": "2026-01-01", **extra}
+catalog = {"opencode-go": {"models": {
+    "beam-free": row("beam-free", {"input": 0, "output": 0}),
+    "glm-5.3-flash": row("glm-5.3-flash", {"input": 0.15, "output": 0.5}),
+    "kimi-k3": row("kimi-k3", {"input": 3, "output": 15}),
+    "mimo-v2.6-flash": row("mimo-v2.6-flash", {"input": 0.14, "output": 0.28}, status="deprecated"),
+}}}
+print(json.dumps(sorted(item["id"] for item in mod.discover(catalog, "opencode-go"))))
+`)
+  assert.equal(run.status, 0, run.stderr)
+  assert.deepEqual(JSON.parse(run.stdout), ["opencode-go/beam-free", "opencode-go/glm-5.3-flash"])
+})
+
+test("a partial model resumes ahead of new candidates", () => {
+  const run = ranking(`
+new = [{"id": "opencode/beam-free"}, {"id": "opencode/flint-40b-free"}]
+print(json.dumps(mod.choose_candidate(new, "opencode", "", {"opencode/flint-40b-free"})["id"]))
+`)
+  assert.equal(run.status, 0, run.stderr)
+  assert.equal(JSON.parse(run.stdout), "opencode/flint-40b-free")
+})
+
+test("saved task results survive a quota stop and complete a later run", () => {
+  const run = ranking(
+    `
+import argparse, pathlib, tempfile
+tmp = pathlib.Path(tempfile.mkdtemp())
+corpus = tmp / "corpus.json"
+corpus.write_text(json.dumps({"task_ids": ["a", "b", "c"], "task_digests": {"a": "da", "b": "db", "c": "dc"}}))
+model = "opencode/beam-free"
+def task(tid, status="valid", score=1.0):
+    return {"task_id": tid, "passed": score > 0, "score": score, "max_score": 1.0, "measurement_status": status}
+def summary(name, tasks):
+    path = tmp / name
+    path.write_text(json.dumps({"run_id": name, "tasks": tasks}))
+    return path
+def ns(**kw):
+    return argparse.Namespace(progress_dir=tmp / "p", model=model, corpus_json=corpus, revision="r1", **kw)
+# Day 1: a is valid, b is cut off by the quota.
+mod.progress_save(ns(summary=summary("d1.json", [task("a"), task("b", "invalid", 0)])))
+todo = mod.fresh_progress(tmp / "p", model, mod.load_corpus(corpus), "r1")
+assert list(todo) == ["a"], todo
+# A changed task digest invalidates only that task.
+corpus.write_text(json.dumps({"task_ids": ["a", "b", "c"], "task_digests": {"a": "NEW", "b": "db", "c": "dc"}}))
+assert mod.fresh_progress(tmp / "p", model, mod.load_corpus(corpus), "r1") == {}
+corpus.write_text(json.dumps({"task_ids": ["a", "b", "c"], "task_digests": {"a": "da", "b": "db", "c": "dc"}}))
+# A different NixBench revision invalidates everything.
+assert mod.fresh_progress(tmp / "p", model, mod.load_corpus(corpus), "r2") == {}
+# Day 2: b and c finish; record merges all three.
+mod.progress_save(ns(summary=summary("d2.json", [task("b", score=0.5), task("c")])))
+out = tmp / "ranking.json"
+mod.record(argparse.Namespace(file=out, model=model, summary=summary("d2.json", [task("b", score=0.5), task("c")]),
+    expected_tasks=3, agent_version="x", progress_dir=tmp / "p", corpus_json=corpus, revision="r1"))
+entry = json.loads(out.read_text())["models"][0]
+print(json.dumps([entry["score"], entry["maxScore"], entry["taskCount"], entry["passedTasks"]]))
+`,
+  )
+  assert.equal(run.status, 0, run.stderr)
+  assert.deepEqual(JSON.parse(run.stdout.trim().split("\n").pop() ?? ""), [2.5, 3, 3, 3])
+})
