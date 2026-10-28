@@ -1111,7 +1111,538 @@
       },
       "runId": "20261027T111220Z-49e0ab1c",
       "taskDigest": "da225fd8706102e48518c266c21868c4f3a01dd0da96fc68bb26660bdb59165b"
+    },
+    "stalwart-state-version-migration": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 253.379,
+          "log_path": "results/20261028T203004Z-33d87a28/stalwart-state-version-migration/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/stalwart-state-version-migration/tests/check.sh /tmp/nixbench-isolated-g8jiq0ab/work",
+          "duration_seconds": 23.713,
+          "log_path": "results/20261028T203004Z-33d87a28/stalwart-state-version-migration/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T20:34:41.297242+00:00",
+        "criteria": {
+          "fresh-host-defaults": true,
+          "hosts-evaluate": true,
+          "legacy-store-preserved": true,
+          "listeners-unchanged": true,
+          "secrets-and-backup-follow": true,
+          "unit-overrides-applied": true
+        },
+        "diff_path": "results/20261028T203004Z-33d87a28/stalwart-state-version-migration/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Bring Two Stalwart Hosts Through The Module State Change",
+        "passed": true,
+        "result_dir": "results/20261028T203004Z-33d87a28/stalwart-state-version-migration",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "fresh-host-defaults": true,
+            "hosts-evaluate": true,
+            "legacy-store-preserved": true,
+            "listeners-unchanged": true,
+            "secrets-and-backup-follow": true,
+            "unit-overrides-applied": true
+          },
+          "criterion_failure_classes": {
+            "fresh-host-defaults": "wrong-value",
+            "hosts-evaluate": "evaluation",
+            "legacy-store-preserved": "wrong-value",
+            "listeners-unchanged": "wrong-value",
+            "secrets-and-backup-follow": "wrong-value",
+            "unit-overrides-applied": "wrong-value"
+          },
+          "criterion_points": {
+            "fresh-host-defaults": 20.0,
+            "hosts-evaluate": 15.0,
+            "legacy-store-preserved": 25.0,
+            "listeners-unchanged": 10.0,
+            "secrets-and-backup-follow": 15.0,
+            "unit-overrides-applied": 15.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "hosts-evaluate",
+            "legacy-store-preserved",
+            "fresh-host-defaults",
+            "unit-overrides-applied",
+            "secrets-and-backup-follow",
+            "listeners-unchanged"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "stalwart-state-version-migration",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T203004Z-33d87a28",
+      "taskDigest": "398d97010ba09865c0f0fb520e23a0d971fb82810b2c79aa28598fa88c16f7f4"
+    },
+    "stdenv-cross-and-host-tools": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 227.164,
+          "log_path": "results/20261028T203004Z-33d87a28/stdenv-cross-and-host-tools/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "packages",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/stdenv-cross-and-host-tools/tests/check.sh /tmp/nixbench-isolated-p6v3ymij/work",
+          "duration_seconds": 8.83,
+          "log_path": "results/20261028T203004Z-33d87a28/stdenv-cross-and-host-tools/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T20:38:37.303975+00:00",
+        "criteria": {
+          "generator-build-compiler": true,
+          "instantiates": true,
+          "man-page-from-scdoc": true,
+          "pkg-config-and-libraries": true,
+          "wrapper-host-zstd": true
+        },
+        "diff_path": "results/20261028T203004Z-33d87a28/stdenv-cross-and-host-tools/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Cross-Compile A C CLI With Build-Time Tools",
+        "passed": true,
+        "result_dir": "results/20261028T203004Z-33d87a28/stdenv-cross-and-host-tools",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "generator-build-compiler": true,
+            "instantiates": true,
+            "man-page-from-scdoc": true,
+            "pkg-config-and-libraries": true,
+            "wrapper-host-zstd": true
+          },
+          "criterion_failure_classes": {
+            "generator-build-compiler": "wrong-value",
+            "instantiates": "evaluation",
+            "man-page-from-scdoc": "wrong-value",
+            "pkg-config-and-libraries": "wrong-value",
+            "wrapper-host-zstd": "wrong-value"
+          },
+          "criterion_points": {
+            "generator-build-compiler": 20.0,
+            "instantiates": 15.0,
+            "man-page-from-scdoc": 25.0,
+            "pkg-config-and-libraries": 20.0,
+            "wrapper-host-zstd": 20.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "instantiates",
+            "pkg-config-and-libraries",
+            "generator-build-compiler",
+            "man-page-from-scdoc",
+            "wrapper-host-zstd"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "stdenv-cross-and-host-tools",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T203004Z-33d87a28",
+      "taskDigest": "1c3f3b03b2df259fde5435b873474785e1df9fb9fa16843c131e070439ab10c0"
+    },
+    "tor-onion-socket-outside-chroot": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 160.675,
+          "log_path": "results/20261028T203004Z-33d87a28/tor-onion-socket-outside-chroot/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/tor-onion-socket-outside-chroot/tests/check.sh /tmp/nixbench-isolated-awvkbw6e/work",
+          "duration_seconds": 26.825,
+          "log_path": "results/20261028T203004Z-33d87a28/tor-onion-socket-outside-chroot/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T20:41:44.819151+00:00",
+        "criteria": {
+          "hosts-evaluate": true,
+          "mirror-unchanged": true,
+          "socket-dir-lifecycle": false,
+          "tor-after-backend": false,
+          "tor-binds-socket-dir": true
+        },
+        "diff_path": "results/20261028T203004Z-33d87a28/tor-onion-socket-outside-chroot/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Bring A Unix-Socket Onion Service Back After The nixpkgs Update",
+        "passed": false,
+        "result_dir": "results/20261028T203004Z-33d87a28/tor-onion-socket-outside-chroot",
+        "score": 60.0,
+        "score_detail": {
+          "criteria": {
+            "hosts-evaluate": true,
+            "mirror-unchanged": true,
+            "socket-dir-lifecycle": false,
+            "tor-after-backend": false,
+            "tor-binds-socket-dir": true
+          },
+          "criterion_failure_classes": {
+            "hosts-evaluate": "evaluation",
+            "mirror-unchanged": "wrong-value",
+            "socket-dir-lifecycle": "wrong-value",
+            "tor-after-backend": "wrong-value",
+            "tor-binds-socket-dir": "wrong-value"
+          },
+          "criterion_points": {
+            "hosts-evaluate": 10.0,
+            "mirror-unchanged": 20.0,
+            "socket-dir-lifecycle": 25.0,
+            "tor-after-backend": 15.0,
+            "tor-binds-socket-dir": 30.0
+          },
+          "failed_criteria": [
+            "socket-dir-lifecycle",
+            "tor-after-backend"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "socket-dir-lifecycle: probe evaluated to false",
+            "tor-after-backend: probe evaluated to false"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "tor-binds-socket-dir",
+            "socket-dir-lifecycle",
+            "tor-after-backend",
+            "mirror-unchanged"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "tor-onion-socket-outside-chroot",
+        "task_outcome": "fail",
+        "workdir": null
+      },
+      "runId": "20261028T203004Z-33d87a28",
+      "taskDigest": "6bdd5259142c65240ca98ef1c8e3064a16b9dd6e126b4a086dcbaccf6e89f060"
+    },
+    "vsftpd-local-login-without-pam": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 131.673,
+          "log_path": "results/20261028T203004Z-33d87a28/vsftpd-local-login-without-pam/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/vsftpd-local-login-without-pam/tests/check.sh /tmp/nixbench-isolated-2tg7uw7f/work",
+          "duration_seconds": 29.93,
+          "log_path": "results/20261028T203004Z-33d87a28/vsftpd-local-login-without-pam/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T20:44:26.437158+00:00",
+        "criteria": {
+          "ftp-pam-policy": true,
+          "hosts-evaluate": true,
+          "mirror-unchanged": true,
+          "system-password-auth": true,
+          "user-restrictions-kept": true
+        },
+        "diff_path": "results/20261028T203004Z-33d87a28/vsftpd-local-login-without-pam/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Scanner FTP Logins Fail After The nixpkgs Update",
+        "passed": true,
+        "result_dir": "results/20261028T203004Z-33d87a28/vsftpd-local-login-without-pam",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "ftp-pam-policy": true,
+            "hosts-evaluate": true,
+            "mirror-unchanged": true,
+            "system-password-auth": true,
+            "user-restrictions-kept": true
+          },
+          "criterion_failure_classes": {
+            "ftp-pam-policy": "wrong-value",
+            "hosts-evaluate": "evaluation",
+            "mirror-unchanged": "wrong-value",
+            "system-password-auth": "wrong-value",
+            "user-restrictions-kept": "wrong-value"
+          },
+          "criterion_points": {
+            "ftp-pam-policy": 30.0,
+            "hosts-evaluate": 15.0,
+            "mirror-unchanged": 20.0,
+            "system-password-auth": 15.0,
+            "user-restrictions-kept": 20.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "hosts-evaluate",
+            "ftp-pam-policy",
+            "system-password-auth",
+            "user-restrictions-kept",
+            "mirror-unchanged"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "vsftpd-local-login-without-pam",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T203004Z-33d87a28",
+      "taskDigest": "597863e96997a55ff1745073fc99291d449f302ee99bf30f21aa39ebacf0ebef"
+    },
+    "wireless-eap-key-unreadable-after-hardening": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 354.683,
+          "log_path": "results/20261028T203004Z-33d87a28/wireless-eap-key-unreadable-after-hardening/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/wireless-eap-key-unreadable-after-hardening/tests/check.sh /tmp/nixbench-isolated-d2q35gvr/work",
+          "duration_seconds": 33.631,
+          "log_path": "results/20261028T203004Z-33d87a28/wireless-eap-key-unreadable-after-hardening/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T20:50:54.765497+00:00",
+        "criteria": {
+          "daemon-hardened": true,
+          "eap-config": true,
+          "hosts-evaluate": true,
+          "key-provisioned": true,
+          "psk-host-unchanged": true
+        },
+        "diff_path": "results/20261028T203004Z-33d87a28/wireless-eap-key-unreadable-after-hardening/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Get An EAP-TLS Kiosk Back On Wi-Fi After The nixpkgs Update",
+        "passed": true,
+        "result_dir": "results/20261028T203004Z-33d87a28/wireless-eap-key-unreadable-after-hardening",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "daemon-hardened": true,
+            "eap-config": true,
+            "hosts-evaluate": true,
+            "key-provisioned": true,
+            "psk-host-unchanged": true
+          },
+          "criterion_failure_classes": {
+            "daemon-hardened": "wrong-value",
+            "eap-config": "wrong-value",
+            "hosts-evaluate": "evaluation",
+            "key-provisioned": "wrong-value",
+            "psk-host-unchanged": "wrong-value"
+          },
+          "criterion_points": {
+            "daemon-hardened": 20.0,
+            "eap-config": 25.0,
+            "hosts-evaluate": 10.0,
+            "key-provisioned": 25.0,
+            "psk-host-unchanged": 20.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "hosts-evaluate",
+            "eap-config",
+            "key-provisioned",
+            "daemon-hardened",
+            "psk-host-unchanged"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "wireless-eap-key-unreadable-after-hardening",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T203004Z-33d87a28",
+      "taskDigest": "f66177f462c6172c32bbb2ea2c1d5bf5da94b7ecbbcb84a4a4b76b33e883ce61"
+    },
+    "yggdrasil-credential-key-owner": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 85.487,
+          "log_path": "results/20261028T203004Z-33d87a28/yggdrasil-credential-key-owner/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/yggdrasil-credential-key-owner/tests/check.sh /tmp/nixbench-isolated-_1wy0b_b/work",
+          "duration_seconds": 30.386,
+          "log_path": "results/20261028T203004Z-33d87a28/yggdrasil-credential-key-owner/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-28T20:52:50.653583+00:00",
+        "criteria": {
+          "dev-keeps-persistent-keys": true,
+          "edge-evaluates": true,
+          "edge-key-from-runtime-secret": true,
+          "key-never-in-store": true,
+          "mesh-settings-preserved": true
+        },
+        "diff_path": "results/20261028T203004Z-33d87a28/yggdrasil-credential-key-owner/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Move A Mesh Node Key Out Of The Store Without Changing Its Identity",
+        "passed": true,
+        "result_dir": "results/20261028T203004Z-33d87a28/yggdrasil-credential-key-owner",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "dev-keeps-persistent-keys": true,
+            "edge-evaluates": true,
+            "edge-key-from-runtime-secret": true,
+            "key-never-in-store": true,
+            "mesh-settings-preserved": true
+          },
+          "criterion_failure_classes": {
+            "dev-keeps-persistent-keys": "wrong-value",
+            "edge-evaluates": "evaluation",
+            "edge-key-from-runtime-secret": "wrong-value",
+            "key-never-in-store": "impurity",
+            "mesh-settings-preserved": "wrong-value"
+          },
+          "criterion_points": {
+            "dev-keeps-persistent-keys": 15.0,
+            "edge-evaluates": 15.0,
+            "edge-key-from-runtime-secret": 25.0,
+            "key-never-in-store": 20.0,
+            "mesh-settings-preserved": 25.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "edge-evaluates",
+            "edge-key-from-runtime-secret",
+            "dev-keeps-persistent-keys",
+            "key-never-in-store",
+            "mesh-settings-preserved"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "yggdrasil-credential-key-owner",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261028T203004Z-33d87a28",
+      "taskDigest": "b25332cdcb14378cd7210cd95f8c6c41f159017f565d420bb378374df39b159b"
     }
   },
-  "updatedAt": "2026-10-28T05:48:14Z"
+  "updatedAt": "2026-10-28T20:52:50Z"
 }

@@ -125,18 +125,6 @@
         "input": 0,
         "output": 0
       },
-      "catalogUpdated": "2026-06-04",
-      "contextTokens": 1000000,
-      "id": "opencode/nemotron-3-ultra-free",
-      "name": "Nemotron 3 Ultra Free",
-      "releaseDate": "2026-06-04"
-    },
-    {
-      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
       "catalogUpdated": "2025-10-17",
       "contextTokens": 200000,
       "id": "opencode/big-pickle",
@@ -181,11 +169,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Wed, 28 Oct 2026 11:40:27 GMT",
+    "retrievedAt": "Wed, 28 Oct 2026 20:29:42 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/deepseek-v4.1-flash-free",
-  "generatedAt": "2026-10-28T11:40:27Z",
+  "generatedAt": "2026-10-28T20:29:42Z",
   "models": [
     {
       "completedAt": "2026-10-28T12:13:04.526596+00:00",
@@ -208,6 +196,31 @@
       "runId": "20261028T114049Z-51685063",
       "score": 1600.0,
       "scoreRate": 0.888889,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
+    {
+      "completedAt": "2026-10-28T20:52:50.658812+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode/beam-free",
+      "maxScore": 1800.0,
+      "passedTasks": 11,
+      "runId": "20261028T203004Z-33d87a28",
+      "score": 1500.0,
+      "scoreRate": 0.833333,
       "status": "screening-only",
       "taskCount": 18,
       "trials": 1
