@@ -74,11 +74,11 @@
   },
   "candidateOrdering": null,
   "catalog": {
-    "retrievedAt": "Wed, 28 Oct 2026 11:40:30 GMT",
+    "retrievedAt": "Wed, 28 Oct 2026 19:18:30 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode-go/deepseek-v4.1-flash",
-  "generatedAt": "2026-10-28T11:40:31Z",
+  "generatedAt": "2026-10-28T19:18:31Z",
   "models": [
     {
       "completedAt": "2026-10-28T08:05:13.654789+00:00",
@@ -126,6 +126,31 @@
       "runId": null,
       "score": 1650.0,
       "scoreRate": 0.916667,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
+    {
+      "completedAt": "2026-10-28T20:29:13.732367+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode-go",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode-go/glm-5.3-flash",
+      "maxScore": 1800.0,
+      "passedTasks": 10,
+      "runId": "20261028T191854Z-ec13faca",
+      "score": 1520.0,
+      "scoreRate": 0.844444,
       "status": "screening-only",
       "taskCount": 18,
       "trials": 1
