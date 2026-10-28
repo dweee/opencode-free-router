@@ -181,15 +181,41 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Tue, 27 Oct 2026 11:12:00 GMT",
+    "retrievedAt": "Wed, 28 Oct 2026 11:40:27 GMT",
     "url": "https://models.dev/api.json"
   },
-  "currentModel": null,
-  "generatedAt": "2026-10-27T11:12:00Z",
-  "models": [],
+  "currentModel": "opencode/deepseek-v4.1-flash-free",
+  "generatedAt": "2026-10-28T11:40:27Z",
+  "models": [
+    {
+      "completedAt": "2026-10-28T12:13:04.526596+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode/deepseek-v4.1-flash-free",
+      "maxScore": 1800.0,
+      "passedTasks": 11,
+      "runId": "20261028T114049Z-51685063",
+      "score": 1600.0,
+      "scoreRate": 0.888889,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    }
+  ],
   "nextCandidate": null,
   "provider": "opencode",
-  "rankingNote": "No currently free, eligible opencode model has a recorded NixBench run. Catalog availability is not proof of account access.",
-  "recommendationStatus": "no-benchmarked-free-model",
+  "rankingNote": "Provisional one-run screens only. NixBench 3.2.0 is in calibration; this is not an official leaderboard or a statistically stable recommendation.",
+  "recommendationStatus": "provisional-screening",
   "schemaVersion": 1
 }
