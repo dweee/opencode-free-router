@@ -32,6 +32,13 @@
       "retryAfter": "2026-10-30T07:33:55Z",
       "runId": "40833170298",
       "status": "deferred"
+    },
+    {
+      "at": "2026-10-29T12:57:12Z",
+      "id": "opencode/mimo-v2.6-flash-free",
+      "retryAfter": "2026-10-30T12:57:12Z",
+      "runId": "40868062138",
+      "status": "deferred"
     }
   ],
   "availableModels": [
@@ -169,11 +176,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Thu, 29 Oct 2026 07:05:33 GMT",
+    "retrievedAt": "Thu, 29 Oct 2026 11:47:31 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/deepseek-v4.1-flash-free",
-  "generatedAt": "2026-10-29T07:05:33Z",
+  "generatedAt": "2026-10-29T11:47:31Z",
   "models": [
     {
       "completedAt": "2026-10-28T12:13:04.526596+00:00",
