@@ -1,6 +1,9 @@
 name: NixBench OpenCode provider screens
 
 on:
+  pull_request:
+    paths:
+      - .github/workflows/nixbench-opencode-provider.yml
   schedule:
     - cron: "47 5 * * *"
   workflow_dispatch:
@@ -26,6 +29,26 @@ permissions:
   contents: write
 
 jobs:
+  nix-sandbox-smoke:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: DeterminateSystems/determinate-nix-action@92957199488000b908fdad19f63711000965d8f3
+        with:
+          source-tag: v3.24.1
+          summarize: false
+          kvm: false
+          trust-runner-user: false
+          extra-conf: |
+            experimental-features = nix-command flakes parallel-eval
+            eval-cores = 2
+      - name: Verify untrusted Determinate client and daemon
+        run: |
+          nix --version | grep -F 'Determinate Nix 3.24.1'
+          nix store info --store daemon --json | jq -e '.trusted == false'
+          nix eval --raw --expr '"sandbox-smoke"' | grep -Fx sandbox-smoke
   refresh-and-screen:
     if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-latest
@@ -45,12 +68,21 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-      - uses: cachix/install-nix-action@3c6342b75005b9cc7c7d4069c3e9179247c89012
+      - uses: DeterminateSystems/determinate-nix-action@92957199488000b908fdad19f63711000965d8f3
         with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-          # Agents reach this daemon through the sandbox socket. A trusted
-          # user can disable the build sandbox and import unsigned paths.
-          set_as_trusted_user: false
+          source-tag: v3.24.1
+          summarize: false
+          kvm: false
+          # Agents reach this daemon through the sandbox socket. They must
+          # never be able to disable the sandbox or import unsigned paths.
+          trust-runner-user: false
+          extra-conf: |
+            experimental-features = nix-command flakes parallel-eval
+            eval-cores = 2
+      - name: Verify untrusted Determinate client and daemon
+        run: |
+          nix --version | grep -F 'Determinate Nix 3.24.1'
+          nix store info --store daemon --json | jq -e '.trusted == false'
       - uses: actions/checkout@v7
         with:
           repository: maximilianpw/nixbench
