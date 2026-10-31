@@ -481,7 +481,192 @@
       },
       "runId": "20261029T114755Z-3ce4be89",
       "taskDigest": "4fd68e57ea3c7d7274564bb9f0702e058da65173a57927f23adf84e38bc9be5c"
+    },
+    "initrd-hook-systemd-stage1-migration": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 900.004,
+          "log_path": "results/20261031T112000Z-feae5070/initrd-hook-systemd-stage1-migration/agent.log",
+          "returncode": 124,
+          "timed_out": true
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/initrd-hook-systemd-stage1-migration/tests/check.sh /tmp/nixbench-isolated-s_3g2tcd/work",
+          "duration_seconds": 16.549,
+          "log_path": "results/20261031T112000Z-feae5070/initrd-hook-systemd-stage1-migration/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-31T11:35:17.372405+00:00",
+        "criteria": {
+          "hook-ordering": true,
+          "hook-runs-in-initrd": true,
+          "hosts-evaluate": true,
+          "root-on-mapper": false,
+          "stage2-and-edge-preserved": true,
+          "systemd-stage1-kept": true
+        },
+        "diff_path": "results/20261031T112000Z-feae5070/initrd-hook-systemd-stage1-migration/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Move A Stage-1 Storage Hook To The Systemd Initrd",
+        "passed": false,
+        "result_dir": "results/20261031T112000Z-feae5070/initrd-hook-systemd-stage1-migration",
+        "score": 90.0,
+        "score_detail": {
+          "criteria": {
+            "hook-ordering": true,
+            "hook-runs-in-initrd": true,
+            "hosts-evaluate": true,
+            "root-on-mapper": false,
+            "stage2-and-edge-preserved": true,
+            "systemd-stage1-kept": true
+          },
+          "criterion_failure_classes": {
+            "hook-ordering": "wrong-value",
+            "hook-runs-in-initrd": "unavailable-helper",
+            "hosts-evaluate": "evaluation",
+            "root-on-mapper": "wrong-value",
+            "stage2-and-edge-preserved": "wrong-value",
+            "systemd-stage1-kept": "wrong-value"
+          },
+          "criterion_points": {
+            "hook-ordering": 25.0,
+            "hook-runs-in-initrd": 15.0,
+            "hosts-evaluate": 20.0,
+            "root-on-mapper": 10.0,
+            "stage2-and-edge-preserved": 15.0,
+            "systemd-stage1-kept": 15.0
+          },
+          "failed_criteria": [
+            "root-on-mapper"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "root-on-mapper: probe evaluated to false"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "systemd-stage1-kept",
+            "hook-ordering",
+            "hook-runs-in-initrd",
+            "root-on-mapper",
+            "stage2-and-edge-preserved"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "initrd-hook-systemd-stage1-migration",
+        "task_outcome": "agent-timeout",
+        "workdir": null
+      },
+      "runId": "20261031T112000Z-feae5070",
+      "taskDigest": "e9d3d6a8088df01b45e9b6888946a53276fedbbc0b6c89b395f894014ca868e4"
+    },
+    "lazy-type-error-boundary": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 398.441,
+          "log_path": "results/20261031T112000Z-feae5070/lazy-type-error-boundary/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "nix-language",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/lazy-type-error-boundary/tests/check.sh /tmp/nixbench-isolated-95p9ighl/work",
+          "duration_seconds": 0.264,
+          "log_path": "results/20261031T112000Z-feae5070/lazy-type-error-boundary/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-10-31T11:41:56.086296+00:00",
+        "criteria": {
+          "disabled-records-unforced": true,
+          "missing-fields-rejected": true,
+          "thrown-values-rejected": true,
+          "type-mismatch-rejected": true,
+          "valid-records-computed": true
+        },
+        "diff_path": "results/20261031T112000Z-feae5070/lazy-type-error-boundary/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Reject Malformed Records Without Aborting The Batch",
+        "passed": true,
+        "result_dir": "results/20261031T112000Z-feae5070/lazy-type-error-boundary",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "disabled-records-unforced": true,
+            "missing-fields-rejected": true,
+            "thrown-values-rejected": true,
+            "type-mismatch-rejected": true,
+            "valid-records-computed": true
+          },
+          "criterion_failure_classes": {
+            "disabled-records-unforced": "evaluation",
+            "missing-fields-rejected": "missing-attr",
+            "thrown-values-rejected": "evaluation",
+            "type-mismatch-rejected": "evaluation",
+            "valid-records-computed": "wrong-value"
+          },
+          "criterion_points": {
+            "disabled-records-unforced": 20.0,
+            "missing-fields-rejected": 15.0,
+            "thrown-values-rejected": 20.0,
+            "type-mismatch-rejected": 25.0,
+            "valid-records-computed": 20.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "valid-records-computed",
+            "type-mismatch-rejected",
+            "missing-fields-rejected",
+            "thrown-values-rejected",
+            "disabled-records-unforced"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "lazy-type-error-boundary",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261031T112000Z-feae5070",
+      "taskDigest": "e2127bcae20c5c8db213f9629e0611c32989d8a2ee41d34bd7c2d3ceb0d70689"
     }
   },
-  "updatedAt": "2026-10-29T12:57:12Z"
+  "updatedAt": "2026-10-31T11:54:23Z"
 }

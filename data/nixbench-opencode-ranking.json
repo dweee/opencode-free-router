@@ -27,18 +27,17 @@
       "status": "deferred"
     },
     {
-      "at": "2026-10-29T12:57:12Z",
-      "id": "opencode/mimo-v2.6-flash-free",
-      "retryAfter": "2026-10-30T12:57:12Z",
-      "runId": "40868062138",
-      "status": "deferred"
-    },
-    {
       "at": "2026-10-30T12:02:05Z",
       "id": "opencode/big-pickle",
       "retryAfter": "2026-10-31T12:02:05Z",
       "runId": "41049612533",
       "status": "deferred"
+    },
+    {
+      "at": "2026-10-31T11:54:23Z",
+      "id": "opencode/mimo-v2.6-flash-free",
+      "runId": "41196043314",
+      "status": "runner-failed"
     }
   ],
   "availableModels": [
@@ -176,11 +175,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Fri, 30 Oct 2026 11:39:37 GMT",
+    "retrievedAt": "Sat, 31 Oct 2026 11:19:43 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/deepseek-v4.1-flash-free",
-  "generatedAt": "2026-10-30T11:39:37Z",
+  "generatedAt": "2026-10-31T11:19:43Z",
   "models": [
     {
       "completedAt": "2026-10-28T12:13:04.526596+00:00",
