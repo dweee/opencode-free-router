@@ -175,12 +175,37 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Sat, 31 Oct 2026 11:19:43 GMT",
+    "retrievedAt": "Sun, 01 Nov 2026 12:02:45 GMT",
     "url": "https://models.dev/api.json"
   },
-  "currentModel": "opencode/deepseek-v4.1-flash-free",
-  "generatedAt": "2026-10-31T11:19:43Z",
+  "currentModel": "opencode/big-pickle",
+  "generatedAt": "2026-11-01T12:02:45Z",
   "models": [
+    {
+      "completedAt": "2026-11-01T12:18:31.570617+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode/big-pickle",
+      "maxScore": 1800.0,
+      "passedTasks": 12,
+      "runId": "20261101T120301Z-921fe61d",
+      "score": 1600.0,
+      "scoreRate": 0.888889,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
     {
       "completedAt": "2026-10-28T12:13:04.526596+00:00",
       "configuration": {

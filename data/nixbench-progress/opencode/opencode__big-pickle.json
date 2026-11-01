@@ -1442,7 +1442,189 @@
       },
       "runId": "20261030T113953Z-7ba28397",
       "taskDigest": "597863e96997a55ff1745073fc99291d449f302ee99bf30f21aa39ebacf0ebef"
+    },
+    "wireless-eap-key-unreadable-after-hardening": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 826.87,
+          "log_path": "results/20261101T120301Z-921fe61d/wireless-eap-key-unreadable-after-hardening/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/wireless-eap-key-unreadable-after-hardening/tests/check.sh /tmp/nixbench-isolated-7hi219lv/work",
+          "duration_seconds": 12.689,
+          "log_path": "results/20261101T120301Z-921fe61d/wireless-eap-key-unreadable-after-hardening/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-11-01T12:17:00.620904+00:00",
+        "criteria": {
+          "daemon-hardened": true,
+          "eap-config": false,
+          "hosts-evaluate": true,
+          "key-provisioned": false,
+          "psk-host-unchanged": true
+        },
+        "diff_path": "results/20261101T120301Z-921fe61d/wireless-eap-key-unreadable-after-hardening/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Get An EAP-TLS Kiosk Back On Wi-Fi After The nixpkgs Update",
+        "passed": false,
+        "result_dir": "results/20261101T120301Z-921fe61d/wireless-eap-key-unreadable-after-hardening",
+        "score": 50.0,
+        "score_detail": {
+          "criteria": {
+            "daemon-hardened": true,
+            "eap-config": false,
+            "hosts-evaluate": true,
+            "key-provisioned": false,
+            "psk-host-unchanged": true
+          },
+          "criterion_failure_classes": {
+            "daemon-hardened": "wrong-value",
+            "eap-config": "wrong-value",
+            "hosts-evaluate": "evaluation",
+            "key-provisioned": "wrong-value",
+            "psk-host-unchanged": "wrong-value"
+          },
+          "criterion_points": {
+            "daemon-hardened": 20.0,
+            "eap-config": 25.0,
+            "hosts-evaluate": 10.0,
+            "key-provisioned": 25.0,
+            "psk-host-unchanged": 20.0
+          },
+          "failed_criteria": [
+            "eap-config",
+            "key-provisioned"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "eap-config: probe evaluated to false",
+            "key-provisioned: probe evaluated to false"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "eap-config",
+            "key-provisioned",
+            "daemon-hardened",
+            "psk-host-unchanged"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "wireless-eap-key-unreadable-after-hardening",
+        "task_outcome": "fail",
+        "workdir": null
+      },
+      "runId": "20261101T120301Z-921fe61d",
+      "taskDigest": "f66177f462c6172c32bbb2ea2c1d5bf5da94b7ecbbcb84a4a4b76b33e883ce61"
+    },
+    "yggdrasil-credential-key-owner": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 74.401,
+          "log_path": "results/20261101T120301Z-921fe61d/yggdrasil-credential-key-owner/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/yggdrasil-credential-key-owner/tests/check.sh /tmp/nixbench-isolated-zflos_kt/work",
+          "duration_seconds": 16.297,
+          "log_path": "results/20261101T120301Z-921fe61d/yggdrasil-credential-key-owner/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-11-01T12:18:31.564421+00:00",
+        "criteria": {
+          "dev-keeps-persistent-keys": true,
+          "edge-evaluates": true,
+          "edge-key-from-runtime-secret": true,
+          "key-never-in-store": true,
+          "mesh-settings-preserved": true
+        },
+        "diff_path": "results/20261101T120301Z-921fe61d/yggdrasil-credential-key-owner/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Move A Mesh Node Key Out Of The Store Without Changing Its Identity",
+        "passed": true,
+        "result_dir": "results/20261101T120301Z-921fe61d/yggdrasil-credential-key-owner",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "dev-keeps-persistent-keys": true,
+            "edge-evaluates": true,
+            "edge-key-from-runtime-secret": true,
+            "key-never-in-store": true,
+            "mesh-settings-preserved": true
+          },
+          "criterion_failure_classes": {
+            "dev-keeps-persistent-keys": "wrong-value",
+            "edge-evaluates": "evaluation",
+            "edge-key-from-runtime-secret": "wrong-value",
+            "key-never-in-store": "impurity",
+            "mesh-settings-preserved": "wrong-value"
+          },
+          "criterion_points": {
+            "dev-keeps-persistent-keys": 15.0,
+            "edge-evaluates": 15.0,
+            "edge-key-from-runtime-secret": 25.0,
+            "key-never-in-store": 20.0,
+            "mesh-settings-preserved": 25.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "edge-evaluates",
+            "edge-key-from-runtime-secret",
+            "dev-keeps-persistent-keys",
+            "key-never-in-store",
+            "mesh-settings-preserved"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "yggdrasil-credential-key-owner",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261101T120301Z-921fe61d",
+      "taskDigest": "b25332cdcb14378cd7210cd95f8c6c41f159017f565d420bb378374df39b159b"
     }
   },
-  "updatedAt": "2026-10-30T12:02:05Z"
+  "updatedAt": "2026-11-01T12:18:31Z"
 }
