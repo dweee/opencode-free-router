@@ -38,6 +38,13 @@
       "id": "opencode/mimo-v2.6-flash-free",
       "runId": "41196043314",
       "status": "runner-failed"
+    },
+    {
+      "at": "2026-11-02T14:44:33Z",
+      "id": "opencode/glm-5.3-flash-free",
+      "retryAfter": "2026-11-03T14:44:33Z",
+      "runId": "41456605463",
+      "status": "deferred"
     }
   ],
   "availableModels": [
@@ -175,11 +182,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Sun, 01 Nov 2026 12:02:45 GMT",
+    "retrievedAt": "Mon, 02 Nov 2026 13:51:52 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/big-pickle",
-  "generatedAt": "2026-11-01T12:02:45Z",
+  "generatedAt": "2026-11-02T13:51:52Z",
   "models": [
     {
       "completedAt": "2026-11-01T12:18:31.570617+00:00",
