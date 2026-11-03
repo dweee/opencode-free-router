@@ -45,9 +45,28 @@
       "retryAfter": "2026-11-03T14:44:33Z",
       "runId": "41456605463",
       "status": "deferred"
+    },
+    {
+      "at": "2026-11-03T14:07:44Z",
+      "id": "opencode/pulse-alpha-free",
+      "retryAfter": "2026-11-04T14:07:44Z",
+      "runId": "41640469651",
+      "status": "deferred"
     }
   ],
   "availableModels": [
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-11-02",
+      "contextTokens": 1048576,
+      "id": "opencode/pulse-alpha-free",
+      "name": "Pulse Alpha Free",
+      "releaseDate": "2026-11-02"
+    },
     {
       "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
       "catalogCost": {
@@ -182,11 +201,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Mon, 02 Nov 2026 13:51:52 GMT",
+    "retrievedAt": "Tue, 03 Nov 2026 13:00:44 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/big-pickle",
-  "generatedAt": "2026-11-02T13:51:52Z",
+  "generatedAt": "2026-11-03T13:00:45Z",
   "models": [
     {
       "completedAt": "2026-11-01T12:18:31.570617+00:00",
