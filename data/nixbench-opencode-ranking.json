@@ -40,21 +40,33 @@
       "status": "runner-failed"
     },
     {
-      "at": "2026-11-02T14:44:33Z",
-      "id": "opencode/glm-5.3-flash-free",
-      "retryAfter": "2026-11-03T14:44:33Z",
-      "runId": "41456605463",
-      "status": "deferred"
-    },
-    {
       "at": "2026-11-03T14:07:44Z",
       "id": "opencode/pulse-alpha-free",
       "retryAfter": "2026-11-04T14:07:44Z",
       "runId": "41640469651",
       "status": "deferred"
+    },
+    {
+      "at": "2026-11-04T13:46:03Z",
+      "id": "opencode/glm-5.3-flash-free",
+      "retryAfter": "2026-11-05T13:46:03Z",
+      "runId": "41836729721",
+      "status": "deferred"
     }
   ],
   "availableModels": [
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-11-03",
+      "contextTokens": 1048576,
+      "id": "opencode/crouton-alpha-free",
+      "name": "Crouton Alpha Free",
+      "releaseDate": "2026-11-03"
+    },
     {
       "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
       "catalogCost": {
@@ -201,11 +213,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Tue, 03 Nov 2026 13:00:44 GMT",
+    "retrievedAt": "Wed, 04 Nov 2026 13:19:08 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/big-pickle",
-  "generatedAt": "2026-11-03T13:00:45Z",
+  "generatedAt": "2026-11-04T13:19:08Z",
   "models": [
     {
       "completedAt": "2026-11-01T12:18:31.570617+00:00",
