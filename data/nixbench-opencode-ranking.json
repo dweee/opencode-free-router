@@ -47,10 +47,10 @@
       "status": "deferred"
     },
     {
-      "at": "2026-11-04T13:46:03Z",
+      "at": "2026-11-06T13:54:01Z",
       "id": "opencode/glm-5.3-flash-free",
-      "retryAfter": "2026-11-05T13:46:03Z",
-      "runId": "41836729721",
+      "retryAfter": "2026-11-07T13:54:01Z",
+      "runId": "42223944286",
       "status": "deferred"
     }
   ],
@@ -213,11 +213,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Thu, 05 Nov 2026 13:30:18 GMT",
+    "retrievedAt": "Fri, 06 Nov 2026 13:15:15 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/big-pickle",
-  "generatedAt": "2026-11-05T13:30:18Z",
+  "generatedAt": "2026-11-06T13:15:15Z",
   "models": [
     {
       "completedAt": "2026-11-01T12:18:31.570617+00:00",
