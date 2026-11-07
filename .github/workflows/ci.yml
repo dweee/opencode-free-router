@@ -63,3 +63,9 @@ jobs:
       # their machine, never in the unit tests.
       - run: shellcheck scripts/*.sh bin/opencode-free
       - run: python3 test/nixbench-quota.test.py
+      - name: Cache retention and isolation regressions
+        run: |
+          python3 -m venv "$RUNNER_TEMP/cache-tests"
+          "$RUNNER_TEMP/cache-tests/bin/python" -m pip install --disable-pip-version-check PyYAML==6.0.3
+          "$RUNNER_TEMP/cache-tests/bin/python" test/nixbench-cache.test.py
+          for test in ci/test-*.py; do "$RUNNER_TEMP/cache-tests/bin/python" "$test"; done
