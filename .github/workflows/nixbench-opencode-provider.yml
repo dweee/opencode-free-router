@@ -81,6 +81,14 @@ jobs:
         python3 ci/transfer-attic.py export --directory smoke-transfer --manifest smoke-outputs.txt
       env:
         ATTIC_MAX_CLOSURE_MIB: '8192'
+    - name: Retain public smoke data for independent cache verification
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: nixbench-cache-smoke
+        path: smoke-transfer/
+        retention-days: 1
+        compression-level: 0
+        if-no-files-found: error
     - name: Release job-local output roots
       if: ${{ always() }}
       run: sudo /usr/bin/python3 /usr/local/libexec/nixbench-cache.py cleanup
