@@ -43,3 +43,10 @@ The small helpers in this directory are exact reviewed shared-controller source
 files recorded in `shared-cache-helper-hashes.json`. This project does not add a
 placeholder flake or install tested/stable promotion automation. The owning
 benchmark-specific hook and workflow stay in this repository.
+
+For a live infrastructure check, dispatch the workflow on the default branch
+with `cache_smoke_only=true`. This runs the same public completed-dependency /
+intentional-exit19 fixture used by PR CI, without loading a provider key, running
+a model or changing rankings. Two successive runs verify publication and then
+signed seed restoration through the real isolated jobs. Backend deployment is
+still required; PR smoke runs never receive cache credentials.

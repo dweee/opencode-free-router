@@ -189,6 +189,17 @@ class WorkflowIsolation(unittest.TestCase):
         saved = next(i for i,s in enumerate(publisher['steps']) if s.get('uses', '').startswith('actions/cache/save@'))
         self.assertLess(runs.index('python3 ci/push-niks3.py --outputs cache-transfer/outputs.txt'), saved)
 
+    def test_cache_self_test_neither_runs_models_nor_modifies_rankings(self):
+        job = self.jobs['refresh-and-screen']
+        fixture = next(s for s in job['steps'] if s.get('name') == 'Run only the public cache fixture')
+        self.assertEqual(fixture['if'], '${{ inputs.cache_smoke_only == true }}')
+        self.assertNotIn('env', fixture)
+        for step in job['steps']:
+            if ('OPENCODE_API_KEY' in step.get('env', {}) or step.get('name') in
+                    ['Install OpenCode v2', 'Refresh models.dev and choose the next candidate', 'Commit refreshed model data']):
+                self.assertIn('inputs.cache_smoke_only != true', step['if'])
+        self.assertEqual(job['permissions']['id-token'], 'none')
+
     def test_canonical_helper_content_is_pinned(self):
         registry = json.loads((ROOT / 'ci/shared-cache-helper-hashes.json').read_text())
         for name, expected in registry['files'].items():

@@ -6,6 +6,7 @@ name: NixBench OpenCode provider screens
     - scripts/nixbench-cache*
     - ci/**
     - test/nixbench-cache.test.py
+    - scripts/nixbench-cache-smoke.sh
   schedule:
   - cron: 47 5 * * *
   workflow_dispatch:
@@ -22,6 +23,11 @@ name: NixBench OpenCode provider screens
         options:
         - opencode
         - opencode-go
+      cache_smoke_only:
+        description: Validate cache seed/publication without a model run or ranking changes
+        required: false
+        default: false
+        type: boolean
 concurrency:
   group: nixbench-opencode-provider
   cancel-in-progress: false
@@ -66,18 +72,7 @@ jobs:
         nix eval --raw --expr '"sandbox-smoke"' | grep -Fx sandbox-smoke
     - name: Retain completed dependencies after an intentional later failure
       run: |
-        nixpkgs_rev=$(python3 -c 'import json; print(json.load(open(".nixbench-upstream/vendor/nixpkgs/pin.json"))["rev"])')
-        nix flake prefetch "github:NixOS/nixpkgs/$nixpkgs_rev"
-        export NIX_PATH="nixpkgs=$(python3 -c 'import json; print(json.load(open(".nixbench-upstream/vendor/nixpkgs/pin.json"))["store_path"])')"
-        if nix-build --no-out-link --expr 'let p=import <nixpkgs> {}; dep=p.runCommand ("nixbench-cache-smoke-dependency-"+builtins.getEnv "GITHUB_RUN_ID") {} "echo retained > $out"; in p.runCommand "nixbench-cache-smoke-failed" {inherit dep;} "exit 19"' > smoke-build.log 2>&1; then
-          echo "Expected the dependent fixture to fail" >&2; exit 1
-        fi
-        cat smoke-build.log
-        grep -q 'builder failed with exit code 19' smoke-build.log
-        python3 scripts/nixbench-cache.py collect --manifest smoke-outputs.txt
-        dependency=$(grep 'nixbench-cache-smoke-dependency-' smoke-outputs.txt | tail -n 1)
-        test "$(cat "$dependency")" = retained
-        ! grep -q 'nixbench-cache-smoke-failed' smoke-outputs.txt
+        bash scripts/nixbench-cache-smoke.sh
         python3 ci/transfer-attic.py export --directory smoke-transfer --manifest smoke-outputs.txt
       env:
         ATTIC_MAX_CLOSURE_MIB: '8192'
@@ -150,8 +145,12 @@ jobs:
         ref: 290eb8c18d4a0833fcc3746662ff08766102232c
         path: .nixbench-upstream
         persist-credentials: false
+    - name: Run only the public cache fixture
+      if: ${{ inputs.cache_smoke_only == true }}
+      run: bash scripts/nixbench-cache-smoke.sh
     - name: Install OpenCode v2
       run: npm install --global @opencode/cli@2.0.18
+      if: ${{ inputs.cache_smoke_only != true }}
     - name: Refresh models.dev and choose the next candidate
       id: candidates
       env:
@@ -204,9 +203,10 @@ jobs:
           printf 'model=%s\n' "$model" >> "$GITHUB_OUTPUT"
         fi
         printf 'task_count=%s\n' "$task_count" >> "$GITHUB_OUTPUT"
+      if: ${{ inputs.cache_smoke_only != true }}
     - name: Benchmark the next model
       id: benchmark
-      if: steps.candidates.outputs.model != ''
+      if: ${{ inputs.cache_smoke_only != true && steps.candidates.outputs.model != '' }}
       env:
         OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
         NIXBENCH_MODEL_ID: ${{ steps.candidates.outputs.model }}
@@ -325,7 +325,7 @@ jobs:
           exit 1
         fi
     - name: Redact the Console key from benchmark traces
-      if: always()
+      if: ${{ always() && inputs.cache_smoke_only != true }}
       env:
         OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
       run: |
@@ -394,7 +394,7 @@ jobs:
       if: ${{ always() }}
       run: sudo /usr/bin/python3 /usr/local/libexec/nixbench-cache.py cleanup
     - name: Commit refreshed model data
-      if: always() && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+      if: ${{ always() && inputs.cache_smoke_only != true && github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
