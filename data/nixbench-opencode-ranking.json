@@ -225,11 +225,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Sat, 07 Nov 2026 11:10:39 GMT",
+    "retrievedAt": "Sat, 07 Nov 2026 12:16:50 GMT",
     "url": "https://models.dev/api.json"
   },
-  "currentModel": "opencode/iceman-free",
-  "generatedAt": "2026-11-07T11:10:40Z",
+  "currentModel": "opencode/big-pickle",
+  "generatedAt": "2026-11-07T12:16:50Z",
   "models": [
     {
       "completedAt": "2026-11-07T11:57:14.986610+00:00",
@@ -327,6 +327,31 @@
       "runId": "20261105T133037Z-edf35199",
       "score": 1560.0,
       "scoreRate": 0.866667,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
+    {
+      "completedAt": "2026-11-07T13:02:26.044080+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode/iceman-free",
+      "maxScore": 1800.0,
+      "passedTasks": 9,
+      "runId": "20261107T121708Z-0aec1204",
+      "score": 1550.0,
+      "scoreRate": 0.861111,
       "status": "screening-only",
       "taskCount": 18,
       "trials": 1
