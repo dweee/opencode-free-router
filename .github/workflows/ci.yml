@@ -62,3 +62,4 @@ jobs:
       # install.sh is the first thing a new user runs; a quoting bug there fails on
       # their machine, never in the unit tests.
       - run: shellcheck scripts/*.sh bin/opencode-free
+      - run: python3 test/nixbench-quota.test.py
