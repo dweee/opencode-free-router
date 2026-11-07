@@ -61,11 +61,11 @@
         "input": 0,
         "output": 0
       },
-      "catalogUpdated": "2026-11-03",
-      "contextTokens": 1048576,
-      "id": "opencode/crouton-alpha-free",
-      "name": "Crouton Alpha Free",
-      "releaseDate": "2026-11-03"
+      "catalogUpdated": "2026-11-06",
+      "contextTokens": 262144,
+      "id": "opencode/iceman-free",
+      "name": "Iceman Free",
+      "releaseDate": "2026-11-06"
     },
     {
       "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
@@ -73,11 +73,23 @@
         "input": 0,
         "output": 0
       },
-      "catalogUpdated": "2026-11-02",
+      "catalogUpdated": "2026-11-05",
       "contextTokens": 1048576,
-      "id": "opencode/pulse-alpha-free",
-      "name": "Pulse Alpha Free",
-      "releaseDate": "2026-11-02"
+      "id": "opencode/inkling-2-small-free",
+      "name": "Inkling 2 Small Free",
+      "releaseDate": "2026-11-05"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-11-03",
+      "contextTokens": 1048576,
+      "id": "opencode/crouton-alpha-free",
+      "name": "Crouton Alpha Free",
+      "releaseDate": "2026-11-03"
     },
     {
       "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
@@ -213,12 +225,37 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Fri, 06 Nov 2026 13:15:15 GMT",
+    "retrievedAt": "Sat, 07 Nov 2026 11:10:39 GMT",
     "url": "https://models.dev/api.json"
   },
-  "currentModel": "opencode/big-pickle",
-  "generatedAt": "2026-11-06T13:15:15Z",
+  "currentModel": "opencode/iceman-free",
+  "generatedAt": "2026-11-07T11:10:40Z",
   "models": [
+    {
+      "completedAt": "2026-11-07T11:57:14.986610+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode/iceman-free",
+      "maxScore": 1800.0,
+      "passedTasks": 10,
+      "runId": "20261107T111056Z-eb93c216",
+      "score": 1610.0,
+      "scoreRate": 0.894444,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
     {
       "completedAt": "2026-11-01T12:18:31.570617+00:00",
       "configuration": {
