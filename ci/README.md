@@ -10,7 +10,8 @@ The workflow keeps three boundaries:
 * A trusted default-branch seed job reads the public output index saved by an
   earlier successful publisher. It restores those roots from Niks3 with source
   builds disabled and recursively verifies Niks3 signatures and contents. It
-  removes its read credential before exporting bounded public store data.
+  checks closure size and free space, retains indirect seed roots through export,
+  and removes its read credential before exporting bounded public store data.
 * Model jobs receive only that data. Their daemon still treats them as untrusted
   clients. They have no OIDC permission, private-cache reader or publisher.
   A root-owned daemon hook records completed build outputs and GC roots outside

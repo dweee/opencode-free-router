@@ -3,9 +3,11 @@
 import argparse
 import fcntl
 import importlib.util
+import json
 import os
 from pathlib import Path
 import re
+import shutil
 import stat
 import subprocess
 import sys
@@ -15,6 +17,7 @@ GCROOTS = Path('/nix/var/nix/gcroots/nixbench-cache')
 KEY = 'niks3.monke.fail-1:q13GqiZgAxx7SyoLZInXoJjviZMOdNpfG03xs0VUD2M='
 MAX_ROOTS = 8192
 MAX_BYTES = 1024 * 1024
+MAX_NAR_BYTES = 8192 * 1024 * 1024
 STORE = re.compile(r'/nix/store/[0-9abcdfghijklmnpqrsvwxyz]{32}-[A-Za-z0-9+._?=-]+')
 
 
@@ -107,6 +110,7 @@ def command(args):
     result = subprocess.run(args, capture_output=True, timeout=900)
     if result.returncode:
         raise RuntimeError('Cache data operation failed')
+    return result.stdout
 
 
 def warm(path):
@@ -125,7 +129,31 @@ def warm(path):
     flags = ['--option', 'trusted-public-keys', KEY, '--option', 'extra-trusted-public-keys', '',
              '--option', 'max-jobs', '0', '--option', 'builders', '', '--option', 'fallback', 'false',
              '--option', 'require-sigs', 'true']
-    command(['nix', 'copy', '--from', url, '--to', 'daemon', *flags, *roots])
+    raw = command(['nix', 'path-info', '--store', url, '--json', '--recursive', *flags, *roots])
+    if len(raw) > 32 * 1024 * 1024:
+        raise ValueError('Closure metadata exceeds bounds')
+    metadata = json.loads(raw)
+    if isinstance(metadata, list):
+        metadata = {entry['path']: entry for entry in metadata}
+    if not isinstance(metadata, dict) or not set(roots) <= metadata.keys():
+        raise ValueError('Incomplete closure metadata')
+    policy.check_paths(metadata.keys())
+    sizes = [entry['narSize'] for entry in metadata.values()]
+    if any(type(size) is not int or size < 0 for size in sizes):
+        raise ValueError('Invalid closure size')
+    nar_bytes = sum(sizes)
+    if nar_bytes > MAX_NAR_BYTES:
+        raise ValueError('Closure exceeds transfer bounds')
+    temporary = Path(os.environ['RUNNER_TEMP'])
+    if (shutil.disk_usage('/nix/store').free < nar_bytes + 2 * 1024**3
+            or shutil.disk_usage(temporary).free < 2 * nar_bytes + 2 * 1024**3):
+        raise ValueError('Insufficient space for seed and export')
+    # Realisation registers the indirect roots before releasing temporary
+    # download roots. Keep the seed alive through verification and export.
+    # Multiple outputs receive root, root-2, ...; no builds are permitted.
+    command(['nix-store', '--realise', '--add-root', str(temporary / 'nixbench-cache-seed'),
+             '--indirect', '--option', 'substituters', url,
+             '--option', 'extra-substituters', '', *flags, *roots])
     command(['nix', 'store', 'copy-sigs', '--substituter', url, '--recursive', *flags, *roots])
     command(['nix', 'store', 'verify', '--recursive', '--sigs-needed', '1', *flags, *roots])
     policy.runtime(roots)

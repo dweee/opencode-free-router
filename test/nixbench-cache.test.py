@@ -108,16 +108,35 @@ class Retention(unittest.TestCase):
     def test_warm_restores_and_verifies_only_with_builds_disabled(self):
         seed = self.root / 'seed'
         seed.write_text(A + '\n')
-        with patch.dict(os.environ, {'NIKS3_READ_URL': 'https://niks3.monke.fail/oidc'}), patch.object(cache, 'command') as command, patch.object(subprocess, 'run', return_value=subprocess.CompletedProcess([], 0, stdout=A+'\n')):
+        metadata = json.dumps({A: {'narSize': 9}}).encode()
+        with patch.dict(os.environ, {'NIKS3_READ_URL': 'https://niks3.monke.fail/oidc', 'RUNNER_TEMP': str(self.root)}), patch.object(cache, 'command', side_effect=[metadata, b'', b'', b'']) as command, patch.object(cache.shutil, 'disk_usage', return_value=type('Space', (), {'free': 100 * 1024**3})()), patch.object(subprocess, 'run', return_value=subprocess.CompletedProcess([], 0, stdout=A+'\n')):
             cache.warm(seed)
         calls = [c.args[0] for c in command.call_args_list]
-        self.assertEqual(len(calls), 3)
-        self.assertEqual(calls[0][:4], ['nix', 'copy', '--from', 'https://niks3.monke.fail/oidc'])
+        self.assertEqual(len(calls), 4)
+        self.assertEqual(calls[0][:4], ['nix', 'path-info', '--store', 'https://niks3.monke.fail/oidc'])
+        self.assertEqual(calls[1][:3], ['nix-store', '--realise', '--add-root'])
+        self.assertIn('--indirect', calls[1])
         self.assertIn('--sigs-needed', calls[-1])
         for call in calls:
             self.assertIn('max-jobs', call)
             self.assertEqual(call[call.index('max-jobs')+1], '0')
             self.assertEqual(call[call.index('fallback')+1], 'false')
+
+    def test_oversized_seed_is_rejected_before_download(self):
+        seed = self.root / 'seed'
+        seed.write_text(A + '\n')
+        metadata = json.dumps({A: {'narSize': cache.MAX_NAR_BYTES+1}}).encode()
+        with patch.dict(os.environ, {'NIKS3_READ_URL': 'https://niks3.monke.fail/oidc'}), patch.object(cache, 'command', return_value=metadata) as command, self.assertRaises(ValueError):
+            cache.warm(seed)
+        self.assertEqual(command.call_count, 1)
+
+    def test_seed_requires_space_for_store_and_export_before_download(self):
+        seed = self.root / 'seed'
+        seed.write_text(A + '\n')
+        metadata = json.dumps({A: {'narSize': 9}}).encode()
+        with patch.dict(os.environ, {'NIKS3_READ_URL': 'https://niks3.monke.fail/oidc', 'RUNNER_TEMP': str(self.root)}), patch.object(cache, 'command', return_value=metadata) as command, patch.object(cache.shutil, 'disk_usage', return_value=type('Space', (), {'free': 0})()), self.assertRaises(ValueError):
+            cache.warm(seed)
+        self.assertEqual(command.call_count, 1)
 
     def test_unexpected_reader_and_denied_roots_never_reach_cache(self):
         seed = self.root / 'seed'
