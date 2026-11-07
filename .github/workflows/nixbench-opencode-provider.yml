@@ -254,13 +254,15 @@ jobs:
                               print("Agent diagnostic:", line[-400:])
           PY
             failure_status=runner-failed
-            if grep -R --include=agent.log -Eiq 'Error:.{0,20}(rate.?limit|quota|free messages|free usage limit|too many requests|usage limit|limit reached|429)|HTTP 429|status.?code.?429' .nixbench-upstream/results; then
+            if python3 scripts/nixbench-quota.py .nixbench-upstream/results; then
               failure_status=deferred
               echo "OpenCode provider quota/rate limit interrupted $NIXBENCH_MODEL_ID; finished tasks are saved and it resumes after 24 hours while the queue tries another candidate." >> "$GITHUB_STEP_SUMMARY"
             else
               echo "NixBench did not produce a full, valid task summary for $NIXBENCH_MODEL_ID; the model was not ranked." >> "$GITHUB_STEP_SUMMARY"
             fi
             python3 scripts/nixbench-ranking.py failed --file "$RANKING_FILE" --model "$NIXBENCH_MODEL_ID" --status "$failure_status" --run-id "$GITHUB_RUN_ID"
+            # Quota exhaustion is a checkpointed deferral, not a benchmark result.
+            if [ "$failure_status" = deferred ]; then exit 0; fi
             exit 1
           fi
       - name: Redact the Console key from benchmark traces
