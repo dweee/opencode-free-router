@@ -225,12 +225,37 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Sat, 07 Nov 2026 12:16:50 GMT",
+    "retrievedAt": "Sun, 08 Nov 2026 12:23:03 GMT",
     "url": "https://models.dev/api.json"
   },
-  "currentModel": "opencode/big-pickle",
-  "generatedAt": "2026-11-07T12:16:50Z",
+  "currentModel": "opencode/glm-5.3-flash-free",
+  "generatedAt": "2026-11-08T12:23:04Z",
   "models": [
+    {
+      "completedAt": "2026-11-08T12:24:51.938198+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode/glm-5.3-flash-free",
+      "maxScore": 1800.0,
+      "passedTasks": 13,
+      "runId": "20261108T122320Z-cb5a80dc",
+      "score": 1635.0,
+      "scoreRate": 0.908333,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
     {
       "completedAt": "2026-11-07T11:57:14.986610+00:00",
       "configuration": {
