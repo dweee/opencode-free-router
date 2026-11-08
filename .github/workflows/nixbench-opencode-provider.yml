@@ -134,7 +134,15 @@ jobs:
       if: ${{ needs.cache-seed.outputs.has_seed == 'true' }}
       env:
         ATTIC_MAX_CLOSURE_MIB: '8192'
-      run: sudo --preserve-env=ATTIC_MAX_CLOSURE_MIB python3 ci/transfer-attic.py import --directory cache-seed
+      run: |
+        # sudo's secure_path excludes the installer-provided Nix profile.
+        # Resolve the trusted client before importing any benchmark data.
+        nix_bin="$(dirname "$(readlink -f "$(command -v nix-store)")")"
+        case "$nix_bin" in /nix/store/*/bin) ;; *) exit 1 ;; esac
+        test -x "$nix_bin/nix"
+        sudo --preserve-env=ATTIC_MAX_CLOSURE_MIB /usr/bin/env \
+          PATH="$nix_bin:/usr/bin:/bin" \
+          /usr/bin/python3 ci/transfer-attic.py import --directory cache-seed
     - name: Verify untrusted Determinate client and daemon
       run: |
         nix --version | grep -F 'Determinate Nix 3.24.1'
@@ -232,7 +240,8 @@ jobs:
         nixpkgs_path=$(python3 -c 'import json; print(json.load(open(".nixbench-upstream/vendor/nixpkgs/pin.json"))["store_path"])')
         test -f "$nixpkgs_path/default.nix"
         nix_bin=$(readlink -f "$(command -v nix-instantiate)")
-        export NIXBENCH_NIX_BIN_DIR="$(dirname "$nix_bin")"
+        NIXBENCH_NIX_BIN_DIR="$(dirname "$nix_bin")"
+        export NIXBENCH_NIX_BIN_DIR
         export NIX_PATH="nixpkgs=$nixpkgs_path"
         sudo install -o root -g root -m 755 \
           "$GITHUB_WORKSPACE/scripts/nixbench-safe-shell.sh" \
