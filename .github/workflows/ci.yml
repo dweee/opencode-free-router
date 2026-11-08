@@ -48,6 +48,8 @@ jobs:
       # default branch as well, so master gets one report per commit from here.
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v2
+        # Its checksum setup can fail before fail-on-error takes effect (#255).
+        continue-on-error: true
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           file: coverage/lcov.info
