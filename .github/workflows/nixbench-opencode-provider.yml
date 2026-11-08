@@ -1,11 +1,14 @@
 name: NixBench OpenCode provider screens
-
-on:
+'on':
   pull_request:
     paths:
-      - .github/workflows/nixbench-opencode-provider.yml
+    - .github/workflows/nixbench-opencode-provider.yml
+    - scripts/nixbench-cache*
+    - ci/**
+    - test/nixbench-cache.test.py
+    - scripts/nixbench-cache-smoke.sh
   schedule:
-    - cron: "47 5 * * *"
+  - cron: 47 5 * * *
   workflow_dispatch:
     inputs:
       candidate:
@@ -18,16 +21,18 @@ on:
         default: opencode
         type: choice
         options:
-          - opencode
-          - opencode-go
-
+        - opencode
+        - opencode-go
+      cache_smoke_only:
+        description: Validate cache seed/publication without a model run or ranking changes
+        required: false
+        default: false
+        type: boolean
 concurrency:
   group: nixbench-opencode-provider
   cancel-in-progress: false
-
 permissions:
   contents: write
-
 jobs:
   nix-sandbox-smoke:
     if: github.event_name == 'pull_request'
@@ -35,20 +40,53 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: DeterminateSystems/determinate-nix-action@92957199488000b908fdad19f63711000965d8f3
-        with:
-          source-tag: v3.24.1
-          summarize: false
-          kvm: false
-          trust-runner-user: false
-          extra-conf: |
-            experimental-features = nix-command flakes parallel-eval
-            eval-cores = 2
-      - name: Verify untrusted Determinate client and daemon
-        run: |
-          nix --version | grep -F 'Determinate Nix 3.24.1'
-          nix store info --store daemon --json | jq -e '.trusted == false'
-          nix eval --raw --expr '"sandbox-smoke"' | grep -Fx sandbox-smoke
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      with:
+        persist-credentials: false
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      with:
+        repository: maximilianpw/nixbench
+        ref: 290eb8c18d4a0833fcc3746662ff08766102232c
+        path: .nixbench-upstream
+        persist-credentials: false
+    - name: Install protected completed-output recorder
+      run: |
+        sudo install -D -o root -g root -m 755 scripts/nixbench-cache.py /usr/local/libexec/nixbench-cache.py
+        sudo install -D -o root -g root -m 755 scripts/nixbench-cache-hook.sh /usr/local/bin/nixbench-cache-hook
+        sudo /usr/bin/python3 /usr/local/libexec/nixbench-cache.py init
+    - uses: DeterminateSystems/determinate-nix-action@92957199488000b908fdad19f63711000965d8f3
+      with:
+        source-tag: v3.24.1
+        summarize: false
+        kvm: false
+        trust-runner-user: false
+        extra-conf: |
+          experimental-features = nix-command flakes parallel-eval
+          eval-cores = 2
+
+          post-build-hook = /usr/local/bin/nixbench-cache-hook
+    - name: Verify untrusted Determinate client and daemon
+      run: |
+        nix --version | grep -F 'Determinate Nix 3.24.1'
+        nix store info --store daemon --json | jq -e '.trusted == false'
+        nix eval --raw --expr '"sandbox-smoke"' | grep -Fx sandbox-smoke
+    - name: Retain completed dependencies after an intentional later failure
+      run: |
+        bash scripts/nixbench-cache-smoke.sh
+        python3 ci/transfer-attic.py export --directory smoke-transfer --manifest smoke-outputs.txt
+      env:
+        ATTIC_MAX_CLOSURE_MIB: '8192'
+    - name: Retain public smoke data for independent cache verification
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: nixbench-cache-smoke
+        path: smoke-transfer/
+        retention-days: 1
+        compression-level: 0
+        if-no-files-found: error
+    - name: Release job-local output roots
+      if: ${{ always() }}
+      run: sudo /usr/bin/python3 /usr/local/libexec/nixbench-cache.py cleanup
   refresh-and-screen:
     if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-latest
@@ -62,254 +100,483 @@ jobs:
       RANKING_FILE: data/nixbench-${{ matrix.provider }}-ranking.json
       PROGRESS_DIR: data/nixbench-progress/${{ matrix.provider }}
     steps:
-      - uses: actions/checkout@v7
-        with:
-          persist-credentials: true
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 24
-      - uses: DeterminateSystems/determinate-nix-action@92957199488000b908fdad19f63711000965d8f3
-        with:
-          source-tag: v3.24.1
-          summarize: false
-          kvm: false
-          # Agents reach this daemon through the sandbox socket. They must
-          # never be able to disable the sandbox or import unsigned paths.
-          trust-runner-user: false
-          extra-conf: |
-            experimental-features = nix-command flakes parallel-eval
-            eval-cores = 2
-      - name: Verify untrusted Determinate client and daemon
-        run: |
-          nix --version | grep -F 'Determinate Nix 3.24.1'
-          nix store info --store daemon --json | jq -e '.trusted == false'
-      - uses: actions/checkout@v7
-        with:
-          repository: maximilianpw/nixbench
-          ref: 290eb8c18d4a0833fcc3746662ff08766102232c
-          path: .nixbench-upstream
-          persist-credentials: false
-      - name: Install OpenCode v2
-        run: npm install --global @opencode/cli@2.0.18
-      - name: Refresh models.dev and choose the next candidate
-        id: candidates
-        env:
-          NIXBENCH_REVISION: 290eb8c18d4a0833fcc3746662ff08766102232c
-          NIXBENCH_CANDIDATE_OVERRIDE: ${{ inputs.candidate || '' }}
-        run: |
-          cd .nixbench-upstream
-          # Three public tasks require /dev/kvm, unavailable on GitHub-hosted runners.
-          # Build a transparent task subset with the same pinned corpus manifest.
-          python3 - <<'PY'
-          from pathlib import Path
-          import shutil
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: true
+    - uses: actions/setup-node@v7
+      with:
+        node-version: 24
+    - name: Install protected completed-output recorder
+      run: |
+        sudo install -D -o root -g root -m 755 scripts/nixbench-cache.py /usr/local/libexec/nixbench-cache.py
+        sudo install -D -o root -g root -m 755 scripts/nixbench-cache-hook.sh /usr/local/bin/nixbench-cache-hook
+        sudo /usr/bin/python3 /usr/local/libexec/nixbench-cache.py init
+    - uses: DeterminateSystems/determinate-nix-action@92957199488000b908fdad19f63711000965d8f3
+      with:
+        source-tag: v3.24.1
+        summarize: false
+        kvm: false
+        trust-runner-user: false
+        extra-conf: |
+          experimental-features = nix-command flakes parallel-eval
+          eval-cores = 2
 
-          source = Path("tasks")
-          target = Path("nixbench-github-hosted")
-          excluded = {
-              "boot-hook-marker-survives-reboot",
-              "firewall-nftables-forwarding-silently-dropped",
-              "state-directory-ownership-after-hardening",
-          }
-          target.mkdir()
-          (target / "tasks").mkdir()
-          (target / "contracts").mkdir()
-          shutil.copy2("corpus.toml", target / "corpus.toml")
-          for task in source.iterdir():
-              if task.is_dir() and task.name not in excluded:
-                  shutil.copytree(task, target / "tasks" / task.name)
-                  contract = Path("contracts") / task.name
-                  if contract.is_dir():
-                      shutil.copytree(contract, target / "contracts" / task.name)
-          PY
-          python3 bench.py --tasks-dir nixbench-github-hosted/tasks corpus-id --json > "$RUNNER_TEMP/nixbench-corpus.json"
-          task_count=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("task_count", 0))' "$RUNNER_TEMP/nixbench-corpus.json")
-          cd "$GITHUB_WORKSPACE"
-          override_args=()
-          if [ -n "$NIXBENCH_CANDIDATE_OVERRIDE" ]; then
-            override_args=(--candidate-override "$NIXBENCH_CANDIDATE_OVERRIDE")
-          fi
-          python3 scripts/nixbench-ranking.py refresh \
-            --provider "$PROVIDER" \
+          accept-flake-config = false
+          substituters = https://cache.nixos.org/
+          extra-substituters =
+          post-build-hook = /usr/local/bin/nixbench-cache-hook
+    - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      if: ${{ needs.cache-seed.outputs.has_seed == 'true' }}
+      with:
+        name: nixbench-cache-seed
+        path: cache-seed
+    - name: Import verified public seed data before model execution
+      if: ${{ needs.cache-seed.outputs.has_seed == 'true' }}
+      env:
+        ATTIC_MAX_CLOSURE_MIB: '8192'
+      run: sudo --preserve-env=ATTIC_MAX_CLOSURE_MIB python3 ci/transfer-attic.py import --directory cache-seed
+    - name: Verify untrusted Determinate client and daemon
+      run: |
+        nix --version | grep -F 'Determinate Nix 3.24.1'
+        nix store info --store daemon --json | jq -e '.trusted == false'
+    - uses: actions/checkout@v7
+      with:
+        repository: maximilianpw/nixbench
+        ref: 290eb8c18d4a0833fcc3746662ff08766102232c
+        path: .nixbench-upstream
+        persist-credentials: false
+    - name: Run only the public cache fixture
+      if: ${{ inputs.cache_smoke_only == true }}
+      run: bash scripts/nixbench-cache-smoke.sh
+    - name: Install OpenCode v2
+      run: npm install --global @opencode/cli@2.0.18
+      if: ${{ inputs.cache_smoke_only != true }}
+    - name: Refresh models.dev and choose the next candidate
+      id: candidates
+      env:
+        NIXBENCH_REVISION: 290eb8c18d4a0833fcc3746662ff08766102232c
+        NIXBENCH_CANDIDATE_OVERRIDE: ${{ inputs.candidate || '' }}
+      run: |
+        cd .nixbench-upstream
+        # Three public tasks require /dev/kvm, unavailable on GitHub-hosted runners.
+        # Build a transparent task subset with the same pinned corpus manifest.
+        python3 - <<'PY'
+        from pathlib import Path
+        import shutil
+
+        source = Path("tasks")
+        target = Path("nixbench-github-hosted")
+        excluded = {
+            "boot-hook-marker-survives-reboot",
+            "firewall-nftables-forwarding-silently-dropped",
+            "state-directory-ownership-after-hardening",
+        }
+        target.mkdir()
+        (target / "tasks").mkdir()
+        (target / "contracts").mkdir()
+        shutil.copy2("corpus.toml", target / "corpus.toml")
+        for task in source.iterdir():
+            if task.is_dir() and task.name not in excluded:
+                shutil.copytree(task, target / "tasks" / task.name)
+                contract = Path("contracts") / task.name
+                if contract.is_dir():
+                    shutil.copytree(contract, target / "contracts" / task.name)
+        PY
+        python3 bench.py --tasks-dir nixbench-github-hosted/tasks corpus-id --json > "$RUNNER_TEMP/nixbench-corpus.json"
+        task_count=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("task_count", 0))' "$RUNNER_TEMP/nixbench-corpus.json")
+        cd "$GITHUB_WORKSPACE"
+        override_args=()
+        if [ -n "$NIXBENCH_CANDIDATE_OVERRIDE" ]; then
+          override_args=(--candidate-override "$NIXBENCH_CANDIDATE_OVERRIDE")
+        fi
+        python3 scripts/nixbench-ranking.py refresh \
+          --provider "$PROVIDER" \
+          --file "$RANKING_FILE" \
+          --progress-dir "$PROGRESS_DIR" \
+          --nixbench-revision "$NIXBENCH_REVISION" \
+          --corpus-version "$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("version", "3.2.0"))' "$RUNNER_TEMP/nixbench-corpus.json")" \
+          --corpus-task-count "$task_count" \
+          --corpus-digest "$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("digest", ""))' "$RUNNER_TEMP/nixbench-corpus.json")" \
+          "${override_args[@]}"
+        model=$(python3 -c 'import json, sys; print(json.load(open(sys.argv[1])).get("nextCandidate") or "")' "$RANKING_FILE")
+        if [ -n "$model" ]; then
+          printf 'model=%s\n' "$model" >> "$GITHUB_OUTPUT"
+        fi
+        printf 'task_count=%s\n' "$task_count" >> "$GITHUB_OUTPUT"
+      if: ${{ inputs.cache_smoke_only != true }}
+    - name: Benchmark the next model
+      id: benchmark
+      if: ${{ inputs.cache_smoke_only != true && steps.candidates.outputs.model != '' }}
+      env:
+        OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+        NIXBENCH_MODEL_ID: ${{ steps.candidates.outputs.model }}
+        NIXBENCH_EXPECTED_TASKS: ${{ steps.candidates.outputs.task_count }}
+        OPENCODE_CONFIG_DIR: ${{ runner.temp }}/opencode-config
+        OPENCODE_HOME: ${{ runner.temp }}/opencode-home
+        NIXBENCH_WORKSPACE: ${{ github.workspace }}
+        NIXBENCH_REVISION: 290eb8c18d4a0833fcc3746662ff08766102232c
+        NIXBENCH_NIX_DAEMON: '1'
+      run: |
+        if [ -z "$OPENCODE_API_KEY" ]; then
+          echo "No OPENCODE_API_KEY Actions secret; catalog refreshed, benchmark deferred." >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+        fi
+        mkdir -p "$OPENCODE_CONFIG_DIR" "$OPENCODE_HOME"
+        chmod 700 "$OPENCODE_CONFIG_DIR" "$OPENCODE_HOME"
+        if ! command -v bwrap >/dev/null 2>&1; then
+          sudo apt-get update
+          sudo apt-get install --yes bubblewrap
+        fi
+        nixpkgs_rev=$(python3 -c 'import json; print(json.load(open(".nixbench-upstream/vendor/nixpkgs/pin.json"))["rev"])')
+        nix flake prefetch "github:NixOS/nixpkgs/$nixpkgs_rev"
+        nixpkgs_path=$(python3 -c 'import json; print(json.load(open(".nixbench-upstream/vendor/nixpkgs/pin.json"))["store_path"])')
+        test -f "$nixpkgs_path/default.nix"
+        nix_bin=$(readlink -f "$(command -v nix-instantiate)")
+        export NIXBENCH_NIX_BIN_DIR="$(dirname "$nix_bin")"
+        export NIX_PATH="nixpkgs=$nixpkgs_path"
+        sudo install -o root -g root -m 755 \
+          "$GITHUB_WORKSPACE/scripts/nixbench-safe-shell.sh" \
+          /usr/local/bin/nixbench-safe-shell
+        export HOME="$OPENCODE_HOME"
+        export NIXBENCH_MODEL_ID
+        # Use OpenCode's native provider catalog and route. The Console key
+        # is supplied through OPENCODE_API_KEY and is never written to config.
+        cp "$GITHUB_WORKSPACE/templates/nixbench-opencode-zen.json" "$OPENCODE_CONFIG_DIR/opencode.json"
+        # Tasks finished by earlier runs are kept in $PROGRESS_DIR, so a quota
+        # stop only costs the task in flight. Run just the tasks still missing.
+        progress_args=(--progress-dir "$GITHUB_WORKSPACE/$PROGRESS_DIR" --model "$NIXBENCH_MODEL_ID" \
+          --corpus-json "$RUNNER_TEMP/nixbench-corpus.json" --revision "$NIXBENCH_REVISION")
+        python3 "$GITHUB_WORKSPACE/scripts/nixbench-ranking.py" progress-todo "${progress_args[@]}" > "$RUNNER_TEMP/nixbench-todo.txt"
+        todo_count=$(wc -l < "$RUNNER_TEMP/nixbench-todo.txt")
+        echo "$NIXBENCH_MODEL_ID: $todo_count of $NIXBENCH_EXPECTED_TASKS tasks left to run." >> "$GITHUB_STEP_SUMMARY"
+        cd .nixbench-upstream
+        bench_status=0
+        summary=""
+        if [ "$todo_count" -gt 0 ]; then
+          python3 - "$RUNNER_TEMP/nixbench-todo.txt" <<'PY'
+        from pathlib import Path
+        import shutil
+        import sys
+
+        todo = set(Path(sys.argv[1]).read_text().split())
+        source = Path("nixbench-github-hosted")
+        target = Path("nixbench-todo")
+        (target / "tasks").mkdir(parents=True)
+        (target / "contracts").mkdir()
+        shutil.copy2(source / "corpus.toml", target / "corpus.toml")
+        for task in todo:
+            shutil.copytree(source / "tasks" / task, target / "tasks" / task)
+            if (source / "contracts" / task).is_dir():
+                shutil.copytree(source / "contracts" / task, target / "contracts" / task)
+        PY
+          set +e
+          python3 bench.py --tasks-dir nixbench-todo/tasks run-all \
+            --agent-cmd "$NIXBENCH_WORKSPACE/scripts/nixbench-agent.sh" \
+            --agent-timeout-seconds 900 \
+            --model "$NIXBENCH_MODEL_ID" \
+            --kind opencode \
+            --agent-version "$(opencode --version)" \
+            --network enabled \
+            --label "OpenCode v2 native provider screening: $NIXBENCH_MODEL_ID"
+          bench_status=$?
+          set -e
+          summary=$(find results -mindepth 2 -maxdepth 2 -type f -name summary.json -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
+        fi
+        cd "$GITHUB_WORKSPACE"
+        summary_args=()
+        if [ -n "$summary" ]; then summary_args=(--summary "$GITHUB_WORKSPACE/.nixbench-upstream/$summary"); fi
+        python3 scripts/nixbench-ranking.py progress-save "${progress_args[@]}" "${summary_args[@]}"
+        if python3 scripts/nixbench-ranking.py record \
             --file "$RANKING_FILE" \
-            --progress-dir "$PROGRESS_DIR" \
-            --nixbench-revision "$NIXBENCH_REVISION" \
-            --corpus-version "$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("version", "3.2.0"))' "$RUNNER_TEMP/nixbench-corpus.json")" \
-            --corpus-task-count "$task_count" \
-            --corpus-digest "$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("digest", ""))' "$RUNNER_TEMP/nixbench-corpus.json")" \
-            "${override_args[@]}"
-          model=$(python3 -c 'import json, sys; print(json.load(open(sys.argv[1])).get("nextCandidate") or "")' "$RANKING_FILE")
-          if [ -n "$model" ]; then
-            printf 'model=%s\n' "$model" >> "$GITHUB_OUTPUT"
-          fi
-          printf 'task_count=%s\n' "$task_count" >> "$GITHUB_OUTPUT"
-      - name: Benchmark the next model
-        id: benchmark
-        if: steps.candidates.outputs.model != ''
-        env:
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-          NIXBENCH_MODEL_ID: ${{ steps.candidates.outputs.model }}
-          NIXBENCH_EXPECTED_TASKS: ${{ steps.candidates.outputs.task_count }}
-          OPENCODE_CONFIG_DIR: ${{ runner.temp }}/opencode-config
-          OPENCODE_HOME: ${{ runner.temp }}/opencode-home
-          NIXBENCH_WORKSPACE: ${{ github.workspace }}
-          NIXBENCH_REVISION: 290eb8c18d4a0833fcc3746662ff08766102232c
-          # Store writes go through the daemon as an untrusted client; the
-          # store itself stays read-only inside the sandbox.
-          NIXBENCH_NIX_DAEMON: "1"
-        run: |
-          if [ -z "$OPENCODE_API_KEY" ]; then
-            echo "No OPENCODE_API_KEY Actions secret; catalog refreshed, benchmark deferred." >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
-          mkdir -p "$OPENCODE_CONFIG_DIR" "$OPENCODE_HOME"
-          chmod 700 "$OPENCODE_CONFIG_DIR" "$OPENCODE_HOME"
-          if ! command -v bwrap >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install --yes bubblewrap
-          fi
-          nixpkgs_rev=$(python3 -c 'import json; print(json.load(open(".nixbench-upstream/vendor/nixpkgs/pin.json"))["rev"])')
-          nix flake prefetch "github:NixOS/nixpkgs/$nixpkgs_rev"
-          nixpkgs_path=$(python3 -c 'import json; print(json.load(open(".nixbench-upstream/vendor/nixpkgs/pin.json"))["store_path"])')
-          test -f "$nixpkgs_path/default.nix"
-          nix_bin=$(readlink -f "$(command -v nix-instantiate)")
-          export NIXBENCH_NIX_BIN_DIR="$(dirname "$nix_bin")"
-          export NIX_PATH="nixpkgs=$nixpkgs_path"
-          sudo install -o root -g root -m 755 \
-            "$GITHUB_WORKSPACE/scripts/nixbench-safe-shell.sh" \
-            /usr/local/bin/nixbench-safe-shell
-          export HOME="$OPENCODE_HOME"
-          export NIXBENCH_MODEL_ID
-          # Use OpenCode's native provider catalog and route. The Console key
-          # is supplied through OPENCODE_API_KEY and is never written to config.
-          cp "$GITHUB_WORKSPACE/templates/nixbench-opencode-zen.json" "$OPENCODE_CONFIG_DIR/opencode.json"
-          # Tasks finished by earlier runs are kept in $PROGRESS_DIR, so a quota
-          # stop only costs the task in flight. Run just the tasks still missing.
-          progress_args=(--progress-dir "$GITHUB_WORKSPACE/$PROGRESS_DIR" --model "$NIXBENCH_MODEL_ID" \
-            --corpus-json "$RUNNER_TEMP/nixbench-corpus.json" --revision "$NIXBENCH_REVISION")
-          python3 "$GITHUB_WORKSPACE/scripts/nixbench-ranking.py" progress-todo "${progress_args[@]}" > "$RUNNER_TEMP/nixbench-todo.txt"
-          todo_count=$(wc -l < "$RUNNER_TEMP/nixbench-todo.txt")
-          echo "$NIXBENCH_MODEL_ID: $todo_count of $NIXBENCH_EXPECTED_TASKS tasks left to run." >> "$GITHUB_STEP_SUMMARY"
-          cd .nixbench-upstream
-          bench_status=0
-          summary=""
-          if [ "$todo_count" -gt 0 ]; then
-            python3 - "$RUNNER_TEMP/nixbench-todo.txt" <<'PY'
-          from pathlib import Path
-          import shutil
-          import sys
-
-          todo = set(Path(sys.argv[1]).read_text().split())
-          source = Path("nixbench-github-hosted")
-          target = Path("nixbench-todo")
-          (target / "tasks").mkdir(parents=True)
-          (target / "contracts").mkdir()
-          shutil.copy2(source / "corpus.toml", target / "corpus.toml")
-          for task in todo:
-              shutil.copytree(source / "tasks" / task, target / "tasks" / task)
-              if (source / "contracts" / task).is_dir():
-                  shutil.copytree(source / "contracts" / task, target / "contracts" / task)
-          PY
-            set +e
-            python3 bench.py --tasks-dir nixbench-todo/tasks run-all \
-              --agent-cmd "$NIXBENCH_WORKSPACE/scripts/nixbench-agent.sh" \
-              --agent-timeout-seconds 900 \
-              --model "$NIXBENCH_MODEL_ID" \
-              --kind opencode \
-              --agent-version "$(opencode --version)" \
-              --network enabled \
-              --label "OpenCode v2 native provider screening: $NIXBENCH_MODEL_ID"
-            bench_status=$?
-            set -e
-            summary=$(find results -mindepth 2 -maxdepth 2 -type f -name summary.json -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
-          fi
-          cd "$GITHUB_WORKSPACE"
-          summary_args=()
-          if [ -n "$summary" ]; then summary_args=(--summary "$GITHUB_WORKSPACE/.nixbench-upstream/$summary"); fi
-          python3 scripts/nixbench-ranking.py progress-save "${progress_args[@]}" "${summary_args[@]}"
-          if python3 scripts/nixbench-ranking.py record \
-              --file "$RANKING_FILE" \
-              --model "$NIXBENCH_MODEL_ID" \
-              "${summary_args[@]}" \
-              --progress-dir "$GITHUB_WORKSPACE/$PROGRESS_DIR" \
-              --corpus-json "$RUNNER_TEMP/nixbench-corpus.json" \
-              --revision "$NIXBENCH_REVISION" \
-              --expected-tasks "$NIXBENCH_EXPECTED_TASKS" \
-              --agent-version "$(opencode --version)"; then
-            echo "Completed a full one-trial screening run for $NIXBENCH_MODEL_ID (bench exit $bench_status)." >> "$GITHUB_STEP_SUMMARY"
+            --model "$NIXBENCH_MODEL_ID" \
+            "${summary_args[@]}" \
+            --progress-dir "$GITHUB_WORKSPACE/$PROGRESS_DIR" \
+            --corpus-json "$RUNNER_TEMP/nixbench-corpus.json" \
+            --revision "$NIXBENCH_REVISION" \
+            --expected-tasks "$NIXBENCH_EXPECTED_TASKS" \
+            --agent-version "$(opencode --version)"; then
+          echo "Completed a full one-trial screening run for $NIXBENCH_MODEL_ID (bench exit $bench_status)." >> "$GITHUB_STEP_SUMMARY"
+        else
+          python3 - "${summary:+$GITHUB_WORKSPACE/.nixbench-upstream/$summary}" <<'PY'
+        import json, re, sys
+        from pathlib import Path
+        summary = Path(sys.argv[1])
+        if sys.argv[1] and summary.is_file():
+            data = json.loads(summary.read_text())
+            for task in data.get("tasks", []):
+                agent = task.get("agent") or {}
+                print(f"NixBench diagnostic {task.get('task_id')}: agent_exit={agent.get('returncode')} timed_out={agent.get('timed_out')} measurement={task.get('measurement_status')} reason={task.get('invalid_reason')}")
+                log = summary.parent / task.get("task_id", "") / "agent.log"
+                if log.is_file():
+                    for line in log.read_text(errors="replace").splitlines():
+                        if re.search(r"error|denied|failed|401|403|unavailable|invalid|timeout|model", line, re.I):
+                            print("Agent diagnostic:", line[-400:])
+        PY
+          failure_status=runner-failed
+          if python3 scripts/nixbench-quota.py .nixbench-upstream/results; then
+            failure_status=deferred
+            echo "OpenCode provider quota/rate limit interrupted $NIXBENCH_MODEL_ID; finished tasks are saved and it resumes after 24 hours while the queue tries another candidate." >> "$GITHUB_STEP_SUMMARY"
           else
-            python3 - "${summary:+$GITHUB_WORKSPACE/.nixbench-upstream/$summary}" <<'PY'
-          import json, re, sys
-          from pathlib import Path
-          summary = Path(sys.argv[1])
-          if sys.argv[1] and summary.is_file():
-              data = json.loads(summary.read_text())
-              for task in data.get("tasks", []):
-                  agent = task.get("agent") or {}
-                  print(f"NixBench diagnostic {task.get('task_id')}: agent_exit={agent.get('returncode')} timed_out={agent.get('timed_out')} measurement={task.get('measurement_status')} reason={task.get('invalid_reason')}")
-                  log = summary.parent / task.get("task_id", "") / "agent.log"
-                  if log.is_file():
-                      for line in log.read_text(errors="replace").splitlines():
-                          if re.search(r"error|denied|failed|401|403|unavailable|invalid|timeout|model", line, re.I):
-                              print("Agent diagnostic:", line[-400:])
-          PY
-            failure_status=runner-failed
-            if python3 scripts/nixbench-quota.py .nixbench-upstream/results; then
-              failure_status=deferred
-              echo "OpenCode provider quota/rate limit interrupted $NIXBENCH_MODEL_ID; finished tasks are saved and it resumes after 24 hours while the queue tries another candidate." >> "$GITHUB_STEP_SUMMARY"
-            else
-              echo "NixBench did not produce a full, valid task summary for $NIXBENCH_MODEL_ID; the model was not ranked." >> "$GITHUB_STEP_SUMMARY"
+            echo "NixBench did not produce a full, valid task summary for $NIXBENCH_MODEL_ID; the model was not ranked." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          python3 scripts/nixbench-ranking.py failed --file "$RANKING_FILE" --model "$NIXBENCH_MODEL_ID" --status "$failure_status" --run-id "$GITHUB_RUN_ID"
+          # Quota exhaustion is a checkpointed deferral, not a benchmark result.
+          if [ "$failure_status" = deferred ]; then exit 0; fi
+          exit 1
+        fi
+    - name: Redact the Console key from benchmark traces
+      if: ${{ always() && inputs.cache_smoke_only != true }}
+      env:
+        OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+      run: |
+        python3 - <<'PY'
+        import os
+        from pathlib import Path
+
+        secret = os.environ.get("OPENCODE_API_KEY", "").encode()
+        root = Path(".nixbench-upstream/results")
+        if secret and root.is_dir():
+            for path in root.rglob("*"):
+                if path.is_file() and not path.is_symlink():
+                    content = path.read_bytes()
+                    if secret in content:
+                        path.write_bytes(content.replace(secret, b"[REDACTED]"))
+        PY
+    - name: Upload NixBench traces and summaries
+      if: always() && steps.candidates.outputs.model != ''
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+      with:
+        name: nixbench-${{ matrix.provider }}-${{ github.run_id }}
+        path: .nixbench-upstream/results/
+        if-no-files-found: warn
+        retention-days: 30
+    - name: Collect completed benchmark outputs
+      id: cache_outputs
+      if: ${{ always() && !cancelled() }}
+      run: |
+        args=()
+        if [ -f cache-seed/outputs.txt ]; then args=(--seed cache-seed/outputs.txt); fi
+        python3 scripts/nixbench-cache.py collect --manifest cache-outputs.txt "${args[@]}"
+    - name: Export bounded public benchmark outputs
+      id: cache_transfer
+      if: ${{ always() && !cancelled() && steps.cache_outputs.outputs.has_outputs == 'true' }}
+      env:
+        ATTIC_MAX_CLOSURE_MIB: '8192'
+      run: python3 ci/transfer-attic.py export --directory cache-transfer --manifest cache-outputs.txt
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: ${{ always() && !cancelled() && steps.cache_transfer.outcome == 'success' }}
+      with:
+        name: nixbench-cache-${{ matrix.provider }}
+        path: cache-transfer/
+        compression-level: 0
+        retention-days: 1
+        if-no-files-found: error
+    - name: Record cache transfer status
+      if: ${{ always() && !cancelled() }}
+      env:
+        CACHE_COLLECT_RESULT: ${{ steps.cache_outputs.outcome }}
+        CACHE_HAS_OUTPUTS: ${{ steps.cache_outputs.outputs.has_outputs }}
+        CACHE_TRANSFER_RESULT: ${{ steps.cache_transfer.outcome }}
+      run: |
+        python3 - <<'PYSTATUS'
+        import json, os
+        from pathlib import Path
+        Path('cache-status.json').write_text(json.dumps({k:os.environ[k] for k in ['CACHE_COLLECT_RESULT','CACHE_HAS_OUTPUTS','CACHE_TRANSFER_RESULT']}))
+        PYSTATUS
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: ${{ always() && !cancelled() }}
+      with:
+        name: nixbench-cache-status-${{ matrix.provider }}
+        path: cache-status.json
+        retention-days: 1
+        if-no-files-found: error
+    - name: Release job-local output roots
+      if: ${{ always() }}
+      run: sudo /usr/bin/python3 /usr/local/libexec/nixbench-cache.py cleanup
+    - name: Commit refreshed model data
+      if: ${{ always() && inputs.cache_smoke_only != true && github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add "$RANKING_FILE"
+        if [ -d "$PROGRESS_DIR" ]; then git add "$PROGRESS_DIR"; fi
+        if git diff --cached --quiet; then
+          echo "No OpenCode provider catalog or ranking changes."
+        else
+          git commit -m "Refresh OpenCode provider catalog and NixBench screening data"
+          for attempt in 1 2 3; do
+            git fetch origin "$GITHUB_REF_NAME"
+            git rebase -X theirs FETCH_HEAD
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              exit 0
             fi
-            python3 scripts/nixbench-ranking.py failed --file "$RANKING_FILE" --model "$NIXBENCH_MODEL_ID" --status "$failure_status" --run-id "$GITHUB_RUN_ID"
-            # Quota exhaustion is a checkpointed deferral, not a benchmark result.
-            if [ "$failure_status" = deferred ]; then exit 0; fi
-            exit 1
-          fi
-      - name: Redact the Console key from benchmark traces
-        if: always()
-        env:
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-        run: |
-          python3 - <<'PY'
-          import os
-          from pathlib import Path
+            echo "Push raced with another master update; retry $attempt of 3."
+            sleep 2
+          done
+          exit 1
+        fi
+    needs:
+    - cache-seed
+    permissions:
+      contents: write
+      id-token: none
+  cache-seed:
+    if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      has_seed: ${{ steps.manifest.outputs.has_outputs }}
+    steps:
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      with:
+        persist-credentials: false
+    - uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+      id: restore
+      with:
+        path: cache-index/outputs.txt
+        key: niks3-nixbench-public-v1-290eb8c18d4a0833fcc3746662ff08766102232c-${{ github.run_id }}-${{ github.run_attempt }}
+        restore-keys: niks3-nixbench-public-v1-290eb8c18d4a0833fcc3746662ff08766102232c-
+    - uses: DeterminateSystems/determinate-nix-action@92957199488000b908fdad19f63711000965d8f3
+      with:
+        source-tag: v3.24.1
+        summarize: false
+        kvm: false
+        trust-runner-user: true
+        extra-conf: |
+          experimental-features = nix-command flakes parallel-eval
+          eval-cores = 2
 
-          secret = os.environ.get("OPENCODE_API_KEY", "").encode()
-          root = Path(".nixbench-upstream/results")
-          if secret and root.is_dir():
-              for path in root.rglob("*"):
-                  if path.is_file() and not path.is_symlink():
-                      content = path.read_bytes()
-                      if secret in content:
-                          path.write_bytes(content.replace(secret, b"[REDACTED]"))
-          PY
-      - name: Upload NixBench traces and summaries
-        if: always() && steps.candidates.outputs.model != ''
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        with:
-          name: nixbench-${{ matrix.provider }}-${{ github.run_id }}
-          path: .nixbench-upstream/results/
-          if-no-files-found: warn
-          retention-days: 30
-      - name: Commit refreshed model data
-        if: always() && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$RANKING_FILE"
-          if [ -d "$PROGRESS_DIR" ]; then git add "$PROGRESS_DIR"; fi
-          if git diff --cached --quiet; then
-            echo "No OpenCode provider catalog or ranking changes."
-          else
-            git commit -m "Refresh OpenCode provider catalog and NixBench screening data"
-            for attempt in 1 2 3; do
-              git fetch origin "$GITHUB_REF_NAME"
-              git rebase -X theirs FETCH_HEAD
-              if git push origin "HEAD:${GITHUB_REF_NAME}"; then
-                exit 0
-              fi
-              echo "Push raced with another master update; retry $attempt of 3."
-              sleep 2
-            done
-            exit 1
-          fi
+          accept-flake-config = false
+          substituters = https://cache.nixos.org/
+          extra-substituters =
+          extra-trusted-public-keys = niks3.monke.fail-1:q13GqiZgAxx7SyoLZInXoJjviZMOdNpfG03xs0VUD2M=
+    - name: Validate the public cache index
+      id: manifest
+      run: |
+        python3 - <<'PYINDEX'
+        import importlib.util, os
+        from pathlib import Path
+        spec=importlib.util.spec_from_file_location('cache','scripts/nixbench-cache.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        p=Path('cache-index/outputs.txt');present=p.exists() and bool(module.manifest(p))
+        with open(os.environ['GITHUB_OUTPUT'],'a') as stream:stream.write('has_outputs='+str(present).lower()+'\n')
+        PYINDEX
+    - name: Configure trusted-job Niks3 reads
+      run: python3 ci/configure-niks3.py --oidc
+      if: ${{ steps.manifest.outputs.has_outputs == 'true' }}
+    - name: Restore signed public benchmark outputs without source builds
+      run: python3 scripts/nixbench-cache.py warm --manifest cache-index/outputs.txt
+      if: ${{ steps.manifest.outputs.has_outputs == 'true' }}
+    - name: Remove cache credentials before data export
+      if: ${{ always() && steps.manifest.outputs.has_outputs == 'true' }}
+      run: python3 ci/configure-niks3.py --cleanup
+    - name: Export only public seed data
+      run: python3 ci/transfer-attic.py export --directory cache-seed --manifest cache-index/outputs.txt
+      env:
+        ATTIC_MAX_CLOSURE_MIB: '8192'
+      if: ${{ steps.manifest.outputs.has_outputs == 'true' }}
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: nixbench-cache-seed
+        path: cache-seed/
+        compression-level: 0
+        retention-days: 1
+        if-no-files-found: error
+      if: ${{ steps.manifest.outputs.has_outputs == 'true' }}
+  publish-cache:
+    name: Publish public cache data (${{ matrix.provider }})
+    needs:
+    - refresh-and-screen
+    if: ${{ always() && !cancelled() && github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && (needs.refresh-and-screen.result == 'success' || needs.refresh-and-screen.result == 'failure') && vars.NIKS3_PUSH_ENABLED == 'true' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    permissions:
+      contents: read
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        provider: ${{ fromJSON(github.event_name == 'workflow_dispatch' && format('["{0}"]', inputs.provider) || '["opencode","opencode-go"]') }}
+    steps:
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      with:
+        persist-credentials: false
+    - name: Install protected completed-output recorder
+      run: |
+        sudo install -D -o root -g root -m 755 scripts/nixbench-cache.py /usr/local/libexec/nixbench-cache.py
+        sudo install -D -o root -g root -m 755 scripts/nixbench-cache-hook.sh /usr/local/bin/nixbench-cache-hook
+        sudo /usr/bin/python3 /usr/local/libexec/nixbench-cache.py init
+    - uses: DeterminateSystems/determinate-nix-action@92957199488000b908fdad19f63711000965d8f3
+      with:
+        source-tag: v3.24.1
+        summarize: false
+        kvm: false
+        trust-runner-user: true
+        extra-conf: |
+          experimental-features = nix-command flakes parallel-eval
+          eval-cores = 2
+
+          accept-flake-config = false
+          substituters = https://cache.nixos.org/
+          extra-substituters =
+          extra-trusted-public-keys = niks3.monke.fail-1:q13GqiZgAxx7SyoLZInXoJjviZMOdNpfG03xs0VUD2M=
+          post-build-hook = /usr/local/bin/nixbench-cache-hook
+    - name: Configure trusted-job Niks3 reads
+      run: python3 ci/configure-niks3.py --oidc
+    - name: Install pinned publisher before importing benchmark data
+      run: bash ci/install-niks3.sh
+    - name: Collect completed publisher bootstrap dependencies
+      run: |
+        client_root=$(dirname "$(dirname "$NIKS3_BIN")")
+        python3 scripts/nixbench-cache.py collect --manifest bootstrap-outputs.txt --add-root "$client_root"
+    - name: Publish completed bootstrap outputs separately
+      run: python3 ci/push-niks3.py --outputs bootstrap-outputs.txt
+    - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      with:
+        name: nixbench-cache-status-${{ matrix.provider }}
+        path: cache-status
+    - name: Require complete export before publication
+      id: status
+      run: |
+        python3 - <<'PYSTATUS'
+        import json, os
+        from pathlib import Path
+        p=Path('cache-status/cache-status.json')
+        assert p.is_file() and not p.is_symlink() and p.stat().st_size < 4096
+        s=json.loads(p.read_text());assert s['CACHE_COLLECT_RESULT']=='success'
+        present=s['CACHE_HAS_OUTPUTS'];assert present in ['true','false']
+        if present=='true':assert s['CACHE_TRANSFER_RESULT']=='success'
+        with open(os.environ['GITHUB_OUTPUT'],'a') as stream:stream.write('has_outputs='+present+'\n')
+        PYSTATUS
+    - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      id: download
+      with:
+        name: nixbench-cache-${{ matrix.provider }}
+        path: cache-transfer
+      if: ${{ steps.status.outputs.has_outputs == 'true' }}
+    - name: Import benchmark data without running package programs
+      if: ${{ steps.download.outcome == 'success' }}
+      env:
+        ATTIC_MAX_CLOSURE_MIB: '8192'
+      run: python3 ci/transfer-attic.py import --directory cache-transfer
+    - name: Publish completed benchmark outputs
+      if: ${{ steps.download.outcome == 'success' }}
+      run: python3 ci/push-niks3.py --outputs cache-transfer/outputs.txt
+    - name: Prepare public index only after successful publication
+      if: ${{ steps.download.outcome == 'success' }}
+      run: |
+        mkdir -p cache-index
+        cp cache-transfer/outputs.txt cache-index/outputs.txt
+    - uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+      if: ${{ steps.download.outcome == 'success' }}
+      with:
+        path: cache-index/outputs.txt
+        key: niks3-nixbench-public-v1-290eb8c18d4a0833fcc3746662ff08766102232c-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.provider }}
+    - name: Remove cache credentials before data export
+      if: ${{ always() }}
+      run: python3 ci/configure-niks3.py --cleanup
+    - name: Release job-local output roots
+      if: ${{ always() }}
+      run: sudo /usr/bin/python3 /usr/local/libexec/nixbench-cache.py cleanup
