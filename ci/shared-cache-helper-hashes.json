@@ -1,7 +1,7 @@
 {
-  "source": "dweee/dave-fork-ci@62f879c6e5e5d9e5e0c6db1045c44a95c1a528ab",
+  "source": "dweee/dave-fork-ci@74b21a2904ac5f6d6750f2f52f3a36f86b0b6651",
   "files": {
-    "configure-niks3.py": "344f8465ab92c8c3276aeae631ff8902c074b050d15085b9296ad961c3af9a83",
+    "configure-niks3.py": "f1690b26b7e2762c083f34c8473d19873de9958ef376a78be46006b1073d4dc8",
     "install-niks3.sh": "55a2f49ee72b9cc24485b31710ecade5cb53f29116bf6141ebf879faeeb852a8",
     "niks3-oidc-token.py": "58569dc6c6d05232300aae7d03848c66f8678f832d51a1a5326f034da41b2e5f",
     "public-closure.py": "3420419639f0f66163efae3b98ff05f1760bd59e6aad5d2f8d654c05bcd02e14",
