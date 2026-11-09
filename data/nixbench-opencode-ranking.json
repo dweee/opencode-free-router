@@ -97,6 +97,18 @@
         "input": 0,
         "output": 0
       },
+      "catalogUpdated": "2026-11-02",
+      "contextTokens": 1000000,
+      "id": "opencode/longcat-2.5-free",
+      "name": "LongCat 2.5 Free",
+      "releaseDate": "2026-11-02"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
       "catalogUpdated": "2026-10-21",
       "contextTokens": 262144,
       "id": "opencode/flint-40b-free",
@@ -225,11 +237,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Sun, 08 Nov 2026 12:23:03 GMT",
+    "retrievedAt": "Mon, 09 Nov 2026 14:24:14 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/glm-5.3-flash-free",
-  "generatedAt": "2026-11-08T12:23:04Z",
+  "generatedAt": "2026-11-09T14:24:14Z",
   "models": [
     {
       "completedAt": "2026-11-08T12:24:51.938198+00:00",
@@ -377,6 +389,31 @@
       "runId": "20261107T121708Z-0aec1204",
       "score": 1550.0,
       "scoreRate": 0.861111,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
+    {
+      "completedAt": "2026-11-09T15:44:34.911190+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode/inkling-2-small-free",
+      "maxScore": 1800.0,
+      "passedTasks": 12,
+      "runId": "20261109T142434Z-dde2e52a",
+      "score": 1545.0,
+      "scoreRate": 0.858333,
       "status": "screening-only",
       "taskCount": 18,
       "trials": 1
