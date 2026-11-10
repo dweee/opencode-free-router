@@ -1,0 +1,194 @@
+{
+  "model": "opencode/longcat-2.5-free",
+  "nixbenchRevision": "290eb8c18d4a0833fcc3746662ff08766102232c",
+  "schemaVersion": 1,
+  "taskCount": 18,
+  "tasks": {
+    "devshell-tooling-contract": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 491.379,
+          "log_path": "results/20261110T134919Z-9232fc40/devshell-tooling-contract/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "devshells",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/devshell-tooling-contract/tests/check.sh /tmp/nixbench-isolated-gev7eo9w/work",
+          "duration_seconds": 0.315,
+          "log_path": "results/20261110T134919Z-9232fc40/devshell-tooling-contract/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-11-10T13:57:31.083099+00:00",
+        "criteria": {
+          "experimental-features": true,
+          "formatter-contract": true,
+          "required-tools": true,
+          "shell-construction": true
+        },
+        "diff_path": "results/20261110T134919Z-9232fc40/devshell-tooling-contract/diff.patch",
+        "difficulty": "easy",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Development Shell Tooling Contract",
+        "passed": true,
+        "result_dir": "results/20261110T134919Z-9232fc40/devshell-tooling-contract",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "experimental-features": true,
+            "formatter-contract": true,
+            "required-tools": true,
+            "shell-construction": true
+          },
+          "criterion_failure_classes": {
+            "experimental-features": "wrong-value",
+            "formatter-contract": "wrong-value",
+            "required-tools": "wrong-value",
+            "shell-construction": "evaluation"
+          },
+          "criterion_points": {
+            "experimental-features": 25.0,
+            "formatter-contract": 25.0,
+            "required-tools": 25.0,
+            "shell-construction": 25.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "shell-construction",
+            "required-tools",
+            "formatter-contract",
+            "experimental-features"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "devshell-tooling-contract",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261110T134919Z-9232fc40",
+      "taskDigest": "b7e5c46509eb16a4d922f547f6d5268fe462d1a8cdca0fc985aa04b84f70b072"
+    },
+    "dovecot-structured-settings-versions": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 900.003,
+          "log_path": "results/20261110T134919Z-9232fc40/dovecot-structured-settings-versions/agent.log",
+          "returncode": 124,
+          "timed_out": true
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/dovecot-structured-settings-versions/tests/check.sh /tmp/nixbench-isolated-ph3adtyl/work",
+          "duration_seconds": 8.184,
+          "log_path": "results/20261110T134919Z-9232fc40/dovecot-structured-settings-versions/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-11-10T14:12:39.278662+00:00",
+        "criteria": {
+          "format-versions": false,
+          "hosts-evaluate": false,
+          "mail-storage-preserved": false,
+          "protocols-and-auth": false,
+          "tls-paths": false
+        },
+        "diff_path": "results/20261110T134919Z-9232fc40/dovecot-structured-settings-versions/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "evaluation",
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Migrate Two Mail Hosts On Different Dovecot Releases To Structured Settings",
+        "passed": false,
+        "result_dir": "results/20261110T134919Z-9232fc40/dovecot-structured-settings-versions",
+        "score": 0,
+        "score_detail": {
+          "criteria": {
+            "format-versions": false,
+            "hosts-evaluate": false,
+            "mail-storage-preserved": false,
+            "protocols-and-auth": false,
+            "tls-paths": false
+          },
+          "criterion_failure_classes": {
+            "format-versions": "wrong-value",
+            "hosts-evaluate": "evaluation",
+            "mail-storage-preserved": "wrong-value",
+            "protocols-and-auth": "wrong-value",
+            "tls-paths": "wrong-value"
+          },
+          "criterion_points": {
+            "format-versions": 20.0,
+            "hosts-evaluate": 15.0,
+            "mail-storage-preserved": 25.0,
+            "protocols-and-auth": 20.0,
+            "tls-paths": 20.0
+          },
+          "failed_criteria": [
+            "hosts-evaluate",
+            "format-versions",
+            "tls-paths",
+            "protocols-and-auth",
+            "mail-storage-preserved"
+          ],
+          "failure_classes": [
+            "evaluation",
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "hosts-evaluate failed: Set 'services.dovecot2.settings.protocols.pop3 = true/false;' instead.",
+            "format-versions failed: Set 'services.dovecot2.settings.protocols.pop3 = true/false;' instead.",
+            "tls-paths failed: archive: ssl_cert is None",
+            "protocols-and-auth failed: archive: enabled protocols []",
+            "mail-storage-preserved failed: archive: mail_location is None"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "format-versions",
+            "tls-paths",
+            "protocols-and-auth",
+            "mail-storage-preserved"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "dovecot-structured-settings-versions",
+        "task_outcome": "agent-timeout",
+        "workdir": null
+      },
+      "runId": "20261110T134919Z-9232fc40",
+      "taskDigest": "13f5b0560afe370db462a571a1ea54b1bea41b96d7e316443950e24e96b8d2ab"
+    }
+  },
+  "updatedAt": "2026-11-10T14:25:11Z"
+}

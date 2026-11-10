@@ -52,6 +52,13 @@
       "retryAfter": "2026-11-07T13:54:01Z",
       "runId": "42223944286",
       "status": "deferred"
+    },
+    {
+      "at": "2026-11-10T14:25:11Z",
+      "id": "opencode/longcat-2.5-free",
+      "retryAfter": "2026-11-11T14:25:11Z",
+      "runId": "42827704418",
+      "status": "deferred"
     }
   ],
   "availableModels": [
@@ -85,18 +92,6 @@
         "input": 0,
         "output": 0
       },
-      "catalogUpdated": "2026-11-03",
-      "contextTokens": 1048576,
-      "id": "opencode/crouton-alpha-free",
-      "name": "Crouton Alpha Free",
-      "releaseDate": "2026-11-03"
-    },
-    {
-      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
       "catalogUpdated": "2026-11-02",
       "contextTokens": 1000000,
       "id": "opencode/longcat-2.5-free",
@@ -114,6 +109,18 @@
       "id": "opencode/flint-40b-free",
       "name": "Flint 40B Free",
       "releaseDate": "2026-10-21"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-10-19",
+      "contextTokens": 1000000,
+      "id": "opencode/minimax-m3.1-flash-free",
+      "name": "MiniMax M3.1 Flash Free",
+      "releaseDate": "2026-10-19"
     },
     {
       "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
@@ -237,11 +244,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Mon, 09 Nov 2026 14:24:14 GMT",
+    "retrievedAt": "Tue, 10 Nov 2026 13:48:59 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/glm-5.3-flash-free",
-  "generatedAt": "2026-11-09T14:24:14Z",
+  "generatedAt": "2026-11-10T13:48:59Z",
   "models": [
     {
       "completedAt": "2026-11-08T12:24:51.938198+00:00",
