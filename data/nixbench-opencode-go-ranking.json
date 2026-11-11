@@ -4,6 +4,19 @@
     {
       "availability": "models.dev listing for opencode-go; covered by the OpenCode Go subscription",
       "catalogCost": {
+        "cache_read": 0.003,
+        "input": 0.15,
+        "output": 0.6
+      },
+      "catalogUpdated": "2026-10-17",
+      "contextTokens": 1000000,
+      "id": "opencode-go/deepseek-v4.1-flash",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "releaseDate": "2026-10-17"
+    },
+    {
+      "availability": "models.dev listing for opencode-go; covered by the OpenCode Go subscription",
+      "catalogCost": {
         "cache_read": 0,
         "input": 0,
         "output": 0
@@ -26,19 +39,6 @@
       "id": "opencode-go/mimo-v2.6-flash",
       "name": "MiMo-V2.6-Flash",
       "releaseDate": "2026-09-22"
-    },
-    {
-      "availability": "models.dev listing for opencode-go; covered by the OpenCode Go subscription",
-      "catalogCost": {
-        "cache_read": 0.003,
-        "input": 0.15,
-        "output": 0.6
-      },
-      "catalogUpdated": "2026-09-10",
-      "contextTokens": 1000000,
-      "id": "opencode-go/deepseek-v4.1-flash",
-      "name": "DeepSeek V4.1 Flash",
-      "releaseDate": "2026-09-10"
     },
     {
       "availability": "models.dev listing for opencode-go; covered by the OpenCode Go subscription",
@@ -74,11 +74,11 @@
   },
   "candidateOrdering": null,
   "catalog": {
-    "retrievedAt": "Tue, 10 Nov 2026 13:48:57 GMT",
+    "retrievedAt": "Wed, 11 Nov 2026 12:59:42 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode-go/deepseek-v4.1-flash",
-  "generatedAt": "2026-11-10T13:48:57Z",
+  "generatedAt": "2026-11-11T12:59:42Z",
   "models": [
     {
       "completedAt": "2026-10-28T08:05:13.654789+00:00",
