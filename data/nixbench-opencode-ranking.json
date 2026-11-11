@@ -59,6 +59,12 @@
       "retryAfter": "2026-11-11T14:25:11Z",
       "runId": "42827704418",
       "status": "deferred"
+    },
+    {
+      "at": "2026-11-11T15:14:34Z",
+      "id": "opencode/nemotron-3.5-super-vl-free",
+      "runId": "43024835954",
+      "status": "runner-failed"
     }
   ],
   "availableModels": [
@@ -128,6 +134,18 @@
         "input": 0,
         "output": 0
       },
+      "catalogUpdated": "2026-10-17",
+      "contextTokens": 200000,
+      "id": "opencode/deepseek-v4.1-flash-free",
+      "name": "DeepSeek V4.1 Flash Free",
+      "releaseDate": "2026-10-17"
+    },
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
       "catalogUpdated": "2026-10-15",
       "contextTokens": 1048576,
       "id": "opencode/nemotron-3.5-super-vl-free",
@@ -157,18 +175,6 @@
       "id": "opencode/mimo-v2.6-flash-free",
       "name": "MiMo-V2.6-Flash Free",
       "releaseDate": "2026-09-22"
-    },
-    {
-      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-09-10",
-      "contextTokens": 200000,
-      "id": "opencode/deepseek-v4.1-flash-free",
-      "name": "DeepSeek V4.1 Flash Free",
-      "releaseDate": "2026-09-10"
     },
     {
       "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
@@ -244,11 +250,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Tue, 10 Nov 2026 13:48:59 GMT",
+    "retrievedAt": "Wed, 11 Nov 2026 12:59:31 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/glm-5.3-flash-free",
-  "generatedAt": "2026-11-10T13:48:59Z",
+  "generatedAt": "2026-11-11T12:59:31Z",
   "models": [
     {
       "completedAt": "2026-11-08T12:24:51.938198+00:00",
