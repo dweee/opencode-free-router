@@ -54,17 +54,17 @@
       "status": "deferred"
     },
     {
-      "at": "2026-11-10T14:25:11Z",
-      "id": "opencode/longcat-2.5-free",
-      "retryAfter": "2026-11-11T14:25:11Z",
-      "runId": "42827704418",
-      "status": "deferred"
-    },
-    {
       "at": "2026-11-11T15:14:34Z",
       "id": "opencode/nemotron-3.5-super-vl-free",
       "runId": "43024835954",
       "status": "runner-failed"
+    },
+    {
+      "at": "2026-11-12T14:33:17Z",
+      "id": "opencode/longcat-2.5-free",
+      "retryAfter": "2026-11-13T14:33:17Z",
+      "runId": "43232584005",
+      "status": "deferred"
     }
   ],
   "availableModels": [
@@ -250,11 +250,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Wed, 11 Nov 2026 12:59:31 GMT",
+    "retrievedAt": "Thu, 12 Nov 2026 14:14:35 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/glm-5.3-flash-free",
-  "generatedAt": "2026-11-11T12:59:31Z",
+  "generatedAt": "2026-11-12T14:14:35Z",
   "models": [
     {
       "completedAt": "2026-11-08T12:24:51.938198+00:00",
