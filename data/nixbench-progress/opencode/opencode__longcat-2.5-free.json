@@ -279,7 +279,101 @@
       },
       "runId": "20261112T141452Z-12259542",
       "taskDigest": "b4d6916da693d5a707db44f6514112ff20bdaabdfd78a9810c3a02d51999f566"
+    },
+    "fleet-shared-profile-conflict": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 398.335,
+          "log_path": "results/20261114T123251Z-e994f7e9/fleet-shared-profile-conflict/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/fleet-shared-profile-conflict/tests/check.sh /tmp/nixbench-isolated-2quy6r11/work",
+          "duration_seconds": 10.562,
+          "log_path": "results/20261114T123251Z-e994f7e9/fleet-shared-profile-conflict/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-11-14T12:39:40.608063+00:00",
+        "criteria": {
+          "baseline-kept": true,
+          "follows-transport": true,
+          "hosts-evaluate": true,
+          "profile-unchanged-elsewhere": true,
+          "sendmail-unit": false
+        },
+        "diff_path": "results/20261114T123251Z-e994f7e9/fleet-shared-profile-conflict/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Shared Hardening Profile Versus A Sendmail Gitea",
+        "passed": false,
+        "result_dir": "results/20261114T123251Z-e994f7e9/fleet-shared-profile-conflict",
+        "score": 80.0,
+        "score_detail": {
+          "criteria": {
+            "baseline-kept": true,
+            "follows-transport": true,
+            "hosts-evaluate": true,
+            "profile-unchanged-elsewhere": true,
+            "sendmail-unit": false
+          },
+          "criterion_failure_classes": {
+            "baseline-kept": "wrong-value",
+            "follows-transport": "overfit",
+            "hosts-evaluate": "evaluation",
+            "profile-unchanged-elsewhere": "wrong-value",
+            "sendmail-unit": "wrong-value"
+          },
+          "criterion_points": {
+            "baseline-kept": 20.0,
+            "follows-transport": 20.0,
+            "hosts-evaluate": 20.0,
+            "profile-unchanged-elsewhere": 20.0,
+            "sendmail-unit": 20.0
+          },
+          "failed_criteria": [
+            "sendmail-unit"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "sendmail-unit did not hold"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "sendmail-unit",
+            "baseline-kept",
+            "profile-unchanged-elsewhere",
+            "follows-transport"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "fleet-shared-profile-conflict",
+        "task_outcome": "fail",
+        "workdir": null
+      },
+      "runId": "20261114T123251Z-e994f7e9",
+      "taskDigest": "d673826aaf2a35d8a0212961229c923c877527c781cd09c92d652171f677f227"
     }
   },
-  "updatedAt": "2026-11-12T14:33:17Z"
+  "updatedAt": "2026-11-14T12:40:09Z"
 }

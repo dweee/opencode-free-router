@@ -60,17 +60,17 @@
       "status": "runner-failed"
     },
     {
-      "at": "2026-11-12T14:33:17Z",
-      "id": "opencode/longcat-2.5-free",
-      "retryAfter": "2026-11-13T14:33:17Z",
-      "runId": "43232584005",
-      "status": "deferred"
-    },
-    {
       "at": "2026-11-13T14:14:27Z",
       "id": "opencode/flint-40b-free",
       "retryAfter": "2026-11-14T14:14:27Z",
       "runId": "43433664486",
+      "status": "deferred"
+    },
+    {
+      "at": "2026-11-14T12:40:09Z",
+      "id": "opencode/longcat-2.5-free",
+      "retryAfter": "2026-11-15T12:40:09Z",
+      "runId": "43595162380",
       "status": "deferred"
     }
   ],
@@ -257,11 +257,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Fri, 13 Nov 2026 13:30:30 GMT",
+    "retrievedAt": "Sat, 14 Nov 2026 12:32:33 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/glm-5.3-flash-free",
-  "generatedAt": "2026-11-13T13:30:30Z",
+  "generatedAt": "2026-11-14T12:32:33Z",
   "models": [
     {
       "completedAt": "2026-11-08T12:24:51.938198+00:00",
