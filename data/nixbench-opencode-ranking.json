@@ -67,10 +67,10 @@
       "status": "deferred"
     },
     {
-      "at": "2026-11-14T12:40:09Z",
+      "at": "2026-11-15T13:21:26Z",
       "id": "opencode/longcat-2.5-free",
-      "retryAfter": "2026-11-15T12:40:09Z",
-      "runId": "43595162380",
+      "retryAfter": "2026-11-16T13:21:26Z",
+      "runId": "43716491561",
       "status": "deferred"
     }
   ],
@@ -93,7 +93,7 @@
         "input": 0,
         "output": 0
       },
-      "catalogUpdated": "2026-11-05",
+      "catalogUpdated": "2026-11-12",
       "contextTokens": 1048576,
       "id": "opencode/inkling-2-small-free",
       "name": "Inkling 2 Small Free",
@@ -257,11 +257,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Sat, 14 Nov 2026 12:32:33 GMT",
+    "retrievedAt": "Sun, 15 Nov 2026 12:59:54 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/glm-5.3-flash-free",
-  "generatedAt": "2026-11-14T12:32:33Z",
+  "generatedAt": "2026-11-15T12:59:54Z",
   "models": [
     {
       "completedAt": "2026-11-08T12:24:51.938198+00:00",
