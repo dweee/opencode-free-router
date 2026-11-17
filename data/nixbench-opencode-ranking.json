@@ -67,10 +67,10 @@
       "status": "deferred"
     },
     {
-      "at": "2026-11-16T14:14:40Z",
+      "at": "2026-11-17T15:10:42Z",
       "id": "opencode/longcat-2.5-free",
-      "retryAfter": "2026-11-17T14:14:40Z",
-      "runId": "43881355943",
+      "retryAfter": "2026-11-18T15:10:42Z",
+      "runId": "44108315231",
       "status": "deferred"
     }
   ],
@@ -134,18 +134,6 @@
       "id": "opencode/flint-40b-free",
       "name": "Flint 40B Free",
       "releaseDate": "2026-10-21"
-    },
-    {
-      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
-      "catalogUpdated": "2026-10-19",
-      "contextTokens": 1000000,
-      "id": "opencode/minimax-m3.1-flash-free",
-      "name": "MiniMax M3.1 Flash Free",
-      "releaseDate": "2026-10-19"
     },
     {
       "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
@@ -269,11 +257,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Mon, 16 Nov 2026 14:03:30 GMT",
+    "retrievedAt": "Tue, 17 Nov 2026 14:56:44 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/glm-5.3-flash-free",
-  "generatedAt": "2026-11-16T14:03:31Z",
+  "generatedAt": "2026-11-17T14:56:44Z",
   "models": [
     {
       "completedAt": "2026-11-08T12:24:51.938198+00:00",

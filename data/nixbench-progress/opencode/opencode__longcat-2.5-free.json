@@ -668,7 +668,93 @@
       },
       "runId": "20261116T140402Z-f863f71b",
       "taskDigest": "e2127bcae20c5c8db213f9629e0611c32989d8a2ee41d34bd7c2d3ceb0d70689"
+    },
+    "module-generated-jobs-fixed-point": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 248.317,
+          "log_path": "results/20261117T145700Z-ee93640c/module-generated-jobs-fixed-point/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/module-generated-jobs-fixed-point/tests/check.sh /tmp/nixbench-isolated-86vt53tr/work",
+          "duration_seconds": 0.315,
+          "log_path": "results/20261117T145700Z-ee93640c/module-generated-jobs-fixed-point/check.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-11-17T15:01:09.084599+00:00",
+        "criteria": {
+          "coexists-with-other-modules": true,
+          "disabled-jobs": true,
+          "option-jobs-evaluate": true,
+          "unit-fields": true,
+          "unit-names": true
+        },
+        "diff_path": "results/20261117T145700Z-ee93640c/module-generated-jobs-fixed-point/diff.patch",
+        "difficulty": "medium",
+        "failure_classes": [],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Generate Units From A Module-Defined Job List",
+        "passed": true,
+        "result_dir": "results/20261117T145700Z-ee93640c/module-generated-jobs-fixed-point",
+        "score": 100.0,
+        "score_detail": {
+          "criteria": {
+            "coexists-with-other-modules": true,
+            "disabled-jobs": true,
+            "option-jobs-evaluate": true,
+            "unit-fields": true,
+            "unit-names": true
+          },
+          "criterion_failure_classes": {
+            "coexists-with-other-modules": "wrong-value",
+            "disabled-jobs": "wrong-value",
+            "option-jobs-evaluate": "evaluation",
+            "unit-fields": "wrong-value",
+            "unit-names": "wrong-value"
+          },
+          "criterion_points": {
+            "coexists-with-other-modules": 20.0,
+            "disabled-jobs": 15.0,
+            "option-jobs-evaluate": 25.0,
+            "unit-fields": 20.0,
+            "unit-names": 20.0
+          },
+          "failed_criteria": [],
+          "failure_classes": [],
+          "format": "criteria-v2",
+          "notes": [],
+          "required_criteria": [
+            "option-jobs-evaluate",
+            "unit-names",
+            "unit-fields",
+            "disabled-jobs",
+            "coexists-with-other-modules"
+          ],
+          "required_passed": true,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "module-generated-jobs-fixed-point",
+        "task_outcome": "pass",
+        "workdir": null
+      },
+      "runId": "20261117T145700Z-ee93640c",
+      "taskDigest": "f52b4eff6441b8a599c720d1873e7b559aa14c7e8c6f36375425d8e761c1de1c"
     }
   },
-  "updatedAt": "2026-11-16T14:14:40Z"
+  "updatedAt": "2026-11-17T15:10:42Z"
 }
