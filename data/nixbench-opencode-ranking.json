@@ -60,17 +60,17 @@
       "status": "runner-failed"
     },
     {
-      "at": "2026-11-13T14:14:27Z",
-      "id": "opencode/flint-40b-free",
-      "retryAfter": "2026-11-14T14:14:27Z",
-      "runId": "43433664486",
-      "status": "deferred"
-    },
-    {
       "at": "2026-11-17T15:10:42Z",
       "id": "opencode/longcat-2.5-free",
       "retryAfter": "2026-11-18T15:10:42Z",
       "runId": "44108315231",
+      "status": "deferred"
+    },
+    {
+      "at": "2026-11-18T15:24:35Z",
+      "id": "opencode/flint-40b-free",
+      "retryAfter": "2026-11-19T15:24:35Z",
+      "runId": "44325778833",
       "status": "deferred"
     }
   ],
@@ -189,18 +189,6 @@
         "input": 0,
         "output": 0
       },
-      "catalogUpdated": "2026-08-26",
-      "contextTokens": 200000,
-      "id": "opencode/glm-5.3-flash-free",
-      "name": "GLM-5.3-Flash Free",
-      "releaseDate": "2026-08-26"
-    },
-    {
-      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
-      "catalogCost": {
-        "input": 0,
-        "output": 0
-      },
       "catalogUpdated": "2026-08-11",
       "contextTokens": 262144,
       "id": "opencode/nemotron-3.5-lightning-free",
@@ -257,11 +245,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Tue, 17 Nov 2026 14:56:44 GMT",
+    "retrievedAt": "Wed, 18 Nov 2026 14:36:49 GMT",
     "url": "https://models.dev/api.json"
   },
-  "currentModel": "opencode/glm-5.3-flash-free",
-  "generatedAt": "2026-11-17T14:56:44Z",
+  "currentModel": "opencode/iceman-free",
+  "generatedAt": "2026-11-18T14:36:50Z",
   "models": [
     {
       "completedAt": "2026-11-08T12:24:51.938198+00:00",
