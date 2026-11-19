@@ -60,21 +60,33 @@
       "status": "runner-failed"
     },
     {
-      "at": "2026-11-17T15:10:42Z",
-      "id": "opencode/longcat-2.5-free",
-      "retryAfter": "2026-11-18T15:10:42Z",
-      "runId": "44108315231",
-      "status": "deferred"
-    },
-    {
       "at": "2026-11-18T15:24:35Z",
       "id": "opencode/flint-40b-free",
       "retryAfter": "2026-11-19T15:24:35Z",
       "runId": "44325778833",
       "status": "deferred"
+    },
+    {
+      "at": "2026-11-19T15:03:03Z",
+      "id": "opencode/longcat-2.5-free",
+      "retryAfter": "2026-11-20T15:03:03Z",
+      "runId": "44546623238",
+      "status": "deferred"
     }
   ],
   "availableModels": [
+    {
+      "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
+      "catalogCost": {
+        "input": 0,
+        "output": 0
+      },
+      "catalogUpdated": "2026-11-18",
+      "contextTokens": 1048576,
+      "id": "opencode/tidepool-alpha-free",
+      "name": "Tidepool Alpha Free",
+      "releaseDate": "2026-11-18"
+    },
     {
       "availability": "models.dev-zero-price for opencode; account access must be checked at run time",
       "catalogCost": {
@@ -245,11 +257,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Wed, 18 Nov 2026 14:36:49 GMT",
+    "retrievedAt": "Thu, 19 Nov 2026 14:44:44 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/iceman-free",
-  "generatedAt": "2026-11-18T14:36:50Z",
+  "generatedAt": "2026-11-19T14:44:45Z",
   "models": [
     {
       "completedAt": "2026-11-08T12:24:51.938198+00:00",
