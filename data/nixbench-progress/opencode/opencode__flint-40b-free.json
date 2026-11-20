@@ -1096,7 +1096,313 @@
       },
       "runId": "20261118T143707Z-e843e6b8",
       "taskDigest": "5b9bf77198ef1685f0e407b9648964c2782a2b1a724d77e747c0fcd892a7a3b0"
+    },
+    "service-requires-removed-network-setup": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 739.933,
+          "log_path": "results/20261120T142526Z-11c7540a/service-requires-removed-network-setup/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/service-requires-removed-network-setup/tests/check.sh /tmp/nixbench-isolated-rx46yhc6/work",
+          "duration_seconds": 15.952,
+          "log_path": "results/20261120T142526Z-11c7540a/service-requires-removed-network-setup/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-11-20T14:38:02.017138+00:00",
+        "criteria": {
+          "hosts-evaluate": true,
+          "relay-ordered-after-address": false,
+          "relay-requires-address": false,
+          "sibling-ssh-unchanged": true,
+          "vendor-link-intact": true,
+          "vendor-password-login": false
+        },
+        "diff_path": "results/20261120T142526Z-11c7540a/service-requires-removed-network-setup/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Vendor Relay Never Starts After The nixpkgs Update",
+        "passed": false,
+        "result_dir": "results/20261120T142526Z-11c7540a/service-requires-removed-network-setup",
+        "score": 45.0,
+        "score_detail": {
+          "criteria": {
+            "hosts-evaluate": true,
+            "relay-ordered-after-address": false,
+            "relay-requires-address": false,
+            "sibling-ssh-unchanged": true,
+            "vendor-link-intact": true,
+            "vendor-password-login": false
+          },
+          "criterion_failure_classes": {
+            "hosts-evaluate": "evaluation",
+            "relay-ordered-after-address": "wrong-value",
+            "relay-requires-address": "wrong-value",
+            "sibling-ssh-unchanged": "wrong-value",
+            "vendor-link-intact": "wrong-value",
+            "vendor-password-login": "wrong-value"
+          },
+          "criterion_points": {
+            "hosts-evaluate": 15.0,
+            "relay-ordered-after-address": 20.0,
+            "relay-requires-address": 20.0,
+            "sibling-ssh-unchanged": 15.0,
+            "vendor-link-intact": 15.0,
+            "vendor-password-login": 15.0
+          },
+          "failed_criteria": [
+            "relay-requires-address",
+            "relay-ordered-after-address",
+            "vendor-password-login"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "relay-requires-address: probe evaluated to false",
+            "relay-ordered-after-address: probe evaluated to false",
+            "vendor-password-login: probe evaluated to false"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "relay-requires-address",
+            "relay-ordered-after-address",
+            "vendor-link-intact",
+            "vendor-password-login",
+            "sibling-ssh-unchanged"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "service-requires-removed-network-setup",
+        "task_outcome": "fail",
+        "workdir": null
+      },
+      "runId": "20261120T142526Z-11c7540a",
+      "taskDigest": "da225fd8706102e48518c266c21868c4f3a01dd0da96fc68bb26660bdb59165b"
+    },
+    "stalwart-state-version-migration": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 665.44,
+          "log_path": "results/20261120T142526Z-11c7540a/stalwart-state-version-migration/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "modules",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/stalwart-state-version-migration/tests/check.sh /tmp/nixbench-isolated-xo9e2x2y/work",
+          "duration_seconds": 10.594,
+          "log_path": "results/20261120T142526Z-11c7540a/stalwart-state-version-migration/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-11-20T14:49:18.055757+00:00",
+        "criteria": {
+          "fresh-host-defaults": false,
+          "hosts-evaluate": true,
+          "legacy-store-preserved": true,
+          "listeners-unchanged": true,
+          "secrets-and-backup-follow": false,
+          "unit-overrides-applied": false
+        },
+        "diff_path": "results/20261120T142526Z-11c7540a/stalwart-state-version-migration/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Bring Two Stalwart Hosts Through The Module State Change",
+        "passed": false,
+        "result_dir": "results/20261120T142526Z-11c7540a/stalwart-state-version-migration",
+        "score": 50.0,
+        "score_detail": {
+          "criteria": {
+            "fresh-host-defaults": false,
+            "hosts-evaluate": true,
+            "legacy-store-preserved": true,
+            "listeners-unchanged": true,
+            "secrets-and-backup-follow": false,
+            "unit-overrides-applied": false
+          },
+          "criterion_failure_classes": {
+            "fresh-host-defaults": "wrong-value",
+            "hosts-evaluate": "evaluation",
+            "legacy-store-preserved": "wrong-value",
+            "listeners-unchanged": "wrong-value",
+            "secrets-and-backup-follow": "wrong-value",
+            "unit-overrides-applied": "wrong-value"
+          },
+          "criterion_points": {
+            "fresh-host-defaults": 20.0,
+            "hosts-evaluate": 15.0,
+            "legacy-store-preserved": 25.0,
+            "listeners-unchanged": 10.0,
+            "secrets-and-backup-follow": 15.0,
+            "unit-overrides-applied": 15.0
+          },
+          "failed_criteria": [
+            "fresh-host-defaults",
+            "unit-overrides-applied",
+            "secrets-and-backup-follow"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "fresh-host-defaults: probe evaluated to false",
+            "unit-overrides-applied: probe evaluated to false",
+            "secrets-and-backup-follow: probe evaluated to false"
+          ],
+          "required_criteria": [
+            "hosts-evaluate",
+            "legacy-store-preserved",
+            "fresh-host-defaults",
+            "unit-overrides-applied",
+            "secrets-and-backup-follow",
+            "listeners-unchanged"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "stalwart-state-version-migration",
+        "task_outcome": "fail",
+        "workdir": null
+      },
+      "runId": "20261120T142526Z-11c7540a",
+      "taskDigest": "398d97010ba09865c0f0fb520e23a0d971fb82810b2c79aa28598fa88c16f7f4"
+    },
+    "stdenv-cross-and-host-tools": {
+      "result": {
+        "agent": {
+          "command": "/home/runner/work/opencode-free-router/opencode-free-router/scripts/nixbench-agent.sh",
+          "duration_seconds": 501.417,
+          "log_path": "results/20261120T142526Z-11c7540a/stdenv-cross-and-host-tools/agent.log",
+          "returncode": 0,
+          "timed_out": false
+        },
+        "agent_status": null,
+        "category": "packages",
+        "check": {
+          "command": "/bin/sh /home/runner/work/opencode-free-router/opencode-free-router/.nixbench-upstream/nixbench-todo/tasks/stdenv-cross-and-host-tools/tests/check.sh /tmp/nixbench-isolated-bp0i3giy/work",
+          "duration_seconds": 2.924,
+          "log_path": "results/20261120T142526Z-11c7540a/stdenv-cross-and-host-tools/check.log",
+          "returncode": 1,
+          "timed_out": false
+        },
+        "completion_attestation": "unattested",
+        "created_at": "2026-11-20T14:57:42.401385+00:00",
+        "criteria": {
+          "generator-build-compiler": false,
+          "instantiates": true,
+          "man-page-from-scdoc": false,
+          "pkg-config-and-libraries": false,
+          "wrapper-host-zstd": false
+        },
+        "diff_path": "results/20261120T142526Z-11c7540a/stdenv-cross-and-host-tools/diff.patch",
+        "difficulty": "hard",
+        "failure_classes": [
+          "wrong-value"
+        ],
+        "infrastructure_events": [
+          "unattested-agent"
+        ],
+        "invalid_reason": null,
+        "max_score": 100.0,
+        "measurement_status": "valid",
+        "name": "Cross-Compile A C CLI With Build-Time Tools",
+        "passed": false,
+        "result_dir": "results/20261120T142526Z-11c7540a/stdenv-cross-and-host-tools",
+        "score": 15.0,
+        "score_detail": {
+          "criteria": {
+            "generator-build-compiler": false,
+            "instantiates": true,
+            "man-page-from-scdoc": false,
+            "pkg-config-and-libraries": false,
+            "wrapper-host-zstd": false
+          },
+          "criterion_failure_classes": {
+            "generator-build-compiler": "wrong-value",
+            "instantiates": "evaluation",
+            "man-page-from-scdoc": "wrong-value",
+            "pkg-config-and-libraries": "wrong-value",
+            "wrapper-host-zstd": "wrong-value"
+          },
+          "criterion_points": {
+            "generator-build-compiler": 20.0,
+            "instantiates": 15.0,
+            "man-page-from-scdoc": 25.0,
+            "pkg-config-and-libraries": 20.0,
+            "wrapper-host-zstd": 20.0
+          },
+          "failed_criteria": [
+            "pkg-config-and-libraries",
+            "generator-build-compiler",
+            "man-page-from-scdoc",
+            "wrapper-host-zstd"
+          ],
+          "failure_classes": [
+            "wrong-value"
+          ],
+          "format": "criteria-v2",
+          "notes": [
+            "pkg-config-and-libraries probe did not evaluate to true",
+            "generator-build-compiler probe did not evaluate to true",
+            "man-page-from-scdoc probe did not evaluate to true",
+            "wrapper-host-zstd probe did not evaluate to true"
+          ],
+          "required_criteria": [
+            "instantiates",
+            "pkg-config-and-libraries",
+            "generator-build-compiler",
+            "man-page-from-scdoc",
+            "wrapper-host-zstd"
+          ],
+          "required_passed": false,
+          "schema_version": 2
+        },
+        "score_valid": true,
+        "scoring_schema": "criteria-v2",
+        "solution_mode": "agent",
+        "task_id": "stdenv-cross-and-host-tools",
+        "task_outcome": "fail",
+        "workdir": null
+      },
+      "runId": "20261120T142526Z-11c7540a",
+      "taskDigest": "1c3f3b03b2df259fde5435b873474785e1df9fb9fa16843c131e070439ab10c0"
     }
   },
-  "updatedAt": "2026-11-18T15:24:35Z"
+  "updatedAt": "2026-11-20T15:00:00Z"
 }
