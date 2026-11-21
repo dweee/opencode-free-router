@@ -1,13 +1,15 @@
 {
-  "source": "dweee/dave-fork-ci@74b21a2904ac5f6d6750f2f52f3a36f86b0b6651",
+  "source": "dweee/dave-fork-ci@9e639dd658afcc5c2118ad255a6929a6a922a86a",
   "files": {
-    "configure-niks3.py": "f1690b26b7e2762c083f34c8473d19873de9958ef376a78be46006b1073d4dc8",
+    "cache-config.py": "4a2cfb975e78a278926abb3a18164476bb9202df20437fa53e0c72419870e768",
+    "caches.json": "5a4b74c7bf7d9815d9cde39492e570a29f4f27533b3a74a7490ac63de4b577d0",
+    "configure-niks3.py": "2820bbb9dd54f85040f1b79a6921f10632c397d154a26cedf5f5ab7ee4b1819b",
     "install-niks3.sh": "55a2f49ee72b9cc24485b31710ecade5cb53f29116bf6141ebf879faeeb852a8",
     "niks3-oidc-token.py": "58569dc6c6d05232300aae7d03848c66f8678f832d51a1a5326f034da41b2e5f",
     "public-closure.py": "3420419639f0f66163efae3b98ff05f1760bd59e6aad5d2f8d654c05bcd02e14",
-    "push-niks3.py": "b97bbcb63a5d305a4062196e1f52b0912b1a88e735731407bbcbaab39a8b466b",
+    "push-niks3.py": "0679c09c9a3023b650997ccc703265aa11c9fd2b346c70578e966307ea13f860",
     "test-public-closure.py": "3bd9af13fd9d8378431f34d6716953c83e44e342dd52d4564afb9858efc933d2",
-    "test-push-niks3.py": "a94920042ed3eb03f2a6d970f494de93237658632d7712227e60cfc89492aec2",
+    "test-push-niks3.py": "ca2239a09fb2fb9862eb36d5b83cb93781b707771fc28b566fba8f1e999e0c37",
     "test-transfer-attic.py": "22b88cb1a352b5b130dd259f00733f373c50bb64c52913fdde22c8db9d58c13d",
     "transfer-attic.py": "59dd605f1f61dc90f24d9259825055cd016a361f1f38d85983e678edf88498a4"
   }

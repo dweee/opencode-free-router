@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "upstream": "lettland/opencode-free-router",
+  "track": "branch",
+  "branch": "942e642074483df263c6751ea622b5c11c0c9514"
+}

@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "upstream": "lettland/opencode-free-router",
+  "branch": "master",
+  "track": "branch",
+  "author": {
+    "name": "dave",
+    "email": "git@d.monke.fail"
+  },
+  "required_paths": [
+    "flake.nix",
+    "flake.lock"
+  ],
+  "protected_paths": [
+    "flake.nix",
+    "flake.lock",
+    "nix/**",
+    "ci/**"
+  ],
+  "matrix": [
+    {
+      "system": "x86_64-linux",
+      "packages": [
+        "sync-source"
+      ],
+      "checks": [],
+      "tests": [
+        [
+          "nix",
+          "shell",
+          "--inputs-from",
+          ".",
+          "nixpkgs#nodejs_24",
+          "-c",
+          "npm",
+          "test"
+        ],
+        [
+          "python3",
+          "test/nixbench-quota.test.py"
+        ]
+      ]
+    }
+  ]
+}
