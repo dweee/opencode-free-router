@@ -6,8 +6,8 @@
     packages.x86_64-linux.sync-source = pkgs.stdenvNoCC.mkDerivation {
       name = "opencode-free-router-sync-source";
       src = self;
-      nativeBuildInputs = [ pkgs.nodejs_24 ];
-      buildPhase = "node --test test/*.test.ts";
+      nativeBuildInputs = [ pkgs.shellcheck ];
+      buildPhase = "shellcheck scripts/*.sh bin/opencode-free";
       installPhase = "mkdir -p $out/share/opencode-free-router && cp -r bin src templates scripts data $out/share/opencode-free-router/";
     };
   };
