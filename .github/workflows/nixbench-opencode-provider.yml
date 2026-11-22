@@ -73,9 +73,9 @@ jobs:
     - name: Retain completed dependencies after an intentional later failure
       run: |
         bash scripts/nixbench-cache-smoke.sh
-        python3 ci/transfer-attic.py export --directory smoke-transfer --manifest smoke-outputs.txt
+        python3 ci/transfer-closures.py export --directory smoke-transfer --manifest smoke-outputs.txt
       env:
-        ATTIC_MAX_CLOSURE_MIB: '8192'
+        MAX_CLOSURE_MIB: '8192'
     - name: Retain public smoke data for independent cache verification
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
@@ -133,16 +133,16 @@ jobs:
     - name: Import verified public seed data before model execution
       if: ${{ needs.cache-seed.outputs.has_seed == 'true' }}
       env:
-        ATTIC_MAX_CLOSURE_MIB: '8192'
+        MAX_CLOSURE_MIB: '8192'
       run: |
         # sudo's secure_path excludes the installer-provided Nix profile.
         # Resolve the trusted client before importing any benchmark data.
         nix_bin="$(dirname "$(readlink -f "$(command -v nix-store)")")"
         case "$nix_bin" in /nix/store/*/bin) ;; *) exit 1 ;; esac
         test -x "$nix_bin/nix"
-        sudo --preserve-env=ATTIC_MAX_CLOSURE_MIB /usr/bin/env \
+        sudo --preserve-env=MAX_CLOSURE_MIB /usr/bin/env \
           PATH="$nix_bin:/usr/bin:/bin" \
-          /usr/bin/python3 ci/transfer-attic.py import --directory cache-seed
+          /usr/bin/python3 ci/transfer-closures.py import --directory cache-seed
     - name: Verify untrusted Determinate client and daemon
       run: |
         nix --version | grep -F 'Determinate Nix 3.24.1'
@@ -370,8 +370,8 @@ jobs:
       id: cache_transfer
       if: ${{ always() && !cancelled() && steps.cache_outputs.outputs.has_outputs == 'true' }}
       env:
-        ATTIC_MAX_CLOSURE_MIB: '8192'
-      run: python3 ci/transfer-attic.py export --directory cache-transfer --manifest cache-outputs.txt
+        MAX_CLOSURE_MIB: '8192'
+      run: python3 ci/transfer-closures.py export --directory cache-transfer --manifest cache-outputs.txt
     - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       if: ${{ always() && !cancelled() && steps.cache_transfer.outcome == 'success' }}
       with:
@@ -482,9 +482,9 @@ jobs:
       if: ${{ always() && steps.manifest.outputs.has_outputs == 'true' }}
       run: python3 ci/configure-niks3.py --cleanup
     - name: Export only public seed data
-      run: python3 ci/transfer-attic.py export --directory cache-seed --manifest cache-index/outputs.txt
+      run: python3 ci/transfer-closures.py export --directory cache-seed --manifest cache-index/outputs.txt
       env:
-        ATTIC_MAX_CLOSURE_MIB: '8192'
+        MAX_CLOSURE_MIB: '8192'
       if: ${{ steps.manifest.outputs.has_outputs == 'true' }}
     - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
@@ -568,8 +568,8 @@ jobs:
     - name: Import benchmark data without running package programs
       if: ${{ steps.download.outcome == 'success' }}
       env:
-        ATTIC_MAX_CLOSURE_MIB: '8192'
-      run: python3 ci/transfer-attic.py import --directory cache-transfer
+        MAX_CLOSURE_MIB: '8192'
+      run: python3 ci/transfer-closures.py import --directory cache-transfer
     - name: Publish completed benchmark outputs
       if: ${{ steps.download.outcome == 'success' }}
       run: python3 ci/push-niks3.py --outputs cache-transfer/outputs.txt

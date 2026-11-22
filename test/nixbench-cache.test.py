@@ -179,9 +179,9 @@ class WorkflowIsolation(unittest.TestCase):
             self.assertIn("github.event_name == 'workflow_dispatch'", job['if'])
             self.assertNotIn('pull_request', job['if'])
         runs = [s.get('run', '') for s in seed['steps']]
-        self.assertLess(runs.index('python3 ci/configure-niks3.py --cleanup'), runs.index('python3 ci/transfer-attic.py export --directory cache-seed --manifest cache-index/outputs.txt'))
+        self.assertLess(runs.index('python3 ci/configure-niks3.py --cleanup'), runs.index('python3 ci/transfer-closures.py export --directory cache-seed --manifest cache-index/outputs.txt'))
         runs = [s.get('run', '') for s in publisher['steps']]
-        imported = runs.index('python3 ci/transfer-attic.py import --directory cache-transfer')
+        imported = runs.index('python3 ci/transfer-closures.py import --directory cache-transfer')
         self.assertLess(runs.index('bash ci/install-niks3.sh'), imported)
         self.assertLess(runs.index('python3 ci/push-niks3.py --outputs bootstrap-outputs.txt'), imported)
         artifact = next(s for s in publisher['steps'] if s.get('id') == 'download')
