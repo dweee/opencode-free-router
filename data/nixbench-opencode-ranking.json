@@ -233,12 +233,37 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Mon, 23 Nov 2026 16:31:51 GMT",
+    "retrievedAt": "Tue, 24 Nov 2026 16:29:36 GMT",
     "url": "https://models.dev/api.json"
   },
-  "currentModel": "opencode/iceman-free",
-  "generatedAt": "2026-11-23T16:31:51Z",
+  "currentModel": "opencode/hy4-flash-free",
+  "generatedAt": "2026-11-24T16:29:36Z",
   "models": [
+    {
+      "completedAt": "2026-11-24T17:37:44.532272+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode/hy4-flash-free",
+      "maxScore": 1800.0,
+      "passedTasks": 12,
+      "runId": "20261124T162955Z-f9cb5397",
+      "score": 1685.0,
+      "scoreRate": 0.936111,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
     {
       "completedAt": "2026-11-08T12:24:51.938198+00:00",
       "configuration": {
