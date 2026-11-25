@@ -233,11 +233,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Tue, 24 Nov 2026 16:29:36 GMT",
+    "retrievedAt": "Wed, 25 Nov 2026 16:10:30 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/hy4-flash-free",
-  "generatedAt": "2026-11-24T16:29:36Z",
+  "generatedAt": "2026-11-25T16:10:31Z",
   "models": [
     {
       "completedAt": "2026-11-24T17:37:44.532272+00:00",
@@ -510,6 +510,31 @@
       "runId": "20261123T163207Z-71cd52bd",
       "score": 740.0,
       "scoreRate": 0.411111,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
+    {
+      "completedAt": "2026-11-25T18:05:57.262406+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode/nemotron-3.5-lightning-free",
+      "maxScore": 1800.0,
+      "passedTasks": 0,
+      "runId": "20261125T161048Z-a4781073",
+      "score": 695.0,
+      "scoreRate": 0.386111,
       "status": "screening-only",
       "taskCount": 18,
       "trials": 1
