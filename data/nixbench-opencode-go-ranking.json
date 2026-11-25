@@ -74,11 +74,11 @@
   },
   "candidateOrdering": null,
   "catalog": {
-    "retrievedAt": "Tue, 24 Nov 2026 16:29:38 GMT",
+    "retrievedAt": "Wed, 25 Nov 2026 16:10:28 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode-go/deepseek-v4.1-flash",
-  "generatedAt": "2026-11-24T16:29:38Z",
+  "generatedAt": "2026-11-25T16:10:28Z",
   "models": [
     {
       "completedAt": "2026-10-28T08:05:13.654789+00:00",
