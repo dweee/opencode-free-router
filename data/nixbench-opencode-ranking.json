@@ -252,11 +252,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Thu, 26 Nov 2026 15:51:13 GMT",
+    "retrievedAt": "Fri, 27 Nov 2026 15:40:51 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/hy4-flash-free",
-  "generatedAt": "2026-11-26T15:51:14Z",
+  "generatedAt": "2026-11-27T15:40:51Z",
   "models": [
     {
       "completedAt": "2026-11-24T17:37:44.532272+00:00",
