@@ -252,11 +252,11 @@
     "unlistedModels": "treated as lacking a curated coding-agent benchmark and screened before benchmarked candidates"
   },
   "catalog": {
-    "retrievedAt": "Fri, 27 Nov 2026 15:40:51 GMT",
+    "retrievedAt": "Sat, 28 Nov 2026 14:38:16 GMT",
     "url": "https://models.dev/api.json"
   },
   "currentModel": "opencode/hy4-flash-free",
-  "generatedAt": "2026-11-27T15:40:51Z",
+  "generatedAt": "2026-11-28T14:38:16Z",
   "models": [
     {
       "completedAt": "2026-11-24T17:37:44.532272+00:00",
@@ -479,6 +479,31 @@
       "runId": "20261028T203004Z-33d87a28",
       "score": 1500.0,
       "scoreRate": 0.833333,
+      "status": "screening-only",
+      "taskCount": 18,
+      "trials": 1
+    },
+    {
+      "completedAt": "2026-11-28T15:17:47.253538+00:00",
+      "configuration": {
+        "agent": "opencode",
+        "provider": "opencode",
+        "shell": "Bubblewrap network-disabled; environment cleared; task worktree writable; system/Nix files read-only",
+        "tools": [
+          "read",
+          "edit",
+          "glob",
+          "grep",
+          "shell"
+        ],
+        "version": "opencode v2.0.18"
+      },
+      "id": "opencode/seaglass-alpha-free",
+      "maxScore": 1800.0,
+      "passedTasks": 10,
+      "runId": "20261128T143832Z-22927b48",
+      "score": 1375.0,
+      "scoreRate": 0.763889,
       "status": "screening-only",
       "taskCount": 18,
       "trials": 1
